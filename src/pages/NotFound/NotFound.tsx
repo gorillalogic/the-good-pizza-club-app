@@ -1,5 +1,11 @@
-const NotFound: React.FC = () => {
-  return <div>404 Not Found</div>
-}
+import Layout from '../../shared/layout/Layout';
 
-export default NotFound
+const NotFound: React.FC = () => {
+  return (
+    <Layout>
+      <h1>404 Not Found</h1>
+    </Layout>
+  );
+};
+
+export default NotFound;

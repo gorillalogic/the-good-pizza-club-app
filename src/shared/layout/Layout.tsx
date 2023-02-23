@@ -1,10 +1,11 @@
 import styles from './Layout.module.scss';
+import Navbar from './Navbar';
 
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <section className={styles.layout}>
-      <header></header>
-      <main>{children}</main>
+      <Navbar />
+      <main className={styles.main}>{children}</main>
       <footer></footer>
     </section>
   );
