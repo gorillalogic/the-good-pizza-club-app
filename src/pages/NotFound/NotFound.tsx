@@ -1,10 +1,10 @@
-import Layout from '../../shared/layout/Layout';
+import styles from './NotFound.module.scss';
 
 const NotFound: React.FC = () => {
   return (
-    <Layout>
+    <section className={styles['not-found']}>
       <h1>404 Not Found</h1>
-    </Layout>
+    </section>
   );
 };
 
