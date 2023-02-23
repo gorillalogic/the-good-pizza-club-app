@@ -1,13 +1,14 @@
+import { RouterProvider } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import './index.scss';
-import CssBaseline from '@mui/material/CssBaseline';
-import { RouterProvider } from 'react-router-dom';
-import router from './router';
 import { Provider } from 'react-redux';
-import store from './app/core/store/store';
-import { ThemeProvider } from '@mui/material';
-import theme from './app/core/theme/theme';
+import router from './router';
+import store from './core/store/store';
+import theme from './core/theme/theme';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
