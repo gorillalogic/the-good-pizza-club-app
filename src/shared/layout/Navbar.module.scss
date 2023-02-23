@@ -28,7 +28,7 @@
     width: 50px;
   }
 
-  .menu-button {
+  .button {
     min-width: 70px;
   
     span {
@@ -61,7 +61,7 @@
 
 @include from-breakpoint('large') {
   .navbar {
-    max-width: 900px;
+    max-width: 1200px;
     padding: 32px 12px;
     flex-direction: row;
   }
@@ -73,7 +73,7 @@
       width: 120px;
     }
 
-    .menu-button {
+    .button {
       display: none;
     }
   }

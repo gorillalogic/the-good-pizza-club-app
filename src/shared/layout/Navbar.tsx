@@ -19,10 +19,10 @@ const Navbar: React.FC = () => {
     <nav className={styles.navbar}>
       <div className={styles.logo}>
         <NavLink to="/">
-          <img src="images/logo.svg" />
+          <img src="images/logo.svg" alt="The Good Pizza Club Logo"/>
         </NavLink>
         <IconButton
-          className={styles['menu-button']}
+          className={styles.button}
           size="small"
           onClick={toggleMenu}
         >

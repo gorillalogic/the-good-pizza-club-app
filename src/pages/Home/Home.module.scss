@@ -1,7 +1,23 @@
 @import '../../styles/styles.scss';
 
 .home {
-  &__title {
-    color: colors('orange');
+  text-align: center;
+}
+
+.title {
+  color: colors('yellow');
+}
+
+.subtitle {
+  color: colors('yellow');
+}
+
+@include from-breakpoint('large') {
+  .title {
+    font-size: calculateRem(80);
+  }
+
+  .subtitle {
+    font-size: calculateRem(40);
   }
 }
