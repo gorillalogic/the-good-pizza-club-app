@@ -44,6 +44,7 @@
   list-style: none;
   flex-grow: 1;
   margin: 0;
+  padding: 0;
 
   &--hidden {
     display: none;
@@ -81,10 +82,16 @@
   .list {
     flex-direction: row;
     flex-grow: 0;
-    gap: 25px;
+    gap: 24px;
 
     &--hidden {
       display: flex;
     }
+  }
+}
+
+@include from-breakpoint('x-large') {
+  .list {
+    gap: 50px;
   }
 }

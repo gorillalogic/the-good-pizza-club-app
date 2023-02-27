@@ -1,3 +1,8 @@
+export const BACKGROUND_IMAGES = {
+  mobile: 'images/background_mobile.png',
+  desktop: 'images/background_desktop.png',
+};
+
 export const NAVBAR_ITEMS = [
   { label: 'Menu', url: '/menu' },
   { label: 'About Us', url: '/about-us' },
