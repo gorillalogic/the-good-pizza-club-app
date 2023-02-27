@@ -14,16 +14,19 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - run: npm run lint
   test:
     name: test
     needs: setup
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - run: npm run test
   build:
     name: build
     needs: setup
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
       - run: npm run build
