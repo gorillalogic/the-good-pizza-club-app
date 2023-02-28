@@ -1,0 +1,9 @@
+@import '../../../styles/styles.scss';
+
+.form {
+  @include form();
+}
+
+.title {
+  color: colors('yellow');
+}

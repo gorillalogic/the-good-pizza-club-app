@@ -6,8 +6,9 @@ describe('HomeComponent', () => {
     render(<Home />);
   });
 
-  it('should render Welcome title', () => {
-    const result = screen.getByText('Welcome!', { exact: false });
+  it('should render background images', () => {
+    const result = screen.getAllByRole('img');
     expect(result).toBeDefined();
+    expect(result.length).toBeGreaterThan(0);
   });
 });

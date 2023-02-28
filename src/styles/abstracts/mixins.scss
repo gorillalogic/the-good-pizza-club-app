@@ -53,3 +53,37 @@
     }
   }
 }
+
+@mixin form() {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+  padding: 0px 16px;
+  margin: 0 auto;
+
+  .form-title {
+    color: colors('yellow');
+  }
+
+  .form-actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  @include from-breakpoint('medium') {
+    max-width: 60%;
+
+    .form-actions {
+      button {
+        width: 340px;
+      }
+    }
+  }
+}

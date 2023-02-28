@@ -47,6 +47,12 @@
   gap: 12px;
 }
 
+@include from-breakpoint('medium'){
+  .images {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @include from-breakpoint('large') {
   .footer {
     padding: 60px 0 0 0;
@@ -54,7 +60,7 @@
 
   .container {
     flex-direction: row;
-    max-width: 1200px;
+    width: 80%;
     margin: 0 auto;
   }
 
@@ -72,5 +78,10 @@
 
   .container {
     gap: 50px;
+    max-width: 1200px;
+  }
+
+  .images {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

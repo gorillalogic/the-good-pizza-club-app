@@ -1,60 +1,46 @@
 @import '../../styles/styles.scss';
 
 .home {
+  position: relative;
   text-align: center;
   width: 100%;
   height: 100%;
-  padding: 250px 12px 32px;
-  background-image: var(--bgMobile);
-  background-size: cover;
-  background-repeat: no-repeat;
+  padding: 250px 12px 24px;
 }
 
-.title {
-  color: colors('yellow');
-}
-
-.subtitle {
-  color: colors('yellow');
-}
-
-.image {
+.background {
   position: absolute;
   top: 0;
   left: 0;
-}
+  height: 100%;
+  width: 100%;
+  z-index: -1;
 
-.actions {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 24px;
-  gap: 16px;
+  &--desktop {
+    display: none;
+  }
 }
 
 @include from-breakpoint('medium') {
   .home {
-    padding-top: 180px;
-  }
-}
-
-@include from-breakpoint('large') {
-
-
-  .title {
-    font-size: calculateRem(80);
-  }
-
-  .subtitle {
-    font-size: calculateRem(40);
+    padding-top: 160px;
   }
 }
 
 @include from-breakpoint('x-large') {
   .home {
     padding-left: 30%;
-    background-image: var(--bgDesktop);
-    background-size: contain;
-    background-position: left;
+  }
+
+  .background {
+    &--mobile {
+      display: none;
+    }
+
+    &--desktop {
+      display: block;
+      width: auto;
+      height: calc(100vh - 405px);
+    }
   }
 }

@@ -57,6 +57,10 @@ html {
     #root {
       height: 100%;
     }
+
+    a {
+      text-decoration: none;
+    }
   }
 
   @include from-breakpoint('medium') {
