@@ -1,4 +1,5 @@
-import { Button, TextField } from '@mui/material';
+import { Button, CircularProgress, TextField } from '@mui/material';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../core/hooks/useAppDispatch';
@@ -16,14 +17,17 @@ const LoginForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm<FormValues>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: FormValues) => {
     try {
+      setIsLoading(true);
       await dispatch(loginAsync(data)).unwrap();
       navigate('/', { replace: true });
     } catch (error) {
       const { message } = error as HttpError;
       dispatch(showSnackbar({ color: 'error', message }));
+      setIsLoading(false);
     }
   };
 
@@ -46,7 +50,8 @@ const LoginForm: React.FC = () => {
           variant="contained"
           className={styles.button}
         >
-          Log in
+          {!isLoading && 'Log in'}
+          {isLoading && <CircularProgress size={30} color='inherit' />}
         </Button>
       </div>
     </form>
