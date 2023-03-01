@@ -55,12 +55,13 @@
 }
 
 @mixin form() {
+  width: 100%;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   text-align: left;
   padding: 0px 16px;
-  margin: 0 auto;
 
   .form-title {
     color: colors('yellow');
@@ -78,7 +79,7 @@
   }
 
   @include from-breakpoint('medium') {
-    max-width: 60%;
+    width: 60%;
 
     .form-actions {
       button {

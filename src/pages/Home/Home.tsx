@@ -15,7 +15,9 @@ const Home: React.FC = () => {
         alt=""
         className={`${styles.background} ${styles['background--mobile']}`}
       />
-      <Outlet />
+      <div className={styles.content}>
+        <Outlet />
+      </div>
     </section>
   );
 };

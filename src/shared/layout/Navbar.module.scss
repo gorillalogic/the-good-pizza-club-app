@@ -52,6 +52,7 @@
   }
 
   a {
+    cursor: pointer;
     color: colors('white');
     text-decoration: none;
   }
@@ -59,12 +60,17 @@
   .active {
     color: colors('yellow');
   }
+
+  span {
+    vertical-align: middle;
+  }
 }
 
 @include from-breakpoint('large') {
   .navbar {
+    width: 80%;
     max-width: 1200px;
-    padding: 24px 12px;
+    padding: 24px 0;
     flex-direction: row;
   }
 
