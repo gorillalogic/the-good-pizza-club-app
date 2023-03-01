@@ -15,7 +15,16 @@ const initialState: InitialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, action) => {
+      state.isLoggedIn = true;
+      state.user = action.payload;
+    },
+    removeUser: (state) => {
+      state.isLoggedIn = false;
+      state.user = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(loginAsync.fulfilled, (state, action) => {
       state.isLoggedIn = true;
@@ -28,4 +37,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { setUser, removeUser } = authSlice.actions;
 export default authSlice.reducer;
