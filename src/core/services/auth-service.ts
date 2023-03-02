@@ -5,7 +5,7 @@ export const login = (email: string, password: string) => {
   return axiosInstance.post('/auth/login', { email, password });
 };
 
-export const register = (data: User) => {
+export const register = (data: Partial<User>) => {
   return axiosInstance.post('/auth/register', data);
 };
 

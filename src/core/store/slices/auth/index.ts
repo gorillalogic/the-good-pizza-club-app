@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from '../../../../models/User';
-import { loginAsync, logoutAsync } from './asyncThunks';
+import { loginAsync, logoutAsync, registerAsync } from './asyncThunks';
 
 interface InitialState {
   isLoggedIn: boolean;
@@ -33,6 +33,10 @@ const authSlice = createSlice({
     builder.addCase(logoutAsync.fulfilled, (state) => {
       state.isLoggedIn = false;
       state.user = null;
+    });
+    builder.addCase(registerAsync.fulfilled, (state, action) => {
+      state.isLoggedIn = true;
+      state.user = action.payload;
     });
   },
 });
