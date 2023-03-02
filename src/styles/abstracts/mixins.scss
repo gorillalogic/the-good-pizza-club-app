@@ -67,6 +67,11 @@
     color: colors('yellow');
   }
 
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
   .form-actions {
     width: 100%;
     display: flex;
@@ -76,6 +81,10 @@
     button {
       width: 100%;
     }
+  }
+
+  .form-error {
+    color: colors('red');
   }
 
   @include from-breakpoint('medium') {
