@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
 import { BACKGROUND_IMAGES } from '../../shared/constants/global.constants';
-import styles from './Home.module.scss';
+import styles from './Login.module.scss';
 
-const Home: React.FC = () => {
+const Welcome: React.FC = () => {
   return (
-    <section className={styles.home}>
+    <section className={styles.login}>
       <img
         src={BACKGROUND_IMAGES.desktop}
         alt=""
@@ -22,4 +22,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Welcome;

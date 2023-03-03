@@ -5,7 +5,7 @@ import {
   getLoggedIn,
   getUser,
 } from '../../../core/store/slices/auth/selectors';
-import styles from './Landing.module.scss';
+import styles from './Welcome.module.scss';
 
 const Landing: React.FC = () => {
   const isLoggedIn = useSelector(getLoggedIn);

@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import Home from './Home';
+import Login from './Login';
 
-describe('HomeComponent', () => {
+describe('LoginComponent', () => {
   beforeEach(() => {
-    render(<Home />);
+    render(<Login />);
   });
 
   it('should render background images', () => {

@@ -74,6 +74,18 @@ const Navbar: React.FC = () => {
             </li>
           </>
         )}
+        {!isLoggedIn && (
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? styles.active : undefined
+              }
+            >
+              Log in/Sign up
+            </NavLink>
+          </li>
+        )}
       </ul>
     </nav>
   );
