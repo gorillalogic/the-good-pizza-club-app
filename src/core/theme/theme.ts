@@ -10,14 +10,29 @@ const theme = createTheme({
       contrastText: '#F2F2F2',
     },
     error: {
-      main: '#EB5757'
+      main: '#EB5757',
     },
     warning: {
-      main: '#F2C94C'
+      main: '#F2C94C',
     },
     success: {
-      main: '#27AE60'
-    }
+      main: '#27AE60',
+    },
+  },
+  typography: {
+    fontFamily: [
+      'Rowdies',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      'Segoe UI',
+      'Oxygen',
+      'Ubuntu',
+      'Cantarell',
+      'Fira Sans',
+      'Droid Sans',
+      'Helvetica Neue',
+      'sans-serif',
+    ].join(','),
   },
   components: {
     MuiButton: {
@@ -36,7 +51,7 @@ const theme = createTheme({
           input: {
             backgroundColor: '#F2F2F2',
             borderRadius: '10px',
-          }
+          },
         },
       },
     },

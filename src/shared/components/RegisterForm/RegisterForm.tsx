@@ -30,7 +30,7 @@ const RegisterForm: React.FC = () => {
     setLoading(true);
     try {
       await dispatch(registerAsync(data)).unwrap();
-      navigate('/', { replace: true });
+      navigate('/home', { replace: true });
     } catch (error) {
       console.log(error);
       const { message } = error as HttpError;

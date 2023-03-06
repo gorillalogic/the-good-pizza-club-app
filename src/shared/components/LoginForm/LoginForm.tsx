@@ -29,7 +29,7 @@ const LoginForm: React.FC = () => {
 
     try {
       await dispatch(loginAsync(data)).unwrap();
-      navigate('/', { replace: true });
+      navigate('/home', { replace: true });
     } catch (error) {
       const { message } = error as HttpError;
       dispatch(showSnackbar({ color: 'error', message }));
