@@ -1,0 +1,64 @@
+@import '../../../styles/styles.scss';
+
+.promotion-card {
+  display: flex;
+  padding: 24px;
+  width: 100%;
+  background-image: var(--image);
+  max-width: 1000px;
+
+  &--right {
+    border-radius: 180px 20px 20px 20px;
+    justify-content: flex-end;
+    background-position: left;
+
+    .content {
+      background-color: colors('purple');
+    }
+  }
+
+  &--left {
+    border-radius: 20px 180px 20px 20px;
+    justify-content: flex-start;
+    background-position: right;
+
+    .content {
+      background-color: colors('dark-green');
+    }
+  }
+}
+
+.content {
+  max-width: 580px;
+  padding: 16px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  gap: 8px;
+  border-radius: 10px;
+}
+
+.title {
+  @include font(80, 100);
+  color: colors('red');
+}
+
+.subtitle {
+  @include font(40, 50);
+  color: colors('yellow');
+}
+
+.description {
+  @include font(16, 20);
+}
+
+.icon {
+  color: colors('yellow');
+  margin-right: 12px;
+}
+
+.info {
+  @include font(12, 16);
+}

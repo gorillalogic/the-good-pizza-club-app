@@ -13,6 +13,8 @@
   justify-content: center;
   align-items: center;
   min-height: 80vh;
+  gap: 80px;
+  padding: 5% 10%;
 }
 
 .title,
@@ -33,4 +35,8 @@
   @include font(30, 37, 0.1, 500);
   width: 500px;
   height: 116px;
+}
+
+.error {
+  color: colors('red');
 }

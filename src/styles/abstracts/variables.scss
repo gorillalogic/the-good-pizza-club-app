@@ -4,36 +4,38 @@ $medium: 768px;
 $large: 1200px;
 
 $breakpoints: (
-    x-small: (
-        null,
-        $x-small - 1,
-    ),
-    small: (
-        $x-small,
-        $small - 1,
-    ),
-    medium: (
-        $small,
-        $medium - 1,
-    ),
-    large: (
-        $medium,
-        $large - 1,
-    ),
-    x-large: (
-        $large,
-        null,
-    ),
+  x-small: (
+    null,
+    $x-small - 1,
+  ),
+  small: (
+    $x-small,
+    $small - 1,
+  ),
+  medium: (
+    $small,
+    $medium - 1,
+  ),
+  large: (
+    $medium,
+    $large - 1,
+  ),
+  x-large: (
+    $large,
+    null,
+  ),
 );
 
 $colors: (
-  'white': #F2F2F2,
-  'black': #1F1F1F,
-  'orange': #F2994A,
-  'red': #EB5757,
-  'yellow': #F2C94C,
-  'green': #27AE60,
+  'white': #f2f2f2,
+  'black': #1f1f1f,
+  'orange': #f2994a,
+  'red': #eb5757,
+  'yellow': #f2c94c,
+  'green': #27ae60,
+  'dark-green': #284b56,
   'light-dark': #333333,
-  'gray': #4F4F4F,
-  'light-gray': #BDBDBD,
+  'gray': #4f4f4f,
+  'light-gray': #bdbdbd,
+  'purple': #380a48,
 );
