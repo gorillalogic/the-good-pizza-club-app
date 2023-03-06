@@ -1,0 +1,47 @@
+@import '../../../styles/styles.scss';
+
+.carousel {
+  width: 100%;
+  position: relative;
+  height: fit-content;
+  padding: 12px 0;
+}
+
+.viewport {
+  width: 85%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+}
+
+.button {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: colors('light-gray');
+  background-color: transparent;
+  border: 0;
+
+  &--prev {
+    left: 0;
+  }
+
+  &--next {
+    right: 0;
+  }
+}
+
+.dots {
+  margin: 16px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}

@@ -1,0 +1,14 @@
+@import '../../../../styles/styles.scss';
+
+.dot {
+  width: 14px;
+  height: 14px;
+  background: colors('light-gray');
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.selected {
+  transform: scale(1.5);
+  background: colors('orange');
+}
