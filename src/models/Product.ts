@@ -2,6 +2,9 @@ export interface Product {
   id: number;
   name: string;
   description: string;
-  price: number;
   image: string;
+  price: number;
+  weight: number;
+  calories: number;
+  color: string;
 }

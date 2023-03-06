@@ -6,7 +6,7 @@ import styles from './Carousel.module.scss';
 import CarouselDot from './CarouselDot/CarouselDot';
 
 interface Props {
-  slides: any[];
+  slides: React.ReactNode[];
   align?: 'start' | 'center' | 'end';
 }
 

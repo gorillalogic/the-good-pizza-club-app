@@ -1,0 +1,64 @@
+@import '../../../styles/styles.scss';
+
+.card {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 300px;
+  min-height: 450px;
+  padding: 17px;
+  border-radius: 10px 100px 10px 10px;
+  gap: 8px;
+
+  &--orange {
+    background: gradient('orange');
+  }
+
+  &--green {
+    background: gradient('green');
+  }
+
+  &--red {
+    background: gradient('red');
+  }
+
+  &--blue {
+    background: gradient('blue');
+  }
+}
+
+.title {
+  @include font(24, 30, 0.1, 700);
+  color: colors('black');
+}
+
+.info {
+  @include font(12, 16, 0.1, 500);
+  display: flex;
+  gap: 24px;
+}
+
+.description {
+  @include font(16, 21);
+  color: colors('black');
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: colors('black');
+}
+
+.price {
+  @include font(24, 30, 0.1, 700);
+  display: block;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

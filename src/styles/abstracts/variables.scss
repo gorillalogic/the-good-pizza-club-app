@@ -39,3 +39,12 @@ $colors: (
   'light-gray': #bdbdbd,
   'purple': #380a48,
 );
+
+$gradients: (
+  'orange':
+    radial-gradient(187.18% 90.09% at 50% 9.91%, #d9571f 0%, #f1c380 100%),
+  'green':
+    radial-gradient(187.18% 90.09% at 50% 9.91%, #8f9f19 0%, #d2da99 100%),
+  'red': radial-gradient(187.18% 90.09% at 50% 9.91%, #d91f1f 0%, #f1a980 100%),
+  'blue': radial-gradient(187.18% 90.09% at 50% 9.91%, #199f7f 0%, #99dac3 100%),
+);

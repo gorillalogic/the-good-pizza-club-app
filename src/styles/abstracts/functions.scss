@@ -19,3 +19,11 @@
 
   @return map-get($zindex, $layer);
 }
+
+@function gradient($color) {
+  @if not map-has-key($gradients, $color) {
+    @warn 'No gradient found for `#{$color}`.';
+  }
+
+  @return map-get($gradients, $color);
+}

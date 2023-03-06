@@ -1,7 +1,7 @@
 export const COOKIE_SESSION_NAME = 'connect.sid';
 
 export const LOCALSTORAGE_KEYS = {
-  user: 'user'
+  user: 'user',
 };
 
 export const BACKGROUND_IMAGES = {
@@ -43,3 +43,6 @@ export const SOCIAL_MEDIA_ITEMS = [
     url: 'https://www.instagram.com',
   },
 ];
+
+export const PROMOTION_DISCLAIMER =
+  'Promotion valid only for pickup and express purchases, not valid with other coupons. Promotion valid only on Fridays.';
