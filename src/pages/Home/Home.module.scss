@@ -7,7 +7,8 @@
   flex-direction: column;
 }
 
-.home-section {
+.section {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,6 +16,10 @@
   min-height: 80vh;
   gap: 80px;
   padding: 5% 10%;
+
+  &:last-of-type {
+    background-color: colors('green');
+  }
 }
 
 .title,
@@ -39,4 +44,11 @@
 
 .error {
   color: colors('red');
+}
+
+@include from-breakpoint('x-large') {
+  .section:last-of-type {
+    border-radius: 312px 0px 0px 0px;
+    margin-bottom: -443px; // footer height
+  }
 }

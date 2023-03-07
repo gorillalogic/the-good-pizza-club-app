@@ -7,6 +7,7 @@ import { productsSelector } from '../../core/store/slices/products/selectors';
 import { fetchPromotions } from '../../core/store/slices/promotions/asyncThunks';
 import { promotionsSelector } from '../../core/store/slices/promotions/selectors';
 import Carousel from '../../shared/components/Carousel/Carousel';
+import GoToMenu from '../../shared/components/GoToMenu/GoToMenu';
 import Hero from '../../shared/components/Hero/Hero';
 import ProductCard from '../../shared/components/ProductCard/ProductCard';
 import PromotionCard from '../../shared/components/PromotionCard/PromotionCard';
@@ -52,14 +53,19 @@ const Home: React.FC = () => {
           Customize Your Own
         </Button>
       </Hero>
+      {error && (
+        <section className={styles.section}>
+          <p className={styles.error}>Error loading data...</p>
+        </section>
+      )}
       {loading && (
-        <section className={styles['home-section']}>
+        <section className={styles.section}>
           <CircularProgress color="primary" />
         </section>
       )}
-      {!loading && (
+      {!loading && !error && (
         <>
-          <section className={styles['home-section']}>
+          <section className={styles.section}>
             <h3>Promotions of the day</h3>
             {promotions.length > 0 &&
               promotions.map((promotion, index) => (
@@ -71,18 +77,15 @@ const Home: React.FC = () => {
                 ></PromotionCard>
               ))}
           </section>
-          <section className={styles['home-section']}>
+          <section className={styles.section}>
             <h3>You can also try one of our greatest hits</h3>
             <Carousel slides={slices} />
           </section>
         </>
       )}
-      {error && (
-        <section className={styles['home-section']}>
-          <p className={styles.error}>Error loading data...</p>
-        </section>
-      )}
-      <section className={styles['home-section']}></section>
+      <section className={styles.section}>
+        <GoToMenu />
+      </section>
     </section>
   );
 };

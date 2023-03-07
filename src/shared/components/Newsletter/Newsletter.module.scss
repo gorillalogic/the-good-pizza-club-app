@@ -1,0 +1,56 @@
+@import '../../../styles/styles.scss';
+
+.newsletter {
+  padding: 16px 24px;
+  background-color: colors('yellow');
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.text {
+  @include font(16, 20);
+  color: colors('black');
+}
+
+.title {
+  @include font(20, 25);
+  text-transform: uppercase;
+  color: colors('black');
+}
+
+.input {
+  width: 100%;
+  margin-top: 16px;
+  background-color: colors('white');
+  border: 0;
+  border-radius: 50px !important;
+  padding-right: 13px !important;
+
+  input {
+    padding-top: 9.5px;
+    padding-bottom: 9.5px;
+  }
+
+  button {
+    width: 70px;
+    background-color: colors('green');
+    color: colors('white');
+    border-radius: 50px;
+
+    &:hover {
+      background-color: colors('green');
+    }
+  }
+}
+
+@include from-breakpoint('medium') {
+  .newsletter {
+    padding: 30px 60px;
+  }
+
+  .input {
+    button {
+      width: 95px;
+    }
+  }
+}
