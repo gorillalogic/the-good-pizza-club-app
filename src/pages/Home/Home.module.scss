@@ -38,8 +38,6 @@
 
 .button {
   @include font(30, 37, 0.1, 500);
-  width: 500px;
-  height: 116px;
 }
 
 .error {
@@ -50,5 +48,10 @@
   .section:last-of-type {
     border-radius: 312px 0px 0px 0px;
     margin-bottom: -443px; // footer height
+  }
+
+  .button {
+    width: 500px;
+    height: 116px;
   }
 }

@@ -34,6 +34,15 @@ const theme = createTheme({
       'sans-serif',
     ].join(','),
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 588,
+      md: 768,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   components: {
     MuiButton: {
       styleOverrides: {
@@ -52,6 +61,39 @@ const theme = createTheme({
             backgroundColor: '#F2F2F2',
             borderRadius: '10px',
           },
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          backgroundColor: '#4F4F4F',
+          color: '#f2f2f2',
+        },
+        icon: {
+          backgroundColor: '#f2f2f2',
+          borderRadius: '50%',
+        },
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: '#333333',
+        },
+      },
+    },
+    MuiDialogTitle: {
+      styleOverrides: {
+        root: {
+          color: '#f2c94c',
+        },
+      },
+    },
+    MuiDialogContent: {
+      styleOverrides: {
+        root: {
+          color: '#f2f2f2',
         },
       },
     },

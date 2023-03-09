@@ -1,0 +1,18 @@
+@import '../../../../styles/styles.scss';
+
+.additions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  @include font(24, 28);
+}
+
+.item {
+  width: 50;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}

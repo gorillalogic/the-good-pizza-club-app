@@ -1,0 +1,5 @@
+@import '../../../../styles/styles.scss';
+
+.title {
+  @include font(24, 28);
+}
