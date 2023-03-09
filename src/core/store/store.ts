@@ -3,6 +3,7 @@ import authReducer from './slices/auth';
 import promotionsReducer from './slices/promotions';
 import snackbarReducer from './slices/snackbar';
 import productsReducer from './slices/products';
+import recordsReducer from './slices/records';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     auth: authReducer,
     promotions: promotionsReducer,
     products: productsReducer,
+    records: recordsReducer,
   },
 });
 

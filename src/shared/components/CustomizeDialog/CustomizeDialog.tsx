@@ -1,5 +1,6 @@
 import {
   Button,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -10,16 +11,11 @@ import {
   useTheme,
 } from '@mui/material';
 import { useReducer } from 'react';
-import {
-  APPETIZERS,
-  CHEESES,
-  DESSERTS,
-  DRINKS,
-  SALADS,
-  SAUCES,
-  SIZES,
-  TOPPINGS,
-} from '../../../mocks/customize';
+import { useSelector } from 'react-redux';
+import { useThunkDispatch } from '../../../core/hooks/useThunkDispatch';
+import { fetchRecords } from '../../../core/store/slices/records/asyncThunks';
+import { recordsSelector } from '../../../core/store/slices/records/selectors';
+import { RecordTypes } from '../../constants/global.constants';
 import Additions from './Additions/Additions';
 import styles from './CustomizeDialog.module.scss';
 import {
@@ -40,6 +36,9 @@ const CustomizeDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [state, dispatch] = useReducer(selectedElementsReducer, initialState);
 
+  const records = useSelector(recordsSelector);
+  const { loading, error } = useThunkDispatch(fetchRecords());
+
   return (
     <Dialog
       className={styles.dialog}
@@ -57,37 +56,45 @@ const CustomizeDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
       </DialogTitle>
       <DialogContent>
         <div className={styles.content}>
-          <Sizes
-            sizes={SIZES}
-            selectedSize={state.selectedSize}
-            onSelect={(size) =>
-              dispatch({ type: size.type, payload: { id: size.id } })
-            }
-          />
-          <Toppings
-            sauces={SAUCES}
-            cheeses={CHEESES}
-            toppings={TOPPINGS}
-            selectedSauce={state.selectedSauce}
-            selectedCheese={state.selectedCheese}
-            selectedToppings={state.selectedToppings}
-            onChange={(item) =>
-              dispatch({ type: item.type, payload: { id: item.id } })
-            }
-          />
-          <Additions
-            drinks={DRINKS}
-            salads={SALADS}
-            appetizers={APPETIZERS}
-            desserts={DESSERTS}
-            selectedItems={state.selectedAdditions}
-            onChange={(item, quantity) =>
-              dispatch({
-                type: 'addition',
-                payload: { ...item, quantity },
-              })
-            }
-          />
+          {error && <p className={styles.error}>Error loading data...</p>}
+          {loading && <CircularProgress color="primary" />}
+          {!loading && !error && (
+            <>
+              <Sizes
+                sizes={records.filter((r) => r.type === RecordTypes.Size)}
+                selectedSize={state.selectedSize}
+                onSelect={(size) =>
+                  dispatch({ type: size.type, payload: { id: size.id } })
+                }
+              />
+              <Toppings
+                sauces={records.filter((r) => r.type === RecordTypes.Sauce)}
+                cheeses={records.filter((r) => r.type === RecordTypes.Cheese)}
+                toppings={records.filter((r) => r.type === RecordTypes.Topping)}
+                selectedSauce={state.selectedSauce}
+                selectedCheese={state.selectedCheese}
+                selectedToppings={state.selectedToppings}
+                onChange={(item) =>
+                  dispatch({ type: item.type, payload: { id: item.id } })
+                }
+              />
+              <Additions
+                drinks={records.filter((r) => r.type === RecordTypes.Drink)}
+                salads={records.filter((r) => r.type === RecordTypes.Salad)}
+                appetizers={records.filter(
+                  (r) => r.type === RecordTypes.Appetizer
+                )}
+                desserts={records.filter((r) => r.type === RecordTypes.Dessert)}
+                selectedItems={state.selectedAdditions}
+                onChange={(item, quantity) =>
+                  dispatch({
+                    type: 'addition',
+                    payload: { ...item, quantity },
+                  })
+                }
+              />
+            </>
+          )}
         </div>
       </DialogContent>
       <DialogActions className={styles.actions}>
@@ -98,7 +105,12 @@ const CustomizeDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
         >
           Restart
         </Button>
-        <Button variant="contained" color="error" onClick={onConfirm}>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={onConfirm}
+          disabled={state.selectedSize === undefined}
+        >
           Add to cart
         </Button>
       </DialogActions>

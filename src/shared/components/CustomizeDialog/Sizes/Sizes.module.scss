@@ -21,6 +21,7 @@
   button {
     border: 1px solid colors('red');
     border-radius: 50%;
+    cursor: pointer;
 
     &.active {
       background-color: colors('green');

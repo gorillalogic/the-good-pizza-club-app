@@ -46,3 +46,14 @@ export const SOCIAL_MEDIA_ITEMS = [
 
 export const PROMOTION_DISCLAIMER =
   'Promotion valid only for pickup and express purchases, not valid with other coupons. Promotion valid only on Fridays.';
+
+export enum RecordTypes {
+  Size = 'size',
+  Sauce = 'sauce',
+  Cheese = 'cheese',
+  Topping = 'topping',
+  Drink = 'drink',
+  Salad = 'salad',
+  Appetizer = 'appetizer',
+  Dessert = 'dessert',
+}

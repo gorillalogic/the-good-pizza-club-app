@@ -1,7 +1,7 @@
 import { Button, CircularProgress } from '@mui/material';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../core/hooks/useAppDispatch';
+import { useThunkDispatch } from '../../core/hooks/useThunkDispatch';
 import { fetchProducts } from '../../core/store/slices/products/asynchThunks';
 import { productsSelector } from '../../core/store/slices/products/selectors';
 import { fetchPromotions } from '../../core/store/slices/promotions/asyncThunks';
@@ -16,12 +16,13 @@ import { PROMOTION_DISCLAIMER } from '../../shared/constants/global.constants';
 import styles from './Home.module.scss';
 
 const Home: React.FC = () => {
-  const dispatch = useAppDispatch();
   const products = useSelector(productsSelector);
   const promotions = useSelector(promotionsSelector);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const { loading, error } = useThunkDispatch([
+    fetchProducts(),
+    fetchPromotions(),
+  ]);
 
   const slices = products.map((product, index) => (
     <ProductCard key={index} product={product} />
@@ -37,25 +38,6 @@ const Home: React.FC = () => {
 
   const addToCart = useCallback((data: any) => {
     console.log(data);
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-
-      try {
-        await Promise.all([
-          dispatch(fetchPromotions()).unwrap(),
-          dispatch(fetchProducts()).unwrap(),
-        ]);
-      } catch (error) {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
   }, []);
 
   return (
