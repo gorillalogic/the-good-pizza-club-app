@@ -4,6 +4,8 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Icon,
+  IconButton,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -45,39 +47,48 @@ const CustomizeDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
       onClose={onClose}
       fullScreen={fullScreen}
     >
-      <DialogTitle className={styles.title}>Make it your own way</DialogTitle>
-      <DialogContent className={styles.content}>
-        <Sizes
-          sizes={SIZES}
-          selectedSize={state.selectedSize}
-          onSelect={(size) =>
-            dispatch({ type: size.type, payload: { id: size.id } })
-          }
-        />
-        <Toppings
-          sauces={SAUCES}
-          cheeses={CHEESES}
-          toppings={TOPPINGS}
-          selectedSauce={state.selectedSauce}
-          selectedCheese={state.selectedCheese}
-          selectedToppings={state.selectedToppings}
-          onChange={(item) =>
-            dispatch({ type: item.type, payload: { id: item.id } })
-          }
-        />
-        <Additions
-          drinks={DRINKS}
-          salads={SALADS}
-          appetizers={APPETIZERS}
-          desserts={DESSERTS}
-          selectedItems={state.selectedAdditions}
-          onChange={(item, quantity) =>
-            dispatch({
-              type: 'addition',
-              payload: { ...item, quantity },
-            })
-          }
-        />
+      <DialogTitle>
+        <div className={styles.title}>
+          <IconButton onClick={onClose} className={styles.close}>
+            <Icon>close</Icon>
+          </IconButton>
+          <h2>Make it your own way</h2>
+        </div>
+      </DialogTitle>
+      <DialogContent>
+        <div className={styles.content}>
+          <Sizes
+            sizes={SIZES}
+            selectedSize={state.selectedSize}
+            onSelect={(size) =>
+              dispatch({ type: size.type, payload: { id: size.id } })
+            }
+          />
+          <Toppings
+            sauces={SAUCES}
+            cheeses={CHEESES}
+            toppings={TOPPINGS}
+            selectedSauce={state.selectedSauce}
+            selectedCheese={state.selectedCheese}
+            selectedToppings={state.selectedToppings}
+            onChange={(item) =>
+              dispatch({ type: item.type, payload: { id: item.id } })
+            }
+          />
+          <Additions
+            drinks={DRINKS}
+            salads={SALADS}
+            appetizers={APPETIZERS}
+            desserts={DESSERTS}
+            selectedItems={state.selectedAdditions}
+            onChange={(item, quantity) =>
+              dispatch({
+                type: 'addition',
+                payload: { ...item, quantity },
+              })
+            }
+          />
+        </div>
       </DialogContent>
       <DialogActions className={styles.actions}>
         <Button

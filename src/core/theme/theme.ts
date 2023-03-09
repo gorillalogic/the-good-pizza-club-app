@@ -80,6 +80,10 @@ const theme = createTheme({
       styleOverrides: {
         paper: {
           backgroundColor: '#333333',
+          maxWidth: 700,
+          ['@media (min-width:768px)']: {
+            borderRadius: '10px 100px 10px 10px',
+          },
         },
       },
     },

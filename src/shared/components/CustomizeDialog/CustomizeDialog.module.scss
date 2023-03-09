@@ -1,8 +1,21 @@
 @import '../../../styles/styles.scss';
 
 .title {
-  @include font(30, 32);
   text-align: center;
+  display: flex;
+  align-items: center;
+
+  h2 {
+    @include font(30, 32);
+    width: 100%;
+  }
+}
+
+.close {
+  float: left;
+  span {
+    color: colors('white');
+  }
 }
 
 .content {
@@ -19,5 +32,19 @@
 
   button {
     width: 100%;
+  }
+}
+
+@include from-breakpoint('large') {
+  .title {
+    padding: 18px 0;
+  }
+
+  .content {
+    padding: 0 24px;
+  }
+
+  .actions {
+    flex-direction: row;
   }
 }

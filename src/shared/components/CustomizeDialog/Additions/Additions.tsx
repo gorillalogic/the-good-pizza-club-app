@@ -23,10 +23,16 @@ const Additions: React.FC<Props> = ({
   return (
     <div className={styles.additions}>
       <span className={styles.title}>Need anything else?</span>
-      <AdditionGroup title="Drinks" items={drinks} onClick={onChange} />
-      <AdditionGroup title="Salads" items={salads} onClick={onChange} />
-      <AdditionGroup title="Appetizers" items={appetizers} onClick={onChange} />
-      <AdditionGroup title="Desserts" items={desserts} onClick={onChange} />
+      <div className={styles.groups}>
+        <AdditionGroup title="Drinks" items={drinks} onClick={onChange} />
+        <AdditionGroup title="Salads" items={salads} onClick={onChange} />
+        <AdditionGroup
+          title="Appetizers"
+          items={appetizers}
+          onClick={onChange}
+        />
+        <AdditionGroup title="Desserts" items={desserts} onClick={onChange} />
+      </div>
       <div className={styles.selections}>
         {selectedItems.map((item) => (
           <div key={`${item.type}-${item.id}`} className={styles.item}>
