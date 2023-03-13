@@ -13,7 +13,6 @@ import Hero from '../../shared/components/Hero/Hero';
 import ProductCard from '../../shared/components/ProductCard/ProductCard';
 import PromotionCard from '../../shared/components/PromotionCard/PromotionCard';
 import { PROMOTION_DISCLAIMER } from '../../shared/constants/global.constants';
-import styles from './Home.module.scss';
 
 const Home: React.FC = () => {
   const products = useSelector(productsSelector);
