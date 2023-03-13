@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>
-        <NavLink to="/">
+        <NavLink to={isLoggedIn ? '/home' : '/'}>
           <img src="images/logo.svg" alt="The Good Pizza Club Logo" />
         </NavLink>
         <IconButton className={styles.button} size="small" onClick={toggleMenu}>
