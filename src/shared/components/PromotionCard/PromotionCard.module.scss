@@ -4,6 +4,7 @@
   display: flex;
   padding: 24px;
   width: 100%;
+  height: fit-content;
   background-image: var(--image);
   max-width: 1000px;
 
@@ -26,10 +27,18 @@
       background-color: colors('dark-green');
     }
   }
+
+  &--compact {
+    max-width: fit-content;
+    border-radius: 20px;
+    background-image: none;
+    padding: 0;
+  }
 }
 
 .content {
-  max-width: 580px;
+  max-width: 500px;
+  min-height: 280px;
   padding: 16px 32px;
   display: flex;
   flex-direction: column;

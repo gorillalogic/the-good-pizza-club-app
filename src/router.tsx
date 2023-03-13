@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './pages/App';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
+import Menu from './pages/Menu/Menu';
 import Welcome from './pages/Login/Welcome/Welcome';
 import NotFound from './pages/NotFound/NotFound';
 import LoginForm from './shared/components/LoginForm/LoginForm';
@@ -39,6 +40,16 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Home />,
+          },
+        ],
+      },
+      {
+        path: '/menu',
+        element: <ProtectedRoute />,
+        children: [
+          {
+            index: true,
+            element: <Menu />,
           },
         ],
       },

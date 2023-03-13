@@ -6,21 +6,26 @@ interface Props {
   promotion: Promotion;
   info?: string;
   contentPosition?: 'left' | 'right';
+  compact?: boolean;
 }
 
 const PromotionCard: React.FC<Props> = ({
   promotion,
   info,
   contentPosition = 'right',
+  compact = false,
 }) => {
   const style = {
     '--image': `url(${promotion.image})`,
   } as React.CSSProperties;
-  const classes = `${styles['promotion-card']} ${
-    contentPosition === 'right'
-      ? styles['promotion-card--right']
-      : styles['promotion-card--left']
-  }`;
+  const classes = `
+    ${styles['promotion-card']}
+    ${compact ? styles['promotion-card--compact'] : ''}
+    ${
+      contentPosition === 'right'
+        ? styles['promotion-card--right']
+        : styles['promotion-card--left']
+    }`;
 
   return (
     <div className={classes} style={style}>

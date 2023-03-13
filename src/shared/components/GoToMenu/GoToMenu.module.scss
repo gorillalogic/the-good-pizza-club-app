@@ -8,15 +8,17 @@
   justify-content: center;
   align-items: center;
   gap: 24px;
-}
 
-.title {
-  @include font(32);
-  color: colors(('black'));
-}
+  .title {
+    @include font(32);
+    color: colors(('black'));
+  }
 
-.newsletter {
-  max-width: 600px;
+  .wrapper {
+    display: flex;
+    align-items: center;
+    height: 64px;
+  }
 }
 
 @include from-breakpoint('x-large') {
@@ -25,12 +27,12 @@
     align-items: flex-start;
     justify-content: center;
     border-radius: 312px 0px 0px 0px;
-  }
 
-  .newsletter {
-    z-index: 2;
-    position: absolute;
-    top: 40%;
-    transform: translateY(-40%);
+    .newsletter {
+      z-index: 2;
+      position: absolute;
+      top: 40%;
+      transform: translateY(-40%);
+    }
   }
 }
