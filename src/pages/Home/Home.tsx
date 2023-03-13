@@ -36,8 +36,8 @@ const Home: React.FC = () => {
     setDialogOpen(false);
   }, []);
 
-  const addToCart = useCallback((data: any) => {
-    console.log(data);
+  const addToCart = useCallback(() => {
+    // Todo: handle add to cart data
   }, []);
 
   return (

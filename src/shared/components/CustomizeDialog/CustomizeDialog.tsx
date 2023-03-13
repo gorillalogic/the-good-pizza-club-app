@@ -28,7 +28,7 @@ import Toppings from './Toppings/Toppings';
 interface Props {
   open: boolean;
   onClose: () => void;
-  onConfirm: (data: any) => void;
+  onConfirm: () => void;
 }
 
 const CustomizeDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
