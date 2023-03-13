@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound/NotFound';
 import LoginForm from './shared/components/LoginForm/LoginForm';
 import ProtectedRoute from './shared/components/ProtectedRoute/ProtectedRoute';
 import RegisterForm from './shared/components/RegisterForm/RegisterForm';
+import { CustomizeDialogProvider } from './core/context/customizeDialogCtx';
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Home />,
+            element: (
+              <CustomizeDialogProvider>
+                <Home />
+              </CustomizeDialogProvider>
+            ),
           },
         ],
       },
@@ -49,7 +54,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Menu />,
+            element: (
+              <CustomizeDialogProvider>
+                <Menu />
+              </CustomizeDialogProvider>
+            ),
           },
         ],
       },
