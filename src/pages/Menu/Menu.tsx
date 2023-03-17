@@ -51,7 +51,7 @@ const Menu: React.FC = () => {
             />
           ))}
         </div>
-        <Newsletter className={styles.newsletter} />
+        <Newsletter />
       </section>
     </section>
   );

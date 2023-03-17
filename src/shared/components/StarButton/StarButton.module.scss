@@ -1,0 +1,22 @@
+@import '../../../styles/styles.scss';
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: colors('light-gray');
+
+  span {
+    @include font(14);
+  }
+
+  .icon {
+    @include font(24, 24);
+  }
+
+  &--active {
+    span {
+      color: colors('yellow');
+    }
+  }
+}

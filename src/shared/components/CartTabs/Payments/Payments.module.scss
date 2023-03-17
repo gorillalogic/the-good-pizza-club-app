@@ -1,0 +1,43 @@
+@import '../../../../styles/styles.scss';
+
+.payments {
+  .header {
+    text-align: left;
+    margin-bottom: 24px;
+
+    a {
+      color: colors('yellow');
+      text-decoration: underline;
+    }
+  }
+
+  .image {
+    position: absolute;
+    top: 25px;
+    right: 20px;
+  }
+
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .card {
+    min-width: 350px;
+    position: relative;
+  }
+
+  .button {
+    min-width: 100px;
+  }
+}
+
+@include from-breakpoint('x-large') {
+  .payments {
+    .content {
+      justify-content: flex-start;
+    }
+  }
+}

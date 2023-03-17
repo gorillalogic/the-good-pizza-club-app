@@ -1,0 +1,24 @@
+@import '../../../../styles/styles.scss';
+
+.table {
+  .cell {
+    display: flex;
+    gap: 20px;
+  }
+
+  .customize {
+    display: block;
+    color: colors('yellow');
+    padding: 0;
+  }
+
+  .discount {
+    @include font(16, 21);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: colors('green');
+    padding: 10px 20px;
+    border-radius: 31px;
+  }
+}

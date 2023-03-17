@@ -9,6 +9,7 @@ import LoginForm from './shared/components/LoginForm/LoginForm';
 import ProtectedRoute from './shared/components/ProtectedRoute/ProtectedRoute';
 import RegisterForm from './shared/components/RegisterForm/RegisterForm';
 import { CustomizeDialogProvider } from './core/context/customizeDialogCtx';
+import Cart from './pages/Cart/Cart';
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,16 @@ const router = createBrowserRouter([
                 <Menu />
               </CustomizeDialogProvider>
             ),
+          },
+        ],
+      },
+      {
+        path: '/cart',
+        element: <ProtectedRoute />,
+        children: [
+          {
+            index: true,
+            element: <Cart />,
           },
         ],
       },

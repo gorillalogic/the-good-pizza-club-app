@@ -1,0 +1,26 @@
+@import '../../styles/styles.scss';
+
+.cart {
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+}
+
+@include from-breakpoint('x-large') {
+  .cart {
+    .container {
+      flex-direction: row;
+    }
+
+    .newsletter {
+      position: absolute;
+      top: 37%;
+      left: 50%;
+      transform: translate(-50%, -37%);
+    }
+  }
+}

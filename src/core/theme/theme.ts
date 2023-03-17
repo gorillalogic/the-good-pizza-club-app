@@ -101,6 +101,63 @@ const theme = createTheme({
         },
       },
     },
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          backgroundColor: '#f2c94c',
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          color: '#f2f2f2',
+          '&.Mui-selected': {
+            color: '#f2c94c',
+          },
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          color: '#f2f2f2',
+          border: 'none',
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          color: '#f2f2f2',
+          backgroundColor: '#333333',
+          maxWidth: '345px',
+        },
+      },
+    },
+    MuiCardHeader: {
+      styleOverrides: {
+        root: {
+          textAlign: 'left',
+        },
+      },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          fontSize: '1rem',
+          textAlign: 'left',
+        },
+      },
+    },
+    MuiCardActions: {
+      styleOverrides: {
+        root: {
+          justifyContent: 'space-between',
+          padding: '16px',
+        },
+      },
+    },
   },
 });
 

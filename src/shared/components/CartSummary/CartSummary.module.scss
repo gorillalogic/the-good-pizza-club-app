@@ -1,0 +1,48 @@
+@import '../../../styles/styles.scss';
+
+.summary {
+  padding: 24px;
+  background-color: colors('light-black');
+  border-radius: 10px 10px 70px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 365px;
+  margin: 0 auto;
+  height: fit-content;
+
+  .title {
+    color: colors('yellow');
+    text-align: left;
+  }
+
+  .products,
+  .totals {
+    @include font(16, 21, 0.1, 400);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .totals {
+    border-top: 1px solid colors('gray');
+    padding: 12px 0;
+    margin: 0 16px;
+    margin-top: 50px;
+  }
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .savings {
+    color: colors('green');
+  }
+
+  .total {
+    color: colors('yellow');
+  }
+}
