@@ -11,4 +11,10 @@
   .button {
     margin-top: 24px;
   }
+
+  .actions {
+    display: flex;
+    gap: 24px;
+    justify-content: flex-end;
+  }
 }

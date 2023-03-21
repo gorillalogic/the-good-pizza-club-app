@@ -1,0 +1,12 @@
+@import '../../../../styles/styles.scss';
+
+.header {
+  text-align: left;
+  margin-bottom: 24px;
+
+  a {
+    color: colors('yellow');
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

@@ -20,5 +20,14 @@
     background-color: colors('green');
     padding: 10px 20px;
     border-radius: 31px;
+    display: none;
+  }
+}
+
+@include from-breakpoint('medium') {
+  .table {
+    .discount {
+      display: block;
+    }
   }
 }

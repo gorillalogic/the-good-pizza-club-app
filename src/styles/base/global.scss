@@ -121,4 +121,8 @@ html {
       margin-bottom: -443px; // footer height
     }
   }
+
+  @include from-breakpoint('xx-large') {
+    padding: 5% 20%;
+  }
 }

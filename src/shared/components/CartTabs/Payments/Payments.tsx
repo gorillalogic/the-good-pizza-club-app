@@ -5,27 +5,28 @@ import {
   CardContent,
   CardHeader,
 } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { authContext } from '../../../../core/context/authCtx';
 import { Payment } from '../../../../models/Payment';
 import StarButton from '../../StarButton/StarButton';
+import TabHeader from '../TabHeader/TabHeader';
 import styles from './Payments.module.scss';
 
 interface Props {
-  user: string;
   payments: Payment[];
 }
 
-const Payments: React.FC<Props> = ({ user, payments }) => {
+const Payments: React.FC<Props> = ({ payments }) => {
   const [selectedPayment, setSelectedPayment] = useState<number | null>(null);
+  const authCtx = useContext(authContext);
 
   return (
     <div className={styles.payments}>
-      <div className={styles.header}>
-        <h2>Your Payments</h2>
-        <p>
-          {user}, not you? <a>Click here</a>
-        </p>
-      </div>
+      <TabHeader
+        title="Your payments"
+        user={authCtx.user?.name || ''}
+        onClick={authCtx.logout}
+      />
       <div className={styles.content}>
         {payments.map((payment) => (
           <Card key={payment.id} className={styles.card}>

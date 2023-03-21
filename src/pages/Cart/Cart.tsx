@@ -17,7 +17,7 @@ const Cart: React.FC = () => {
           <CartSummary />
         </div>
       </section>
-      <section className="page-section">
+      <section className={`page-section ${styles.section}`}>
         <Newsletter className={styles.newsletter} />
       </section>
     </section>

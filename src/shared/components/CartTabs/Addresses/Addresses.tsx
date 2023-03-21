@@ -5,24 +5,27 @@ import {
   CardContent,
   CardHeader,
 } from '@mui/material';
+import { useContext } from 'react';
+import { authContext } from '../../../../core/context/authCtx';
 import { Address } from '../../../../models/Address';
 import StarButton from '../../StarButton/StarButton';
+import TabHeader from '../TabHeader/TabHeader';
 import styles from './Addresses.module.scss';
 
 interface Props {
   addresses: Address[];
-  user: string;
 }
 
-const Addresses: React.FC<Props> = ({ addresses, user }) => {
+const Addresses: React.FC<Props> = ({ addresses }) => {
+  const authCtx = useContext(authContext);
+
   return (
     <div className={styles.addresses}>
-      <div className={styles.header}>
-        <h2>Your Addresses</h2>
-        <p>
-          {user}, not you? <a>Click here</a>
-        </p>
-      </div>
+      <TabHeader
+        title="Your addresses"
+        user={authCtx.user?.name || ''}
+        onClick={authCtx.logout}
+      />
       <div className={styles.container}>
         {addresses.map((address) => (
           <Card key={address.id}>

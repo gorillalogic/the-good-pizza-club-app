@@ -2,6 +2,7 @@ $x-small: 480px;
 $small: 588px;
 $medium: 768px;
 $large: 1200px;
+$x-large: 1400px;
 
 $breakpoints: (
   x-small: (
@@ -22,6 +23,10 @@ $breakpoints: (
   ),
   x-large: (
     $large,
+    $x-large - 1,
+  ),
+  xx-large: (
+    $x-large,
     null,
   ),
 );

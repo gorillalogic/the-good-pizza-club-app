@@ -8,6 +8,10 @@
     flex-direction: column;
     gap: 36px;
   }
+
+  .section {
+    min-height: 60vh;
+  }
 }
 
 @include from-breakpoint('x-large') {
@@ -18,9 +22,9 @@
 
     .newsletter {
       position: absolute;
-      top: 37%;
+      top: 15%;
       left: 50%;
-      transform: translate(-50%, -37%);
+      transform: translate(-50%, -15%);
     }
   }
 }

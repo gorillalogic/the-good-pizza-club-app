@@ -1,11 +1,10 @@
 import { Button, Tab, Tabs } from '@mui/material';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { getUser } from '../../../core/store/slices/auth/selectors';
 import { CardTypes } from '../../../models/Payment';
 import Addresses from './Addresses/Addresses';
 import CartPanel from './CartPanel/CartPanel';
 import styles from './CartTabs.module.scss';
+import OrderSummary from './OrderSummary/OrderSummary';
 import OrderTable from './OrderTable/OrderTable';
 import Payments from './Payments/Payments';
 
@@ -62,7 +61,6 @@ const payments = [
 
 const CartTabs: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-  const user = useSelector(getUser);
 
   const handleChange = (_: React.SyntheticEvent, value: number) => {
     setSelectedTab(value);
@@ -84,19 +82,27 @@ const CartTabs: React.FC = () => {
           </Button>
         </CartPanel>
         <CartPanel selectedTab={selectedTab} index={1}>
-          <Addresses addresses={addresses} user={user?.name || ''} />
+          <Addresses addresses={addresses} />
           <Button variant="outlined" color="error" className={styles.button}>
             New address
           </Button>
         </CartPanel>
         <CartPanel selectedTab={selectedTab} index={2}>
-          <Payments payments={payments} user={user?.name || ''} />
+          <Payments payments={payments} />
           <Button variant="outlined" color="error" className={styles.button}>
             New payment
           </Button>
         </CartPanel>
         <CartPanel selectedTab={selectedTab} index={3}>
-          <p>Checkout</p>
+          <OrderSummary payment={payments[0]} address={addresses[0]} />
+          <div className={styles.actions}>
+            <Button variant="outlined" color="error" className={styles.button}>
+              Go back
+            </Button>
+            <Button variant="contained" color="error" className={styles.button}>
+              Place order
+            </Button>
+          </div>
         </CartPanel>
       </div>
     </div>
