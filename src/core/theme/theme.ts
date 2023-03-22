@@ -140,6 +140,9 @@ const theme = createTheme({
         root: {
           textAlign: 'left',
         },
+        subheader: {
+          color: '#f2f2f2',
+        },
       },
     },
     MuiCardContent: {
