@@ -1,16 +1,15 @@
 import { Icon, IconButton } from '@mui/material';
-import { IdTypedObject } from '../../../../models/Base';
-import { SelectedAddition } from '../selected-elements.reducer';
+import { QuantifiedRecord, Record } from '../../../../models/Record';
 import AdditionGroup from './AdditionGroup/AdditionGroup';
 import styles from './Additions.module.scss';
 
 interface Props {
-  drinks: IdTypedObject[];
-  salads: IdTypedObject[];
-  appetizers: IdTypedObject[];
-  desserts: IdTypedObject[];
-  selectedItems: SelectedAddition[];
-  onChange: (item: IdTypedObject, quantity: number) => void;
+  drinks: Record[];
+  salads: Record[];
+  appetizers: Record[];
+  desserts: Record[];
+  selectedItems: QuantifiedRecord[];
+  onChange: (item: Record, quantity: number) => void;
 }
 const Additions: React.FC<Props> = ({
   drinks,

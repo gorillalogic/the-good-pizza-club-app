@@ -1,5 +1,5 @@
 import { Button, CircularProgress } from '@mui/material';
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import CustomizeDialogCtx from '../../core/context/customizeDialogCtx';
 import { useThunkDispatch } from '../../core/hooks/useThunkDispatch';
@@ -7,6 +7,7 @@ import { fetchProducts } from '../../core/store/slices/products/asynchThunks';
 import { productsSelector } from '../../core/store/slices/products/selectors';
 import { fetchPromotions } from '../../core/store/slices/promotions/asyncThunks';
 import { promotionsSelector } from '../../core/store/slices/promotions/selectors';
+import { Product } from '../../models/Product';
 import Carousel from '../../shared/components/Carousel/Carousel';
 import GoToMenu from '../../shared/components/GoToMenu/GoToMenu';
 import Hero from '../../shared/components/Hero/Hero';
@@ -24,8 +25,13 @@ const Home: React.FC = () => {
     fetchPromotions(),
   ]);
 
+  const addProductHandler = useCallback((product: Product) => {
+    console.log(product);
+    customizeDialogCtx.openDialog({ sizesOnly: true, product });
+  }, []);
+
   const slices = products.map((product, index) => (
-    <ProductCard key={index} product={product} />
+    <ProductCard key={index} product={product} onClick={addProductHandler} />
   ));
 
   return (
@@ -38,7 +44,7 @@ const Home: React.FC = () => {
             className="page__button"
             variant="contained"
             color="error"
-            onClick={customizeDialogCtx.openDialog}
+            onClick={() => customizeDialogCtx.openDialog()}
           >
             Customize Your Own
           </Button>

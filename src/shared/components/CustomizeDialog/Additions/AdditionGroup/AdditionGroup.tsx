@@ -1,12 +1,12 @@
 import { Button, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useState } from 'react';
-import { IdTypedObject } from '../../../../../models/Base';
+import { Record } from '../../../../../models/Record';
 import styles from './AdditionGroup.module.scss';
 
 interface Props {
   title: string;
-  items: IdTypedObject[];
-  onClick: (item: IdTypedObject, quantity: number) => void;
+  items: Record[];
+  onClick: (item: Record, quantity: number) => void;
 }
 
 const AdditionGroup: React.FC<Props> = ({ title, items, onClick }) => {

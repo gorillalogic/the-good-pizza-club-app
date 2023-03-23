@@ -1,15 +1,15 @@
-import { IdTypedObject } from '../../../../models/Base';
+import { Record } from '../../../../models/Record';
 import ToppingGroup from './ToppingGroup/ToppingGroup';
 import styles from './Toppings.module.scss';
 
 interface Props {
-  sauces: IdTypedObject[];
-  cheeses: IdTypedObject[];
-  toppings: IdTypedObject[];
-  selectedSauce: number | undefined;
-  selectedCheese: number | undefined;
-  selectedToppings: number[];
-  onChange: (item: { type: string; id?: number }) => void;
+  sauces: Record[];
+  cheeses: Record[];
+  toppings: Record[];
+  selectedSauce: Record | undefined;
+  selectedCheese: Record | undefined;
+  selectedToppings: Record[];
+  onChange: (type: string, item?: Record) => void;
 }
 
 const Toppings: React.FC<Props> = ({

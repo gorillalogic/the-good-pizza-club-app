@@ -1,13 +1,13 @@
 import { Button } from '@mui/material';
-import { IdTypedObject } from '../../../../../models/Base';
+import { Record } from '../../../../../models/Record';
 import styles from './ToppingGroup.module.scss';
 
 interface Props {
   title: string;
   type: string;
-  items: IdTypedObject[];
-  selectedItem: number | number[] | undefined;
-  onChange: (item: { type: string; id?: number }) => void;
+  items: Record[];
+  selectedItem: Record | Record[] | undefined;
+  onChange: (type: string, item?: Record) => void;
 }
 
 const ToppingGroup: React.FC<Props> = ({
@@ -30,20 +30,20 @@ const ToppingGroup: React.FC<Props> = ({
             color="error"
             className={
               isArray
-                ? selectedItem.includes(item.id)
+                ? selectedItem.findIndex((i) => i.id === item.id) !== -1
                   ? styles.active
                   : ''
-                : selectedItem === item.id
+                : selectedItem?.id === item.id
                 ? styles.active
                 : ''
             }
-            onClick={() => onChange(item)}
+            onClick={() => onChange(item.type, item)}
           >
             {item.name}
           </Button>
         ))}
       </div>
-      <button onClick={() => onChange({ type })}>No {title}?</button>
+      <button onClick={() => onChange(type)}>No {title}?</button>
     </div>
   );
 };

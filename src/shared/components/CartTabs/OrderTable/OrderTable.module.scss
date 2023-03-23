@@ -22,6 +22,17 @@
     border-radius: 31px;
     display: none;
   }
+
+  .delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: colors('red');
+
+    span {
+      font-size: 20px;
+    }
+  }
 }
 
 @include from-breakpoint('medium') {

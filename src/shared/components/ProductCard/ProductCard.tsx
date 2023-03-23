@@ -5,9 +5,10 @@ import styles from './ProductCard.module.scss';
 
 interface Props {
   product: Product;
+  onClick?: (product: Product) => void;
 }
 
-const ProductCard: React.FC<Props> = ({ product }) => {
+const ProductCard: React.FC<Props> = ({ product, onClick }) => {
   const classes = [styles.card, styles[`card--${product.color}`]].join(' ');
 
   return (
@@ -29,6 +30,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
           color="error"
           className={styles.button}
           sx={{ minWidth: 130 }}
+          onClick={() => onClick && onClick(product)}
         >
           Add
         </Button>

@@ -18,13 +18,15 @@ const Counter: React.FC<Props> = ({
   const [value, setValue] = useState(initialValue);
 
   const handleAdd = () => {
-    setValue((prev) => (prev += 1));
-    onChange && onChange(value);
+    const newValue = value + 1;
+    setValue(newValue);
+    onChange && onChange(newValue);
   };
 
   const handleSubstract = () => {
-    setValue((prev) => (prev -= 1));
-    onChange && onChange(value);
+    const newValue = value - 1;
+    setValue(newValue);
+    onChange && onChange(newValue);
   };
 
   return (

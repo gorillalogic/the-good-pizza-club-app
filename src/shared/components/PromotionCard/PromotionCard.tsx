@@ -7,6 +7,7 @@ interface Props {
   info?: string;
   contentPosition?: 'left' | 'right';
   compact?: boolean;
+  onClick?: (promotion: Promotion) => void;
 }
 
 const PromotionCard: React.FC<Props> = ({
@@ -14,6 +15,7 @@ const PromotionCard: React.FC<Props> = ({
   info,
   contentPosition = 'right',
   compact = false,
+  onClick,
 }) => {
   const style = {
     '--image': `url(${promotion.image})`,
@@ -33,7 +35,11 @@ const PromotionCard: React.FC<Props> = ({
         <span className={styles.title}>{promotion.name}</span>
         <span className={styles.subtitle}>{promotion.product.name}</span>
         <span className={styles.description}>{promotion.description}</span>
-        <Button variant="contained" color="error">
+        <Button
+          variant="contained"
+          color="error"
+          onClick={() => onClick && onClick(promotion)}
+        >
           <Icon className={styles.icon}>av_timer</Icon>
           Add to cart
         </Button>

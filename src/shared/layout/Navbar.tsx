@@ -9,12 +9,14 @@ import { logoutAsync } from '../../core/store/slices/auth/asyncThunks';
 import { useAppDispatch } from '../../core/hooks/useAppDispatch';
 import { showSnackbar } from '../../core/store/slices/snackbar';
 import { HttpError } from '../../models/Error';
+import cartSelectors from '../../core/store/slices/cart/selectors';
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const isLoggedIn = useSelector(getLoggedIn);
   const dispatch = useAppDispatch();
+  const cartItems = useSelector(cartSelectors.totalItems);
 
   const toggleMenu = () => {
     setShowMenu((prev) => !prev);
@@ -69,6 +71,9 @@ const Navbar: React.FC = () => {
                   isActive ? styles.active : undefined
                 }
               >
+                {cartItems && (
+                  <span className={styles.cartItems}>{cartItems}</span>
+                )}
                 <Icon>shopping_cart</Icon>
               </NavLink>
             </li>

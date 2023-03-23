@@ -1,10 +1,10 @@
-import { IdTypedObject } from '../../../../models/Base';
+import { Record } from '../../../../models/Record';
 import styles from './Sizes.module.scss';
 
 interface Props {
-  sizes: IdTypedObject[];
-  selectedSize: number | undefined;
-  onSelect: (size: IdTypedObject) => void;
+  sizes: Record[];
+  selectedSize: Record | undefined;
+  onSelect: (size: Record) => void;
 }
 
 const Sizes: React.FC<Props> = ({ sizes, selectedSize, onSelect }) => {
@@ -16,7 +16,7 @@ const Sizes: React.FC<Props> = ({ sizes, selectedSize, onSelect }) => {
           <div key={size.id} className={styles.group}>
             <button
               onClick={() => onSelect(size)}
-              className={size.id === selectedSize ? styles.active : ''}
+              className={size.id === selectedSize?.id ? styles.active : ''}
             ></button>
             <label>{size.name}</label>
           </div>

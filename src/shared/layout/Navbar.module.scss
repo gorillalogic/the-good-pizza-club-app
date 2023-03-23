@@ -31,7 +31,7 @@
 
   .button {
     min-width: 70px;
-  
+
     span {
       color: colors('white');
     }
@@ -63,6 +63,10 @@
 
   span {
     vertical-align: middle;
+  }
+
+  .cartItems {
+    color: colors('yellow');
   }
 }
 

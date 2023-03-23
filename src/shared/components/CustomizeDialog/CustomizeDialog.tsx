@@ -21,23 +21,79 @@ import styles from './CustomizeDialog.module.scss';
 import {
   initialState,
   selectedElementsReducer,
+  SelectedElementsState,
 } from './selected-elements.reducer';
 import Sizes from './Sizes/Sizes';
 import Toppings from './Toppings/Toppings';
 
 interface Props {
   open: boolean;
+  sizesOnly?: boolean;
   onClose: () => void;
-  onConfirm: () => void;
+  onConfirm: (state: SelectedElementsState) => void;
 }
 
-const CustomizeDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
+const CustomizeDialog: React.FC<Props> = ({
+  open,
+  sizesOnly,
+  onClose,
+  onConfirm,
+}) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [state, dispatch] = useReducer(selectedElementsReducer, initialState);
 
   const records = useSelector(recordsSelector);
   const { loading, error } = useThunkDispatch(fetchRecords());
+
+  let content: React.ReactNode;
+
+  const confirmHandler = () => {
+    onConfirm(state);
+    dispatch({ type: 'restart' });
+  };
+
+  if (sizesOnly) {
+    content = (
+      <Sizes
+        sizes={records.filter((r) => r.type === RecordTypes.Size)}
+        selectedSize={state.selectedSize}
+        onSelect={(size) => dispatch({ type: size.type, payload: size })}
+      />
+    );
+  } else {
+    content = (
+      <>
+        <Sizes
+          sizes={records.filter((r) => r.type === RecordTypes.Size)}
+          selectedSize={state.selectedSize}
+          onSelect={(size) => dispatch({ type: size.type, payload: size })}
+        />
+        <Toppings
+          sauces={records.filter((r) => r.type === RecordTypes.Sauce)}
+          cheeses={records.filter((r) => r.type === RecordTypes.Cheese)}
+          toppings={records.filter((r) => r.type === RecordTypes.Topping)}
+          selectedSauce={state.selectedSauce}
+          selectedCheese={state.selectedCheese}
+          selectedToppings={state.selectedToppings}
+          onChange={(type, item) => dispatch({ type, payload: item })}
+        />
+        <Additions
+          drinks={records.filter((r) => r.type === RecordTypes.Drink)}
+          salads={records.filter((r) => r.type === RecordTypes.Salad)}
+          appetizers={records.filter((r) => r.type === RecordTypes.Appetizer)}
+          desserts={records.filter((r) => r.type === RecordTypes.Dessert)}
+          selectedItems={state.selectedAdditions}
+          onChange={(item, quantity) =>
+            dispatch({
+              type: 'addition',
+              payload: { ...item, quantity },
+            })
+          }
+        />
+      </>
+    );
+  }
 
   return (
     <Dialog
@@ -58,43 +114,7 @@ const CustomizeDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
         <div className={styles.content}>
           {error && <p className={styles.error}>Error loading data...</p>}
           {loading && <CircularProgress color="primary" />}
-          {!loading && !error && (
-            <>
-              <Sizes
-                sizes={records.filter((r) => r.type === RecordTypes.Size)}
-                selectedSize={state.selectedSize}
-                onSelect={(size) =>
-                  dispatch({ type: size.type, payload: { id: size.id } })
-                }
-              />
-              <Toppings
-                sauces={records.filter((r) => r.type === RecordTypes.Sauce)}
-                cheeses={records.filter((r) => r.type === RecordTypes.Cheese)}
-                toppings={records.filter((r) => r.type === RecordTypes.Topping)}
-                selectedSauce={state.selectedSauce}
-                selectedCheese={state.selectedCheese}
-                selectedToppings={state.selectedToppings}
-                onChange={(item) =>
-                  dispatch({ type: item.type, payload: { id: item.id } })
-                }
-              />
-              <Additions
-                drinks={records.filter((r) => r.type === RecordTypes.Drink)}
-                salads={records.filter((r) => r.type === RecordTypes.Salad)}
-                appetizers={records.filter(
-                  (r) => r.type === RecordTypes.Appetizer
-                )}
-                desserts={records.filter((r) => r.type === RecordTypes.Dessert)}
-                selectedItems={state.selectedAdditions}
-                onChange={(item, quantity) =>
-                  dispatch({
-                    type: 'addition',
-                    payload: { ...item, quantity },
-                  })
-                }
-              />
-            </>
-          )}
+          {!loading && !error && content}
         </div>
       </DialogContent>
       <DialogActions className={styles.actions}>
@@ -108,7 +128,7 @@ const CustomizeDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
         <Button
           variant="contained"
           color="error"
-          onClick={onConfirm}
+          onClick={confirmHandler}
           disabled={state.selectedSize === undefined}
         >
           Add to cart

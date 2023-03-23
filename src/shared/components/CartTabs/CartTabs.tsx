@@ -38,6 +38,7 @@ const payments = [
     number: 1111111111,
     securityCode: 123,
     expiration: new Date(),
+    isDefault: true,
   },
   {
     id: 1,
@@ -47,6 +48,7 @@ const payments = [
     number: 1111111111,
     securityCode: 123,
     expiration: new Date(),
+    isDefault: false,
   },
   {
     id: 2,
@@ -56,6 +58,7 @@ const payments = [
     number: 1111111111,
     securityCode: 123,
     expiration: new Date(),
+    isDefault: false,
   },
 ];
 

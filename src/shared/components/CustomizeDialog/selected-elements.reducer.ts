@@ -1,25 +1,16 @@
-import { IdTypedObject } from '../../../models/Base';
-
-export interface SelectedAddition extends IdTypedObject {
-  quantity: number;
-}
+import { QuantifiedRecord, Record } from '../../../models/Record';
 
 export interface SelectedElementsState {
-  selectedSize: number | undefined;
-  selectedCheese: number | undefined;
-  selectedSauce: number | undefined;
-  selectedToppings: number[];
-  selectedAdditions: SelectedAddition[];
+  selectedSize: Record | undefined;
+  selectedCheese: Record | undefined;
+  selectedSauce: Record | undefined;
+  selectedToppings: Record[];
+  selectedAdditions: QuantifiedRecord[];
 }
 
 export interface SelectedElementsAction {
   type: string;
-  payload?: {
-    id?: number;
-    name?: string;
-    type?: string;
-    quantity?: number;
-  };
+  payload?: Record | QuantifiedRecord;
 }
 
 export const initialState: SelectedElementsState = {
@@ -38,49 +29,44 @@ export const selectedElementsReducer = (
     case 'size': {
       return {
         ...state,
-        selectedSize: action.payload?.id,
+        selectedSize: action.payload,
       };
     }
     case 'cheese': {
       return {
         ...state,
-        selectedCheese: action.payload?.id,
+        selectedCheese: action.payload,
       };
     }
     case 'sauce': {
       return {
         ...state,
-        selectedSauce: action.payload?.id,
+        selectedSauce: action.payload,
       };
     }
     case 'topping': {
-      if (action.payload?.id === undefined) {
-        return { ...state, selectedToppings: [] };
-      }
+      const newTopping = action.payload as Record;
 
-      if (state.selectedToppings.includes(action.payload.id)) {
+      const index = state.selectedToppings.findIndex(
+        (i) => i.id === newTopping.id
+      );
+
+      if (index !== -1) {
         return {
           ...state,
           selectedToppings: state.selectedToppings.filter(
-            (id: number) => id !== action.payload?.id
+            (i) => i.id !== newTopping.id
           ),
         };
       }
 
       return {
         ...state,
-        selectedToppings: [...state.selectedToppings, action.payload.id],
+        selectedToppings: [...state.selectedToppings, newTopping],
       };
     }
     case 'addition': {
-      if (
-        action.payload?.id === undefined ||
-        action.payload.quantity === undefined ||
-        !action.payload.name ||
-        !action.payload.type
-      ) {
-        return { ...state, selectedAdditions: [] };
-      }
+      const newAddition = action.payload as QuantifiedRecord;
 
       const itemIndex = state.selectedAdditions.findIndex(
         (item) =>
@@ -90,10 +76,10 @@ export const selectedElementsReducer = (
       if (itemIndex !== -1) {
         const newAdditions = [...state.selectedAdditions];
 
-        if (action.payload.quantity === 0) {
+        if (newAddition.quantity === 0) {
           newAdditions.splice(itemIndex, 1);
         } else {
-          newAdditions[itemIndex].quantity = action.payload.quantity;
+          newAdditions[itemIndex].quantity = newAddition.quantity;
         }
 
         return {
@@ -104,15 +90,7 @@ export const selectedElementsReducer = (
 
       return {
         ...state,
-        selectedAdditions: [
-          ...state.selectedAdditions,
-          {
-            id: action.payload.id,
-            name: action.payload.name,
-            type: action.payload.type,
-            quantity: action.payload.quantity,
-          },
-        ],
+        selectedAdditions: [...state.selectedAdditions, newAddition],
       };
     }
     case 'restart': {

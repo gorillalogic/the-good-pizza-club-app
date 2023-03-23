@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IdTypedObject } from '../../../../models/Base';
+import { Record } from '../../../../models/Record';
 import { fetchRecords } from './asyncThunks';
 
 interface RecordsState {
-  records: IdTypedObject[];
+  records: Record[];
 }
 
 const initialState: RecordsState = {

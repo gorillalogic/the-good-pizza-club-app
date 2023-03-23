@@ -6,6 +6,7 @@ export interface Payment {
   name: string;
   expiration: Date;
   securityCode: number;
+  isDefault: boolean;
 }
 
 export enum CardTypes {

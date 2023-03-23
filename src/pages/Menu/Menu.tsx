@@ -1,9 +1,11 @@
 import { Button } from '@mui/material';
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import CustomizeDialogCtx from '../../core/context/customizeDialogCtx';
 import { productsSelector } from '../../core/store/slices/products/selectors';
 import { promotionsSelector } from '../../core/store/slices/promotions/selectors';
+import { Product } from '../../models/Product';
+import { Promotion } from '../../models/Promotion';
 import Hero from '../../shared/components/Hero/Hero';
 import Newsletter from '../../shared/components/Newsletter/Newsletter';
 import ProductCard from '../../shared/components/ProductCard/ProductCard';
@@ -16,6 +18,14 @@ const Menu: React.FC = () => {
   const products = useSelector(productsSelector);
   const promotions = useSelector(promotionsSelector);
 
+  const productAddHandler = useCallback((product: Product) => {
+    customizeDialogCtx.openDialog({ sizesOnly: true, product });
+  }, []);
+
+  const promotionAddHandler = useCallback((promotion: Promotion) => {
+    //
+  }, []);
+
   return (
     <section className={`page ${styles.menu}`}>
       <Hero image="images/menu_background.png">
@@ -25,7 +35,11 @@ const Menu: React.FC = () => {
         <h3>Our repertoire</h3>
         <div className={styles.products}>
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onClick={productAddHandler}
+            />
           ))}
         </div>
         <span className={styles.title}>None of the above?</span>
@@ -33,7 +47,7 @@ const Menu: React.FC = () => {
           className={`page__button ${styles.button}`}
           variant="contained"
           color="error"
-          onClick={customizeDialogCtx.openDialog}
+          onClick={() => customizeDialogCtx.openDialog()}
         >
           Customize Your Own
         </Button>
@@ -48,6 +62,7 @@ const Menu: React.FC = () => {
               info={PROMOTION_DISCLAIMER}
               contentPosition={index % 2 === 0 ? 'right' : 'left'}
               compact
+              onClick={promotionAddHandler}
             />
           ))}
         </div>

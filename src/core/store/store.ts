@@ -4,6 +4,7 @@ import promotionsReducer from './slices/promotions';
 import snackbarReducer from './slices/snackbar';
 import productsReducer from './slices/products';
 import recordsReducer from './slices/records';
+import cartReducer from './slices/cart';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     promotions: promotionsReducer,
     products: productsReducer,
     records: recordsReducer,
+    cart: cartReducer,
   },
 });
 
