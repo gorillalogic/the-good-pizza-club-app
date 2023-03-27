@@ -12,6 +12,7 @@ interface DialogOptions {
 }
 
 const CustomizeDialogCtx = createContext({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   openDialog: (options?: DialogOptions) => {
     //
   },
