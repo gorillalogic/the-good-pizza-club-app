@@ -101,6 +101,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiDialogContentText: {
+      styleOverrides: {
+        root: {
+          color: '#f2f2f2',
+        },
+      },
+    },
     MuiTabs: {
       styleOverrides: {
         indicator: {

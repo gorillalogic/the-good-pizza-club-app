@@ -21,6 +21,8 @@
   }
 
   .summary {
+    margin-bottom: 32px;
+
     &__item {
       display: flex;
       justify-content: space-between;
@@ -34,5 +36,11 @@
     &__total {
       color: colors('yellow');
     }
+  }
+
+  .actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
   }
 }

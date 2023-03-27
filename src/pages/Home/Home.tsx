@@ -26,7 +26,6 @@ const Home: React.FC = () => {
   ]);
 
   const addProductHandler = useCallback((product: Product) => {
-    console.log(product);
     customizeDialogCtx.openDialog({ sizesOnly: true, product });
   }, []);
 

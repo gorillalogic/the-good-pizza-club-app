@@ -3,10 +3,12 @@ import styles from './OrderSummary.module.scss';
 import TabHeader from '../TabHeader/TabHeader';
 import { authContext } from '../../../../core/context/authCtx';
 import OrderTable from '../OrderTable/OrderTable';
-import { Card, CardContent, CardHeader } from '@mui/material';
+import { Button, Card, CardContent, CardHeader } from '@mui/material';
 import { Payment } from '../../../../models/Payment';
 import { Address } from '../../../../models/Address';
 import { currencyFormat } from '../../../utils/number';
+import { useSelector } from 'react-redux';
+import cartSelectors from '../../../../core/store/slices/cart/selectors';
 
 interface Props {
   payment: Payment;
@@ -15,6 +17,7 @@ interface Props {
 
 const OrderSummary: React.FC<Props> = ({ payment, address }) => {
   const authCtx = useContext(authContext);
+  const cartTotals = useSelector(cartSelectors.totals);
 
   return (
     <div className={styles['order-summary']}>
@@ -23,7 +26,7 @@ const OrderSummary: React.FC<Props> = ({ payment, address }) => {
         user={authCtx.user?.name || ''}
         onClick={authCtx.logout}
       />
-      <OrderTable />
+      <OrderTable hideActions />
       <div className={styles.cards}>
         <Card className={styles.card}>
           <CardHeader title={payment.bank} subheader={payment.type} />
@@ -53,24 +56,32 @@ const OrderSummary: React.FC<Props> = ({ payment, address }) => {
       <div className={styles.summary}>
         <div className={styles.summary__item}>
           <span>Subtotal</span>
-          <span>{currencyFormat(41.7)}</span>
+          <span>{currencyFormat(cartTotals.subtotal)}</span>
         </div>
         <div className={styles.summary__item}>
           <span>Total Savings</span>
-          <span>{currencyFormat(41.7)}</span>
+          <span>{currencyFormat(cartTotals.totalDiscounts)}</span>
         </div>
         <div className={styles.summary__item}>
-          <span>Express</span>
-          <span>{currencyFormat(41.7)}</span>
+          <span>Delivery</span>
+          <span>{currencyFormat(5)}</span>
         </div>
         <div className={styles.summary__item}>
           <span>Taxes</span>
-          <span>{currencyFormat(41.7)}</span>
+          <span>{currencyFormat(cartTotals.totalTaxes)}</span>
         </div>
         <div className={styles.summary__item}>
           <span className={styles.summary__total}>Total</span>
-          <span>{currencyFormat(41.7)}</span>
+          <span>{currencyFormat(cartTotals.total)}</span>
         </div>
+      </div>
+      <div className={styles.actions}>
+        <Button variant="outlined" color="error" className={styles.button}>
+          Go back
+        </Button>
+        <Button variant="contained" color="error" className={styles.button}>
+          Place order
+        </Button>
       </div>
     </div>
   );

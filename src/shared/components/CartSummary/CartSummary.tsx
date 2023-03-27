@@ -1,51 +1,52 @@
 import { Button } from '@mui/material';
+import { useSelector } from 'react-redux';
+import cartSelectors from '../../../core/store/slices/cart/selectors';
+import { currencyFormat } from '../../utils/number';
 import styles from './CartSummary.module.scss';
 
 const CartSummary: React.FC = () => {
+  const cartItems = useSelector(cartSelectors.selectItems);
+  const cartTotals = useSelector(cartSelectors.totals);
+
   return (
     <div className={styles.summary}>
       <h4 className={styles.title}>Summary</h4>
       <div className={styles.products}>
-        <div className={styles.item}>
-          <span>1</span>
-          <span>Large Salami & Mushrooms</span>
-          <span>$10</span>
-        </div>
-        <div className={styles.item}>
-          <span>1</span>
-          <span>Large Salami & Mushrooms</span>
-          <span>$10</span>
-        </div>
-        <div className={styles.item}>
-          <span>1</span>
-          <span>Large Salami & Mushrooms</span>
-          <span>$10</span>
-        </div>
+        {cartItems.length === 0 && <p>Add products to your cart</p>}
+        {cartItems.map((item) => (
+          <div key={item.id} className={styles.item}>
+            <span>{item.quantity}</span>
+            <span>{item.product ? item.product.name : 'Custom'}</span>
+            <span>{item.subtotal}</span>
+          </div>
+        ))}
       </div>
       <div className={styles.totals}>
-        <div className={styles.item}>
-          <span>Subtotal</span>
-          <span>$40</span>
-        </div>
-        <div className={styles.item}>
-          <span>Total Savings</span>
-          <span className={styles.savings}>-$4</span>
-        </div>
-        <div className={styles.item}>
-          <span>Total Savings</span>
-          <span>-$4</span>
-        </div>
-        <div className={styles.item}>
-          <span>Express</span>
-          <span>$5</span>
-        </div>
-        <div className={styles.item}>
-          <span>Taxes</span>
-          <span>$5.4</span>
-        </div>
+        {cartItems.length > 0 && (
+          <>
+            <div className={styles.item}>
+              <span>Subtotal</span>
+              <span>{currencyFormat(cartTotals.subtotal)}</span>
+            </div>
+            <div className={styles.item}>
+              <span>Total Savings</span>
+              <span className={styles.savings}>
+                -{currencyFormat(cartTotals.totalDiscounts)}
+              </span>
+            </div>
+            <div className={styles.item}>
+              <span>Total Taxes</span>
+              <span>{currencyFormat(cartTotals.totalTaxes)}</span>
+            </div>
+            <div className={styles.item}>
+              <span>Delivery</span>
+              <span>{currencyFormat(5)}</span>
+            </div>
+          </>
+        )}
         <div className={styles.item}>
           <span className={styles.total}>Total</span>
-          <span>$50</span>
+          <span>{currencyFormat(cartTotals.total)}</span>
         </div>
       </div>
       <Button variant="contained" color="error">

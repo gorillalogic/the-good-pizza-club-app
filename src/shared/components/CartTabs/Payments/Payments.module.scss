@@ -15,12 +15,16 @@
   }
 
   .card {
-    min-width: 350px;
+    min-width: 300px;
     position: relative;
   }
 
   .button {
     min-width: 100px;
+  }
+
+  .actions {
+    margin-top: 32px;
   }
 }
 

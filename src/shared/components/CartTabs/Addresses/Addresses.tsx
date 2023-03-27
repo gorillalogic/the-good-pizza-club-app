@@ -20,33 +20,42 @@ const Addresses: React.FC<Props> = ({ addresses }) => {
   const authCtx = useContext(authContext);
 
   return (
-    <div className={styles.addresses}>
-      <TabHeader
-        title="Your addresses"
-        user={authCtx.user?.name || ''}
-        onClick={authCtx.logout}
-      />
-      <div className={styles.container}>
-        {addresses.map((address) => (
-          <Card key={address.id}>
-            <CardHeader title={address.name} />
-            <CardContent>{address.address}</CardContent>
-            <CardActions>
-              <Button
-                variant="outlined"
-                color="error"
-                className={styles.button}
-              >
-                Edit
-              </Button>
-              <StarButton active={address.isDefault}>
-                {address.isDefault ? 'Default Address' : 'Make default Address'}
-              </StarButton>
-            </CardActions>
-          </Card>
-        ))}
+    <>
+      <div className={styles.addresses}>
+        <TabHeader
+          title="Your addresses"
+          user={authCtx.user?.name || ''}
+          onClick={authCtx.logout}
+        />
+        <div className={styles.content}>
+          {addresses.map((address) => (
+            <Card key={address.id} className={styles.card}>
+              <CardHeader title={address.name} />
+              <CardContent>{address.address}</CardContent>
+              <CardActions>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  className={styles.button}
+                >
+                  Edit
+                </Button>
+                <StarButton active={address.isDefault}>
+                  {address.isDefault
+                    ? 'Default Address'
+                    : 'Make default Address'}
+                </StarButton>
+              </CardActions>
+            </Card>
+          ))}
+        </div>
+        <div className={styles.actions}>
+          <Button variant="outlined" color="error" className={styles.button}>
+            New address
+          </Button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

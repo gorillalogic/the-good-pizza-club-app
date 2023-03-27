@@ -32,7 +32,6 @@ const RegisterForm: React.FC = () => {
       await dispatch(registerAsync(data)).unwrap();
       navigate('/home', { replace: true });
     } catch (error) {
-      console.log(error);
       const { message } = error as HttpError;
       dispatch(showSnackbar({ color: 'error', message }));
     } finally {

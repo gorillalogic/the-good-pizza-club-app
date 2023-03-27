@@ -64,6 +64,11 @@ const Payments: React.FC<Props> = ({ payments }) => {
           </Card>
         ))}
       </div>
+      <div className={styles.actions}>
+        <Button variant="outlined" color="error" className={styles.button}>
+          New Payment
+        </Button>
+      </div>
     </div>
   );
 };

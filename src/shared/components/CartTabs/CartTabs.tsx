@@ -80,32 +80,15 @@ const CartTabs: React.FC = () => {
       <div className={styles.content}>
         <CartPanel selectedTab={selectedTab} index={0}>
           <OrderTable />
-          <Button variant="outlined" color="error" className={styles.button}>
-            Need another?
-          </Button>
         </CartPanel>
         <CartPanel selectedTab={selectedTab} index={1}>
           <Addresses addresses={addresses} />
-          <Button variant="outlined" color="error" className={styles.button}>
-            New address
-          </Button>
         </CartPanel>
         <CartPanel selectedTab={selectedTab} index={2}>
           <Payments payments={payments} />
-          <Button variant="outlined" color="error" className={styles.button}>
-            New payment
-          </Button>
         </CartPanel>
         <CartPanel selectedTab={selectedTab} index={3}>
           <OrderSummary payment={payments[0]} address={addresses[0]} />
-          <div className={styles.actions}>
-            <Button variant="outlined" color="error" className={styles.button}>
-              Go back
-            </Button>
-            <Button variant="contained" color="error" className={styles.button}>
-              Place order
-            </Button>
-          </div>
         </CartPanel>
       </div>
     </div>

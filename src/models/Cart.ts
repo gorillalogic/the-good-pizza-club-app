@@ -17,4 +17,7 @@ export interface CartItem {
 export interface Cart {
   items: CartItem[];
   total: number;
+  subtotal: number;
+  totalDiscounts: number;
+  totalTaxes: number;
 }

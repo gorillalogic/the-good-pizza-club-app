@@ -6,4 +6,5 @@ export interface Promotion {
   description: string;
   image: string;
   product: Product;
+  discount: number;
 }

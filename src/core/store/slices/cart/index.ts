@@ -1,10 +1,38 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Cart, CartItem } from '../../../../models/Cart';
 
+const taxes = 0.1;
+const delivery = 5;
+
 const initialState: Cart = {
   items: [],
   total: 0,
+  subtotal: 0,
+  totalDiscounts: 0,
+  totalTaxes: 0,
 };
+
+function calculateTotals(items: CartItem[], taxes: number, delivery: number) {
+  let total = 0;
+  let subtotal = 0;
+  let totalDiscounts = 0;
+  let totalTaxes = 0;
+
+  items.forEach((item) => {
+    subtotal += item.subtotal || 0;
+    totalDiscounts += item.promotion?.discount || 0;
+  });
+
+  total = subtotal - totalDiscounts;
+  totalTaxes = total * taxes;
+
+  return {
+    subtotal,
+    totalDiscounts,
+    totalTaxes: totalTaxes,
+    total: total + totalTaxes + (items.length ? delivery : 0),
+  };
+}
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -41,7 +69,16 @@ const cartSlice = createSlice({
 
       item.unitPrice = productPrice;
       item.subtotal = productPrice * quantity + extrasPrice;
-      state.total += item.subtotal;
+
+      const { total, subtotal, totalDiscounts } = calculateTotals(
+        state.items,
+        taxes,
+        delivery
+      );
+
+      state.total = total;
+      state.subtotal = subtotal;
+      state.totalDiscounts = totalDiscounts;
     },
     removeProduct: (state, action: PayloadAction<number>) => {
       const item = state.items.find((item) => item.id === action.payload);
@@ -49,7 +86,16 @@ const cartSlice = createSlice({
       if (!item) return;
 
       state.items = state.items.filter((i) => i !== item);
-      state.total -= item.subtotal || 0;
+
+      const { total, subtotal, totalDiscounts } = calculateTotals(
+        state.items,
+        taxes,
+        delivery
+      );
+
+      state.total = total;
+      state.subtotal = subtotal;
+      state.totalDiscounts = totalDiscounts;
     },
     updateProductQuantity: (
       state,
@@ -57,11 +103,19 @@ const cartSlice = createSlice({
     ) => {
       const { item, quantity } = action.payload;
       const index = state.items.findIndex((i) => i.id === item.id);
-      const difference = (quantity - item.quantity) * (item.unitPrice || 1);
 
       state.items[index].quantity = quantity;
       state.items[index].subtotal = (item.unitPrice || 1) * quantity;
-      state.total += difference;
+
+      const { total, subtotal, totalDiscounts } = calculateTotals(
+        state.items,
+        taxes,
+        delivery
+      );
+
+      state.total = total;
+      state.subtotal = subtotal;
+      state.totalDiscounts = totalDiscounts;
     },
   },
 });
