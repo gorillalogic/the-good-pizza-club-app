@@ -19,8 +19,13 @@ function calculateTotals(items: CartItem[], taxes: number, delivery: number) {
   let totalTaxes = 0;
 
   items.forEach((item) => {
-    subtotal += item.subtotal || 0;
-    totalDiscounts += item.promotion?.discount || 0;
+    if (item.subtotal) {
+      subtotal += item.subtotal;
+    }
+
+    if (item.subtotal && item.promotion?.discount) {
+      totalDiscounts += item.subtotal * item.promotion?.discount;
+    }
   });
 
   total = subtotal - totalDiscounts;
@@ -70,7 +75,7 @@ const cartSlice = createSlice({
       item.unitPrice = productPrice;
       item.subtotal = productPrice * quantity + extrasPrice;
 
-      const { total, subtotal, totalDiscounts } = calculateTotals(
+      const { total, subtotal, totalDiscounts, totalTaxes } = calculateTotals(
         state.items,
         taxes,
         delivery
@@ -79,6 +84,7 @@ const cartSlice = createSlice({
       state.total = total;
       state.subtotal = subtotal;
       state.totalDiscounts = totalDiscounts;
+      state.totalTaxes = totalTaxes;
     },
     removeProduct: (state, action: PayloadAction<number>) => {
       const item = state.items.find((item) => item.id === action.payload);
@@ -87,7 +93,7 @@ const cartSlice = createSlice({
 
       state.items = state.items.filter((i) => i !== item);
 
-      const { total, subtotal, totalDiscounts } = calculateTotals(
+      const { total, subtotal, totalDiscounts, totalTaxes } = calculateTotals(
         state.items,
         taxes,
         delivery
@@ -96,6 +102,7 @@ const cartSlice = createSlice({
       state.total = total;
       state.subtotal = subtotal;
       state.totalDiscounts = totalDiscounts;
+      state.totalTaxes = totalTaxes;
     },
     updateProductQuantity: (
       state,
@@ -107,7 +114,7 @@ const cartSlice = createSlice({
       state.items[index].quantity = quantity;
       state.items[index].subtotal = (item.unitPrice || 1) * quantity;
 
-      const { total, subtotal, totalDiscounts } = calculateTotals(
+      const { total, subtotal, totalDiscounts, totalTaxes } = calculateTotals(
         state.items,
         taxes,
         delivery
@@ -116,6 +123,7 @@ const cartSlice = createSlice({
       state.total = total;
       state.subtotal = subtotal;
       state.totalDiscounts = totalDiscounts;
+      state.totalTaxes = totalTaxes;
     },
   },
 });

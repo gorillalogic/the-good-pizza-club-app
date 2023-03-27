@@ -1,8 +1,6 @@
 @import '../../../../styles/styles.scss';
 
 .table {
-  min-height: 200px;
-
   .cell {
     display: flex;
     gap: 20px;
@@ -45,6 +43,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 32px;
 }
 
 @include from-breakpoint('medium') {

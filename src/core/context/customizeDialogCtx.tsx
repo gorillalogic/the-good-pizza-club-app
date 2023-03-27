@@ -5,6 +5,7 @@ import CustomizeDialog from '../../shared/components/CustomizeDialog/CustomizeDi
 import { SelectedElementsState } from '../../shared/components/CustomizeDialog/selected-elements.reducer';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { addProduct } from '../store/slices/cart';
+import { showSnackbar } from '../store/slices/snackbar';
 
 interface DialogOptions {
   sizesOnly?: boolean;
@@ -57,6 +58,9 @@ const CustomizeDialogProvider: React.FC<PropsWithChildren> = ({ children }) => {
       }
 
       dispatch(addProduct(cartItem));
+      dispatch(
+        showSnackbar({ color: 'success', message: 'Product added to cart!' })
+      );
       setOpen(false);
     },
     [product]

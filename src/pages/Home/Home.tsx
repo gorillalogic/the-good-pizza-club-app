@@ -2,12 +2,17 @@ import { Button, CircularProgress } from '@mui/material';
 import { useCallback, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import CustomizeDialogCtx from '../../core/context/customizeDialogCtx';
+import { useAppDispatch } from '../../core/hooks/useAppDispatch';
 import { useThunkDispatch } from '../../core/hooks/useThunkDispatch';
+import { addProduct } from '../../core/store/slices/cart';
 import { fetchProducts } from '../../core/store/slices/products/asynchThunks';
 import { productsSelector } from '../../core/store/slices/products/selectors';
 import { fetchPromotions } from '../../core/store/slices/promotions/asyncThunks';
 import { promotionsSelector } from '../../core/store/slices/promotions/selectors';
+import { showSnackbar } from '../../core/store/slices/snackbar';
+import { CartItem } from '../../models/Cart';
 import { Product } from '../../models/Product';
+import { Promotion } from '../../models/Promotion';
 import Carousel from '../../shared/components/Carousel/Carousel';
 import GoToMenu from '../../shared/components/GoToMenu/GoToMenu';
 import Hero from '../../shared/components/Hero/Hero';
@@ -16,6 +21,7 @@ import PromotionCard from '../../shared/components/PromotionCard/PromotionCard';
 import { PROMOTION_DISCLAIMER } from '../../shared/constants/global.constants';
 
 const Home: React.FC = () => {
+  const dispatch = useAppDispatch();
   const products = useSelector(productsSelector);
   const promotions = useSelector(promotionsSelector);
   const customizeDialogCtx = useContext(CustomizeDialogCtx);
@@ -27,6 +33,21 @@ const Home: React.FC = () => {
 
   const addProductHandler = useCallback((product: Product) => {
     customizeDialogCtx.openDialog({ sizesOnly: true, product });
+  }, []);
+
+  const addPromotionHandler = useCallback((promotion: Promotion) => {
+    const cartItem: CartItem = {
+      id: Date.now(),
+      size: promotion.size,
+      quantity: 1,
+      product: promotion.product,
+      promotion,
+    };
+
+    dispatch(addProduct(cartItem));
+    dispatch(
+      showSnackbar({ color: 'success', message: 'Promotion added to cart!' })
+    );
   }, []);
 
   const slices = products.map((product, index) => (
@@ -69,7 +90,8 @@ const Home: React.FC = () => {
                     promotion={promotion}
                     info={PROMOTION_DISCLAIMER}
                     contentPosition={index % 2 === 0 ? 'right' : 'left'}
-                  ></PromotionCard>
+                    onClick={addPromotionHandler}
+                  />
                 ))}
             </section>
             <section className="page-section">
