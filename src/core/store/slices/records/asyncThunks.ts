@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import { getErrorMessage } from '../../../../shared/utils/http';
 import { getRecords } from '../../../services/records-service';
 import { RootState } from '../../store';
 
@@ -19,9 +19,8 @@ export const fetchRecords = createAsyncThunk(
 
       return data;
     } catch (error) {
-      if (error instanceof AxiosError) {
-        thunkApi.rejectWithValue(error.response?.data);
-      }
+      const message = getErrorMessage(error);
+      return thunkApi.rejectWithValue(message);
     }
   }
 );

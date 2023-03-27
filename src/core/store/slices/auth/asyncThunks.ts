@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 import { User } from '../../../../models/User';
 import { LOCALSTORAGE_KEYS } from '../../../../shared/constants/global.constants';
+import { getErrorMessage } from '../../../../shared/utils/http';
 import { login, logout, register } from '../../../services/auth-service';
 
 export const loginAsync = createAsyncThunk(
@@ -15,9 +15,8 @@ export const loginAsync = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      if (error instanceof AxiosError) {
-        return thunkApi.rejectWithValue(error.response?.data);
-      }
+      const message = getErrorMessage(error);
+      return thunkApi.rejectWithValue(message);
     }
   }
 );
@@ -30,9 +29,8 @@ export const logoutAsync = createAsyncThunk(
       localStorage.removeItem(LOCALSTORAGE_KEYS.user);
       return response.data;
     } catch (error) {
-      if (error instanceof AxiosError) {
-        return thunkApi.rejectWithValue(error.response?.data);
-      }
+      const message = getErrorMessage(error);
+      return thunkApi.rejectWithValue(message);
     }
   }
 );
@@ -48,10 +46,8 @@ export const registerAsync = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error);
-      if (error instanceof AxiosError) {
-        return thunkApi.rejectWithValue(error.response?.data);
-      }
+      const message = getErrorMessage(error);
+      return thunkApi.rejectWithValue(message);
     }
   }
 );

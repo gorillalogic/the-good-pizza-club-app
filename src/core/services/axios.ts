@@ -17,9 +17,8 @@ axiosInstance.interceptors.response.use(
     console.log(error);
     const { response } = error as AxiosError;
 
-    if (response?.status === 403) {
+    if (!response || response.status === 403) {
       localStorage.removeItem(LOCALSTORAGE_KEYS.user);
-      window.location.replace('/');
     }
 
     return Promise.reject(error);
