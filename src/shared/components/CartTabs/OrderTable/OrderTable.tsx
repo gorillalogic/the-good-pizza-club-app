@@ -117,7 +117,7 @@ const OrderTable: React.FC<{ hideActions?: boolean }> = ({ hideActions }) => {
             className={styles.button}
             onClick={() => navigate('/menu')}
           >
-            Need another?
+            {cartItems.length > 0 ? 'Need another?' : 'Add some products!'}
           </Button>
         </div>
       )}

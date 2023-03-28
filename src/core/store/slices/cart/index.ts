@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Address } from '../../../../models/Address';
 import { Cart, CartItem } from '../../../../models/Cart';
+import { Payment } from '../../../../models/Payment';
 
 const taxes = 0.1;
 const delivery = 5;
@@ -10,6 +12,8 @@ const initialState: Cart = {
   subtotal: 0,
   totalDiscounts: 0,
   totalTaxes: 0,
+  selectedPayment: null,
+  selectedAddress: null,
 };
 
 function calculateTotals(items: CartItem[], taxes: number, delivery: number) {
@@ -125,9 +129,20 @@ const cartSlice = createSlice({
       state.totalDiscounts = totalDiscounts;
       state.totalTaxes = totalTaxes;
     },
+    selectPayment: (state, action: PayloadAction<Payment>) => {
+      state.selectedPayment = action.payload;
+    },
+    selectAddress: (state, action: PayloadAction<Address>) => {
+      state.selectedAddress = action.payload;
+    },
   },
 });
 
 export default cartSlice.reducer;
-export const { addProduct, removeProduct, updateProductQuantity } =
-  cartSlice.actions;
+export const {
+  addProduct,
+  removeProduct,
+  updateProductQuantity,
+  selectAddress,
+  selectPayment,
+} = cartSlice.actions;

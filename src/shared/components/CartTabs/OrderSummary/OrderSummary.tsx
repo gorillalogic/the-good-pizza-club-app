@@ -1,21 +1,23 @@
-import { useContext } from 'react';
-import styles from './OrderSummary.module.scss';
-import TabHeader from '../TabHeader/TabHeader';
-import { authContext } from '../../../../core/context/authCtx';
-import OrderTable from '../OrderTable/OrderTable';
 import { Button, Card, CardContent, CardHeader } from '@mui/material';
-import { Payment } from '../../../../models/Payment';
-import { Address } from '../../../../models/Address';
-import { currencyFormat } from '../../../utils/number';
+import { format } from 'date-fns';
+import { useContext } from 'react';
 import { useSelector } from 'react-redux';
+import { authContext } from '../../../../core/context/authCtx';
 import cartSelectors from '../../../../core/store/slices/cart/selectors';
+import { Address } from '../../../../models/Address';
+import { Payment } from '../../../../models/Payment';
+import { currencyFormat } from '../../../utils/number';
+import OrderTable from '../OrderTable/OrderTable';
+import TabHeader from '../TabHeader/TabHeader';
+import styles from './OrderSummary.module.scss';
 
 interface Props {
   payment: Payment;
   address: Address;
+  onBack: () => void;
 }
 
-const OrderSummary: React.FC<Props> = ({ payment, address }) => {
+const OrderSummary: React.FC<Props> = ({ payment, address, onBack }) => {
   const authCtx = useContext(authContext);
   const cartTotals = useSelector(cartSelectors.totals);
 
@@ -41,7 +43,8 @@ const OrderSummary: React.FC<Props> = ({ payment, address }) => {
               <strong>Name on card:</strong> {payment.name}
             </p>
             <p>
-              <strong>Expiration:</strong> {payment.expiration.toDateString()}
+              <strong>Expiration:</strong>{' '}
+              {format(new Date(payment.expiration), 'MM/yy')}
             </p>
             <p>
               <strong>Security code:</strong> {payment.securityCode}
@@ -50,7 +53,7 @@ const OrderSummary: React.FC<Props> = ({ payment, address }) => {
         </Card>
         <Card>
           <CardHeader title={address.name} />
-          <CardContent>{address.address}</CardContent>
+          <CardContent>{address.description}</CardContent>
         </Card>
       </div>
       <div className={styles.summary}>
@@ -76,10 +79,20 @@ const OrderSummary: React.FC<Props> = ({ payment, address }) => {
         </div>
       </div>
       <div className={styles.actions}>
-        <Button variant="outlined" color="error" className={styles.button}>
+        <Button
+          variant="outlined"
+          color="error"
+          className={styles.button}
+          onClick={onBack}
+        >
           Go back
         </Button>
-        <Button variant="contained" color="error" className={styles.button}>
+        <Button
+          variant="contained"
+          color="error"
+          className={styles.button}
+          onClick={onBack}
+        >
           Place order
         </Button>
       </div>

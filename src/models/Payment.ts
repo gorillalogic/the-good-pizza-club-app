@@ -2,10 +2,10 @@ export interface Payment {
   id: number;
   type: CardTypes;
   bank: string;
-  number: number;
+  number: string;
   name: string;
-  expiration: Date;
-  securityCode: number;
+  expiration: string;
+  securityCode: string;
   isDefault: boolean;
 }
 

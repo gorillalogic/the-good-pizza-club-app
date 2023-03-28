@@ -9,6 +9,8 @@ const cartSelectors = {
     totalDiscounts: state.cart.totalDiscounts,
     totalTaxes: state.cart.totalTaxes,
   }),
+  selectPayment: (state: RootState) => state.cart.selectedPayment,
+  selectAddress: (state: RootState) => state.cart.selectedAddress,
 };
 
 export default cartSelectors;

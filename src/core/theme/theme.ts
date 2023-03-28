@@ -51,6 +51,9 @@ const theme = createTheme({
           borderRadius: 200,
           minWidth: 224,
           fontWeight: 'bold',
+          '&.Mui-disabled': {
+            backgroundColor: '#4f4f4f',
+          },
         },
       },
     },
@@ -121,6 +124,9 @@ const theme = createTheme({
           color: '#f2f2f2',
           '&.Mui-selected': {
             color: '#f2c94c',
+          },
+          '&.Mui-disabled': {
+            color: '#bdbdbd',
           },
         },
       },

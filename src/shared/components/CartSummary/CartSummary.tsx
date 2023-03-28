@@ -1,12 +1,49 @@
 import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import cartSelectors from '../../../core/store/slices/cart/selectors';
+import { Address } from '../../../models/Address';
+import { Payment } from '../../../models/Payment';
 import { currencyFormat } from '../../utils/number';
 import styles from './CartSummary.module.scss';
 
-const CartSummary: React.FC = () => {
+interface Props {
+  selectedTab: number;
+  onClick: () => void;
+}
+
+function shouldDisableButton(
+  selectedTab: number,
+  totalItems: number,
+  address: Address | null,
+  payment: Payment | null
+) {
+  switch (selectedTab) {
+    case 0:
+      return totalItems === 0;
+
+    case 1:
+      return !address;
+
+    case 2:
+      return !payment;
+
+    default:
+      return false;
+  }
+}
+
+const CartSummary: React.FC<Props> = ({ selectedTab, onClick }) => {
   const cartItems = useSelector(cartSelectors.selectItems);
   const cartTotals = useSelector(cartSelectors.totals);
+  const selectedAddress = useSelector(cartSelectors.selectAddress);
+  const selectedPayment = useSelector(cartSelectors.selectPayment);
+
+  const buttonDisbled = shouldDisableButton(
+    selectedTab,
+    cartItems.length,
+    selectedAddress,
+    selectedPayment
+  );
 
   return (
     <div className={styles.summary}>
@@ -49,9 +86,16 @@ const CartSummary: React.FC = () => {
           <span>{currencyFormat(cartTotals.total)}</span>
         </div>
       </div>
-      <Button variant="contained" color="error">
-        Next Step
-      </Button>
+      {selectedTab <= 2 && (
+        <Button
+          variant="contained"
+          color="error"
+          onClick={onClick}
+          disabled={buttonDisbled}
+        >
+          Next Step
+        </Button>
+      )}
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import { Address } from './Address';
+import { Payment } from './Payment';
 import { Product } from './Product';
 import { Promotion } from './Promotion';
 import { QuantifiedRecord, Record } from './Record';
@@ -20,4 +22,6 @@ export interface Cart {
   subtotal: number;
   totalDiscounts: number;
   totalTaxes: number;
+  selectedPayment: Payment | null;
+  selectedAddress: Address | null;
 }

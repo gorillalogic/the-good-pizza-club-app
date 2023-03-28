@@ -5,6 +5,7 @@ import snackbarReducer from './slices/snackbar';
 import productsReducer from './slices/products';
 import recordsReducer from './slices/records';
 import cartReducer from './slices/cart';
+import userReducer from './slices/user';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     products: productsReducer,
     records: recordsReducer,
     cart: cartReducer,
+    user: userReducer,
   },
 });
 
