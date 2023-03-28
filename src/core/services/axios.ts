@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { LOCALSTORAGE_KEYS } from '../../shared/constants/global.constants';
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://localhost:7777/api',
+  baseURL: process.env.REACT_APP_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
