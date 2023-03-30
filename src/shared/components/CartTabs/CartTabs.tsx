@@ -6,8 +6,8 @@ import { useThunkDispatch } from '../../../core/hooks/useThunkDispatch';
 import { selectAddress, selectPayment } from '../../../core/store/slices/cart';
 import cartSelectors from '../../../core/store/slices/cart/selectors';
 import {
-  fetchAddreses,
-  fetchPayments,
+  getAddressesAsync,
+  getPaymentsAsync,
 } from '../../../core/store/slices/user/asyncThunks';
 import { Address } from '../../../models/Address';
 import { Payment } from '../../../models/Payment';
@@ -26,8 +26,8 @@ interface Props {
 const CartTabs: React.FC<Props> = ({ selectedTab, onChange }) => {
   const dispatch = useAppDispatch();
   const { data, loading, error } = useThunkDispatch([
-    fetchAddreses(),
-    fetchPayments(),
+    getAddressesAsync(),
+    getPaymentsAsync(),
   ]);
 
   const [addresses, payments] = (data || []) as [Address[], Payment[]];
