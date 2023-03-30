@@ -1,0 +1,8 @@
+@import '../../../styles/styles.scss';
+
+.map {
+  min-width: 600px;
+  min-height: 400px;
+  border-radius: 20px;
+  border: 3px solid colors('yellow');
+}

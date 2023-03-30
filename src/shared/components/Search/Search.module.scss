@@ -1,0 +1,10 @@
+@import '../../../styles/styles.scss';
+
+.search {
+  min-width: 350px !important;
+  border-radius: 50px !important;
+
+  fieldset {
+    border: 0;
+  }
+}

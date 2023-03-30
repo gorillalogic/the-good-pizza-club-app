@@ -122,6 +122,8 @@ const OrderTable: React.FC<{ hideActions?: boolean }> = ({ hideActions }) => {
         </div>
       )}
       <RemoveDialog
+        title="Remove Item"
+        content="Are you sure you want to remove this item from your cart?"
         open={open}
         onClose={closeModalHandler}
         onConfirm={confirmModalHandler}

@@ -9,19 +9,25 @@ import {
 import styles from './RemoveDialog.module.scss';
 
 interface Props {
+  title: string;
+  content: string;
   open: boolean;
   onClose?: () => void;
   onConfirm?: () => void;
 }
 
-const RemoveDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
+const RemoveDialog: React.FC<Props> = ({
+  open,
+  title,
+  content,
+  onClose,
+  onConfirm,
+}) => {
   return (
     <Dialog open={open} onClose={onClose} className={styles.dialog}>
-      <DialogTitle>Remove Item</DialogTitle>
+      <DialogTitle>{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          Are you sure you want to remove this item from your cart?
-        </DialogContentText>
+        <DialogContentText>{content}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button variant="outlined" color="error" onClick={onClose}>

@@ -5,10 +5,11 @@ import {
   CardContent,
   CardHeader,
 } from '@mui/material';
-import { useContext } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { authContext } from '../../../../core/context/authCtx';
 import { Address } from '../../../../models/Address';
 import StarButton from '../../StarButton/StarButton';
+import CreateAddressDialog from '../CreateAddressDialog/CreateAddressDialog';
 import TabHeader from '../TabHeader/TabHeader';
 import styles from './Addresses.module.scss';
 
@@ -24,6 +25,15 @@ const Addresses: React.FC<Props> = ({
   onSelect,
 }) => {
   const authCtx = useContext(authContext);
+  const [open, setOpen] = useState(false);
+
+  const toggleDialog = useCallback(() => {
+    setOpen(!open);
+  }, [open]);
+
+  const createAddress = useCallback((data: Partial<Address>) => {
+    console.log(data);
+  }, []);
 
   let content: React.ReactNode;
 
@@ -61,11 +71,21 @@ const Addresses: React.FC<Props> = ({
         />
         <div className={styles.content}>{content}</div>
         <div className={styles.actions}>
-          <Button variant="outlined" color="error" className={styles.button}>
+          <Button
+            variant="outlined"
+            color="error"
+            className={styles.button}
+            onClick={toggleDialog}
+          >
             New address
           </Button>
         </div>
       </div>
+      <CreateAddressDialog
+        open={open}
+        onClose={toggleDialog}
+        onConfirm={createAddress}
+      />
     </>
   );
 };

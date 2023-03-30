@@ -60,10 +60,8 @@ const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
-          input: {
-            backgroundColor: '#F2F2F2',
-            borderRadius: '10px',
-          },
+          backgroundColor: '#F2F2F2',
+          borderRadius: '10px',
         },
       },
     },
