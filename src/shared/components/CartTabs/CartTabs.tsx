@@ -1,14 +1,10 @@
-import { CircularProgress, Tab, Tabs } from '@mui/material';
+import { Tab, Tabs } from '@mui/material';
 import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../core/hooks/useAppDispatch';
-import { useThunkDispatch } from '../../../core/hooks/useThunkDispatch';
 import { selectAddress, selectPayment } from '../../../core/store/slices/cart';
 import cartSelectors from '../../../core/store/slices/cart/selectors';
-import {
-  getAddressesAsync,
-  getPaymentsAsync,
-} from '../../../core/store/slices/user/asyncThunks';
+import userSelectors from '../../../core/store/slices/user/selectors';
 import { Address } from '../../../models/Address';
 import { Payment } from '../../../models/Payment';
 import Addresses from './Addresses/Addresses';
@@ -25,13 +21,10 @@ interface Props {
 
 const CartTabs: React.FC<Props> = ({ selectedTab, onChange }) => {
   const dispatch = useAppDispatch();
-  const { data, loading, error } = useThunkDispatch([
-    getAddressesAsync(),
-    getPaymentsAsync(),
-  ]);
 
-  const [addresses, payments] = (data || []) as [Address[], Payment[]];
   const totalCartItems = useSelector(cartSelectors.totalItems);
+  const addresses = useSelector(userSelectors.selectAddreses);
+  const payments = useSelector(userSelectors.selectPayments);
   const selectedAddress = useSelector(cartSelectors.selectAddress);
   const selectedPayment = useSelector(cartSelectors.selectPayment);
 
@@ -43,19 +36,24 @@ const CartTabs: React.FC<Props> = ({ selectedTab, onChange }) => {
     dispatch(selectPayment(payment));
   }, []);
 
-  let content: React.ReactNode;
-
-  if (loading) {
-    content = <CircularProgress color="primary" />;
-  }
-
-  if (error) {
-    content = <p>Error loading data...</p>;
-  }
-
-  if (addresses && payments) {
-    content = (
-      <>
+  return (
+    <div className={styles.tabs}>
+      <Tabs
+        value={selectedTab}
+        onChange={(_, value: number) => onChange(value)}
+      >
+        <Tab label="Order" />
+        <Tab label="Address" disabled={false} />
+        <Tab
+          label="Payment"
+          disabled={totalCartItems === 0 || !selectedAddress}
+        />
+        <Tab
+          label="Checkout"
+          disabled={totalCartItems === 0 || !selectedPayment}
+        />
+      </Tabs>
+      <div className={styles.content}>
         <CartPanel selectedTab={selectedTab} index={0}>
           <OrderTable />
         </CartPanel>
@@ -82,28 +80,7 @@ const CartTabs: React.FC<Props> = ({ selectedTab, onChange }) => {
             />
           )}
         </CartPanel>
-      </>
-    );
-  }
-
-  return (
-    <div className={styles.tabs}>
-      <Tabs
-        value={selectedTab}
-        onChange={(_, value: number) => onChange(value)}
-      >
-        <Tab label="Order" />
-        <Tab label="Address" disabled={false} />
-        <Tab
-          label="Payment"
-          disabled={totalCartItems === 0 || !selectedAddress}
-        />
-        <Tab
-          label="Checkout"
-          disabled={totalCartItems === 0 || !selectedPayment}
-        />
-      </Tabs>
-      <div className={styles.content}>{content}</div>
+      </div>
     </div>
   );
 };

@@ -50,7 +50,7 @@ export const deleteAddressAsync = createAsyncThunk(
   async (payload: number, thunkApi) => {
     try {
       const response = await deleteAddress(payload);
-      return response.data;
+      return { id: payload, ...response.data };
     } catch (error) {
       const message = getErrorMessage(error);
       thunkApi.rejectWithValue(message);
@@ -96,7 +96,7 @@ export const deletePaymentAsync = createAsyncThunk(
   async (payload: number, thunkApi) => {
     try {
       const response = await deletePayment(payload);
-      return response.data;
+      return { id: payload, ...response.data };
     } catch (error) {
       const message = getErrorMessage(error);
       thunkApi.rejectWithValue(message);

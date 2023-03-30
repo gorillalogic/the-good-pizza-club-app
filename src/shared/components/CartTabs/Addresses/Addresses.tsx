@@ -7,9 +7,16 @@ import {
 } from '@mui/material';
 import { useCallback, useContext, useState } from 'react';
 import { authContext } from '../../../../core/context/authCtx';
+import { useAppDispatch } from '../../../../core/hooks/useAppDispatch';
+import { showSnackbar } from '../../../../core/store/slices/snackbar';
+import {
+  createAddressAsync,
+  deleteAddressAsync,
+} from '../../../../core/store/slices/user/asyncThunks';
 import { Address } from '../../../../models/Address';
 import StarButton from '../../StarButton/StarButton';
 import CreateAddressDialog from '../CreateAddressDialog/CreateAddressDialog';
+import RemoveDialog from '../RemoveDialog/RemoveDialog';
 import TabHeader from '../TabHeader/TabHeader';
 import styles from './Addresses.module.scss';
 
@@ -25,14 +32,59 @@ const Addresses: React.FC<Props> = ({
   onSelect,
 }) => {
   const authCtx = useContext(authContext);
-  const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const [openCreateDialog, setOpenCreateDialog] = useState(false);
+  const [openRemoveDialog, setOpenRemoveDialog] = useState(false);
+  let selectedAddressId: number | undefined;
 
-  const toggleDialog = useCallback(() => {
-    setOpen(!open);
+  const toggleCreateDialog = useCallback(() => {
+    setOpenCreateDialog((prev) => !prev);
   }, [open]);
 
-  const createAddress = useCallback((data: Partial<Address>) => {
-    console.log(data);
+  const toggleRemoveDialog = useCallback(
+    (id?: number) => {
+      selectedAddressId = id;
+      setOpenRemoveDialog((prev) => !prev);
+    },
+    [open]
+  );
+
+  const createAddress = useCallback(async (data: Partial<Address>) => {
+    try {
+      await dispatch(createAddressAsync(data)).unwrap();
+      dispatch(
+        showSnackbar({
+          color: 'success',
+          message: 'Address created successfully!',
+        })
+      );
+    } catch (error) {
+      dispatch(
+        showSnackbar({ color: 'error', message: 'Error creating address' })
+      );
+    } finally {
+      toggleCreateDialog();
+    }
+  }, []);
+
+  const deleteAddress = useCallback(async () => {
+    if (selectedAddressId) {
+      try {
+        await dispatch(deleteAddressAsync(selectedAddressId)).unwrap();
+        dispatch(
+          showSnackbar({
+            color: 'success',
+            message: 'Address deleted successfully!',
+          })
+        );
+      } catch (error) {
+        dispatch(
+          showSnackbar({ color: 'error', message: 'Error deleting address' })
+        );
+      } finally {
+        toggleRemoveDialog();
+      }
+    }
   }, []);
 
   let content: React.ReactNode;
@@ -45,8 +97,13 @@ const Addresses: React.FC<Props> = ({
         <CardHeader title={address.name} />
         <CardContent>{address.description}</CardContent>
         <CardActions>
-          <Button variant="outlined" color="error" className={styles.button}>
-            Edit
+          <Button
+            variant="outlined"
+            color="error"
+            className={styles.button}
+            onClick={() => toggleRemoveDialog(address.id)}
+          >
+            Delete
           </Button>
           <StarButton
             active={selectedAddress?.id === address.id}
@@ -75,16 +132,23 @@ const Addresses: React.FC<Props> = ({
             variant="outlined"
             color="error"
             className={styles.button}
-            onClick={toggleDialog}
+            onClick={toggleCreateDialog}
           >
             New address
           </Button>
         </div>
       </div>
       <CreateAddressDialog
-        open={open}
-        onClose={toggleDialog}
+        open={openCreateDialog}
+        onClose={toggleCreateDialog}
         onConfirm={createAddress}
+      />
+      <RemoveDialog
+        title="Delete Address"
+        content="Do you want to delete this address?"
+        open={openRemoveDialog}
+        onClose={toggleRemoveDialog}
+        onConfirm={deleteAddress}
       />
     </>
   );
