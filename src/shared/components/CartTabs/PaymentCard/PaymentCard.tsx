@@ -6,20 +6,22 @@ import {
   CardHeader,
 } from '@mui/material';
 import { format } from 'date-fns';
-import { Payment } from '../../../../../models/Payment';
-import StarButton from '../../../StarButton/StarButton';
+import { Payment } from '../../../../models/Payment';
+import StarButton from '../../StarButton/StarButton';
 import styles from './PaymentCard.module.scss';
 
 interface Props {
   payment: Payment;
-  active: boolean;
-  onDelete: () => void;
-  onSelect: (payment: Payment) => void;
+  active?: boolean;
+  hideActions?: boolean;
+  onDelete?: () => void;
+  onSelect?: () => void;
 }
 
 const PaymentCard: React.FC<Props> = ({
   payment,
   active,
+  hideActions,
   onDelete,
   onSelect,
 }) => {
@@ -44,19 +46,21 @@ const PaymentCard: React.FC<Props> = ({
           <strong>Security code:</strong> {payment.securityCode}
         </p>
       </CardContent>
-      <CardActions>
-        <Button
-          variant="outlined"
-          color="error"
-          className={styles.button}
-          onClick={onDelete}
-        >
-          Delete
-        </Button>
-        <StarButton active={active} onClick={() => onSelect(payment)}>
-          {active ? 'Using this card' : 'Use this card'}
-        </StarButton>
-      </CardActions>
+      {!hideActions && (
+        <CardActions>
+          <Button
+            variant="outlined"
+            color="error"
+            className={styles.button}
+            onClick={onDelete}
+          >
+            Delete
+          </Button>
+          <StarButton active={active} onClick={onSelect}>
+            {active ? 'Using this card' : 'Use this card'}
+          </StarButton>
+        </CardActions>
+      )}
     </Card>
   );
 };

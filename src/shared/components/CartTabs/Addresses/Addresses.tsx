@@ -1,10 +1,4 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-} from '@mui/material';
+import { Button } from '@mui/material';
 import { useCallback, useContext, useState } from 'react';
 import { authContext } from '../../../../core/context/authCtx';
 import { useAppDispatch } from '../../../../core/hooks/useAppDispatch';
@@ -14,7 +8,7 @@ import {
   deleteAddressAsync,
 } from '../../../../core/store/slices/user/asyncThunks';
 import { Address } from '../../../../models/Address';
-import StarButton from '../../StarButton/StarButton';
+import AddressCard from '../AddressCard/AddressCard';
 import CreateAddressDialog from '../CreateAddressDialog/CreateAddressDialog';
 import RemoveDialog from '../RemoveDialog/RemoveDialog';
 import TabHeader from '../TabHeader/TabHeader';
@@ -93,28 +87,13 @@ const Addresses: React.FC<Props> = ({
     content = <p>You have not added any address</p>;
   } else {
     content = addresses.map((address) => (
-      <Card key={address.id} className={styles.card}>
-        <CardHeader title={address.name} />
-        <CardContent>{address.description}</CardContent>
-        <CardActions>
-          <Button
-            variant="outlined"
-            color="error"
-            className={styles.button}
-            onClick={() => toggleRemoveDialog(address.id)}
-          >
-            Delete
-          </Button>
-          <StarButton
-            active={selectedAddress?.id === address.id}
-            onClick={() => onSelect(address)}
-          >
-            {selectedAddress?.id === address.id
-              ? 'Using this address'
-              : 'Use this address'}
-          </StarButton>
-        </CardActions>
-      </Card>
+      <AddressCard
+        key={address.id}
+        address={address}
+        active={selectedAddress?.id === address.id}
+        onDelete={() => toggleRemoveDialog(address.id)}
+        onSelect={() => onSelect(address)}
+      />
     ));
   }
 

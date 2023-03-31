@@ -1,5 +1,4 @@
-import { Button, Card, CardContent, CardHeader } from '@mui/material';
-import { format } from 'date-fns';
+import { Button } from '@mui/material';
 import { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { authContext } from '../../../../core/context/authCtx';
@@ -7,7 +6,9 @@ import cartSelectors from '../../../../core/store/slices/cart/selectors';
 import { Address } from '../../../../models/Address';
 import { Payment } from '../../../../models/Payment';
 import { currencyFormat } from '../../../utils/number';
+import AddressCard from '../AddressCard/AddressCard';
 import OrderTable from '../OrderTable/OrderTable';
+import PaymentCard from '../PaymentCard/PaymentCard';
 import TabHeader from '../TabHeader/TabHeader';
 import styles from './OrderSummary.module.scss';
 
@@ -30,31 +31,8 @@ const OrderSummary: React.FC<Props> = ({ payment, address, onBack }) => {
       />
       <OrderTable hideActions />
       <div className={styles.cards}>
-        <Card className={styles.card}>
-          <CardHeader title={payment.type} />
-          <CardContent>
-            <img
-              src="icons/mastercard.svg"
-              alt=""
-              className={styles.card__image}
-            />
-            <p>{payment.number}</p>
-            <p>
-              <strong>Name on card:</strong> {payment.name}
-            </p>
-            <p>
-              <strong>Expiration:</strong>{' '}
-              {format(new Date(payment.expiration), 'MM/yy')}
-            </p>
-            <p>
-              <strong>Security code:</strong> {payment.securityCode}
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader title={address.name} />
-          <CardContent>{address.description}</CardContent>
-        </Card>
+        <PaymentCard payment={payment} hideActions />
+        <AddressCard address={address} hideActions />
       </div>
       <div className={styles.summary}>
         <div className={styles.summary__item}>

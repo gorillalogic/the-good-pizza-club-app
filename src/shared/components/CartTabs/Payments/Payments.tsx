@@ -9,9 +9,9 @@ import {
 } from '../../../../core/store/slices/user/asyncThunks';
 import { Payment } from '../../../../models/Payment';
 import CreatePaymentDialog from '../CreatePaymentDialog/CreatePaymentDialog';
+import PaymentCard from '../PaymentCard/PaymentCard';
 import RemoveDialog from '../RemoveDialog/RemoveDialog';
 import TabHeader from '../TabHeader/TabHeader';
-import PaymentCard from './PaymentCard/PaymentCard';
 import styles from './Payments.module.scss';
 
 interface Props {
@@ -87,7 +87,7 @@ const Payments: React.FC<Props> = ({ payments, selectedPayment, onSelect }) => {
         payment={payment}
         active={payment.id === selectedPayment?.id}
         onDelete={() => toggleRemoveDialog(payment.id)}
-        onSelect={onSelect}
+        onSelect={() => onSelect(payment)}
       />
     ));
   }

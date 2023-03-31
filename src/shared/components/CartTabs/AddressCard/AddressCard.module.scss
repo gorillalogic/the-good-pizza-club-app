@@ -1,0 +1,17 @@
+@import '../../../../styles/styles.scss';
+
+.card {
+  min-width: 345px;
+  position: relative;
+
+  .button {
+    min-width: 100px;
+  }
+
+  .image {
+    position: absolute;
+    width: 60px;
+    top: 25px;
+    right: 20px;
+  }
+}

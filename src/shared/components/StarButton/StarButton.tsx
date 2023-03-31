@@ -2,7 +2,7 @@ import { Icon } from '@mui/material';
 import styles from './StarButton.module.scss';
 
 interface Props extends React.PropsWithChildren {
-  active: boolean;
+  active?: boolean;
   onClick?: (event?: React.SyntheticEvent) => void;
 }
 
