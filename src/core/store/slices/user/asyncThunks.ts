@@ -27,7 +27,7 @@ export const getAddressesAsync = createAsyncThunk(
       return response.data;
     } catch (error) {
       const message = getErrorMessage(error);
-      thunkApi.rejectWithValue(message);
+      return thunkApi.rejectWithValue(message);
     }
   }
 );
@@ -40,7 +40,7 @@ export const createAddressAsync = createAsyncThunk(
       return response.data;
     } catch (error) {
       const message = getErrorMessage(error);
-      thunkApi.rejectWithValue(message);
+      return thunkApi.rejectWithValue(message);
     }
   }
 );
@@ -53,7 +53,7 @@ export const deleteAddressAsync = createAsyncThunk(
       return { id: payload, ...response.data };
     } catch (error) {
       const message = getErrorMessage(error);
-      thunkApi.rejectWithValue(message);
+      return thunkApi.rejectWithValue(message);
     }
   }
 );
@@ -73,7 +73,7 @@ export const getPaymentsAsync = createAsyncThunk(
       return response.data;
     } catch (error) {
       const message = getErrorMessage(error);
-      thunkApi.rejectWithValue(message);
+      return thunkApi.rejectWithValue(message);
     }
   }
 );
@@ -86,7 +86,7 @@ export const createPaymentAsync = createAsyncThunk(
       return response.data;
     } catch (error) {
       const message = getErrorMessage(error);
-      thunkApi.rejectWithValue(message);
+      return thunkApi.rejectWithValue(message);
     }
   }
 );
@@ -99,7 +99,7 @@ export const deletePaymentAsync = createAsyncThunk(
       return { id: payload, ...response.data };
     } catch (error) {
       const message = getErrorMessage(error);
-      thunkApi.rejectWithValue(message);
+      return thunkApi.rejectWithValue(message);
     }
   }
 );

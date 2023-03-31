@@ -1,16 +1,17 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-} from '@mui/material';
-import { format } from 'date-fns';
-import { useContext } from 'react';
+import { Button } from '@mui/material';
+import { useCallback, useContext, useState } from 'react';
 import { authContext } from '../../../../core/context/authCtx';
+import { useAppDispatch } from '../../../../core/hooks/useAppDispatch';
+import { showSnackbar } from '../../../../core/store/slices/snackbar';
+import {
+  createPaymentAsync,
+  deletePaymentAsync,
+} from '../../../../core/store/slices/user/asyncThunks';
 import { Payment } from '../../../../models/Payment';
-import StarButton from '../../StarButton/StarButton';
+import CreatePaymentDialog from '../CreatePaymentDialog/CreatePaymentDialog';
+import RemoveDialog from '../RemoveDialog/RemoveDialog';
 import TabHeader from '../TabHeader/TabHeader';
+import PaymentCard from './PaymentCard/PaymentCard';
 import styles from './Payments.module.scss';
 
 interface Props {
@@ -21,6 +22,59 @@ interface Props {
 
 const Payments: React.FC<Props> = ({ payments, selectedPayment, onSelect }) => {
   const authCtx = useContext(authContext);
+  const dispatch = useAppDispatch();
+  const [openCreateDialog, setOpenCreateDialog] = useState(false);
+  const [openRemoveDialog, setOpenRemoveDialog] = useState(false);
+
+  let selectedPaymentId: number | undefined;
+
+  const toggleCreateDialog = useCallback(() => {
+    setOpenCreateDialog((prev) => !prev);
+  }, []);
+
+  const toggleRemoveDialog = useCallback((id?: number) => {
+    selectedPaymentId = id;
+    setOpenRemoveDialog((prev) => !prev);
+  }, []);
+
+  const createPayment = useCallback(async (data: Partial<Payment>) => {
+    try {
+      await dispatch(createPaymentAsync(data)).unwrap();
+      dispatch(
+        showSnackbar({
+          color: 'success',
+          message: 'Payment method added succesfully!',
+        })
+      );
+      toggleCreateDialog();
+    } catch (error) {
+      dispatch(
+        showSnackbar({ color: 'error', message: 'Error adding payment method' })
+      );
+    }
+  }, []);
+
+  const deletePayment = useCallback(async () => {
+    if (selectedPaymentId) {
+      try {
+        await dispatch(deletePaymentAsync(selectedPaymentId)).unwrap();
+        dispatch(
+          showSnackbar({
+            color: 'success',
+            message: 'Payment method deleted succesfully!',
+          })
+        );
+        toggleRemoveDialog();
+      } catch (error) {
+        dispatch(
+          showSnackbar({
+            color: 'error',
+            message: 'Error deleting payment method',
+          })
+        );
+      }
+    }
+  }, []);
 
   let content: React.ReactNode;
 
@@ -28,53 +82,49 @@ const Payments: React.FC<Props> = ({ payments, selectedPayment, onSelect }) => {
     content = <p>You have not added any payment method</p>;
   } else {
     content = payments.map((payment) => (
-      <Card key={payment.id} className={styles.card}>
-        <CardHeader title={payment.bank} subheader={payment.type} />
-        <CardContent>
-          <img src="icons/mastercard.svg" alt="" className={styles.image} />
-          <p>{payment.number}</p>
-          <p>
-            <strong>Name on card:</strong> {payment.name}
-          </p>
-          <p>
-            <strong>Expiration:</strong>{' '}
-            {format(new Date(payment.expiration), 'MM/yy')}
-          </p>
-          <p>
-            <strong>Security code:</strong> {payment.securityCode}
-          </p>
-        </CardContent>
-        <CardActions>
-          <Button variant="outlined" color="error" className={styles.button}>
-            Delete
-          </Button>
-          <StarButton
-            active={payment.id === selectedPayment?.id}
-            onClick={() => onSelect(payment)}
-          >
-            {payment.id === selectedPayment?.id
-              ? 'Using this card'
-              : 'Use this card'}
-          </StarButton>
-        </CardActions>
-      </Card>
+      <PaymentCard
+        key={payment.id}
+        payment={payment}
+        active={payment.id === selectedPayment?.id}
+        onDelete={() => toggleRemoveDialog(payment.id)}
+        onSelect={onSelect}
+      />
     ));
   }
 
   return (
-    <div className={styles.payments}>
-      <TabHeader
-        title="Your payments"
-        user={authCtx.user?.name || ''}
-        onClick={authCtx.logout}
-      />
-      <div className={styles.content}>{content}</div>
-      <div className={styles.actions}>
-        <Button variant="outlined" color="error" className={styles.button}>
-          New Payment
-        </Button>
+    <>
+      <div className={styles.payments}>
+        <TabHeader
+          title="Your payments"
+          user={authCtx.user?.name || ''}
+          onClick={authCtx.logout}
+        />
+        <div className={styles.content}>{content}</div>
+        <div className={styles.actions}>
+          <Button
+            variant="outlined"
+            color="error"
+            className={styles.button}
+            onClick={toggleCreateDialog}
+          >
+            New Payment
+          </Button>
+        </div>
       </div>
-    </div>
+      <CreatePaymentDialog
+        open={openCreateDialog}
+        onClose={toggleCreateDialog}
+        onConfirm={createPayment}
+      />
+      <RemoveDialog
+        title="Delete payment method"
+        content="Do you want to delete this payment method?"
+        open={openRemoveDialog}
+        onClose={toggleRemoveDialog}
+        onConfirm={deletePayment}
+      />
+    </>
   );
 };
 

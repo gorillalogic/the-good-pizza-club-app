@@ -1,25 +1,10 @@
 @import '../../../../styles/styles.scss';
 
 .payments {
-  .image {
-    position: absolute;
-    top: 25px;
-    right: 20px;
-  }
-
   .content {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-  }
-
-  .card {
-    min-width: 345px;
-    position: relative;
-  }
-
-  .button {
-    min-width: 100px;
   }
 
   .actions {

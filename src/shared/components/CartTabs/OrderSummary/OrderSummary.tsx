@@ -31,7 +31,7 @@ const OrderSummary: React.FC<Props> = ({ payment, address, onBack }) => {
       <OrderTable hideActions />
       <div className={styles.cards}>
         <Card className={styles.card}>
-          <CardHeader title={payment.bank} subheader={payment.type} />
+          <CardHeader title={payment.type} />
           <CardContent>
             <img
               src="icons/mastercard.svg"
