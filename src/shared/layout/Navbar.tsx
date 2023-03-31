@@ -1,22 +1,18 @@
-import styles from './Navbar.module.scss';
-import { NavLink, useNavigate } from 'react-router-dom';
 import { Icon, IconButton } from '@mui/material';
-import { NAVBAR_ITEMS } from '../constants/global.constants';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { authContext } from '../../core/context/authCtx';
 import { getLoggedIn } from '../../core/store/slices/auth/selectors';
-import { logoutAsync } from '../../core/store/slices/auth/asyncThunks';
-import { useAppDispatch } from '../../core/hooks/useAppDispatch';
-import { showSnackbar } from '../../core/store/slices/snackbar';
-import { HttpError } from '../../models/Error';
 import cartSelectors from '../../core/store/slices/cart/selectors';
+import { NAVBAR_ITEMS } from '../constants/global.constants';
+import styles from './Navbar.module.scss';
 
 const Navbar: React.FC = () => {
-  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const isLoggedIn = useSelector(getLoggedIn);
-  const dispatch = useAppDispatch();
   const cartItems = useSelector(cartSelectors.totalItems);
+  const authCtx = useContext(authContext);
 
   const toggleMenu = () => {
     setShowMenu((prev) => !prev);
@@ -25,16 +21,6 @@ const Navbar: React.FC = () => {
   const listClasses = `${styles.list} ${
     !showMenu ? styles['list--hidden'] : ''
   }`;
-
-  const logoutHandler = async () => {
-    try {
-      await dispatch(logoutAsync()).unwrap();
-      navigate('/');
-    } catch (error) {
-      const { message } = error as HttpError;
-      dispatch(showSnackbar({ color: 'error', message }));
-    }
-  };
 
   return (
     <nav className={styles.navbar}>
@@ -62,7 +48,7 @@ const Navbar: React.FC = () => {
         {isLoggedIn && (
           <>
             <li>
-              <a onClick={logoutHandler}>Logout</a>
+              <a onClick={authCtx.logout}>Logout</a>
             </li>
             <li>
               <NavLink

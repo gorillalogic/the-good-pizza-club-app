@@ -135,6 +135,9 @@ const cartSlice = createSlice({
     selectAddress: (state, action: PayloadAction<Address>) => {
       state.selectedAddress = action.payload;
     },
+    resetCart: () => {
+      return initialState;
+    },
   },
 });
 
@@ -145,4 +148,5 @@ export const {
   updateProductQuantity,
   selectAddress,
   selectPayment,
+  resetCart,
 } = cartSlice.actions;

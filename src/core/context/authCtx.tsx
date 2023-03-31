@@ -5,6 +5,7 @@ import { User } from '../../models/User';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { logoutAsync } from '../store/slices/auth/asyncThunks';
 import { getUser } from '../store/slices/auth/selectors';
+import { resetCart } from '../store/slices/cart';
 
 interface AuthContext {
   user: Partial<User> | null;
@@ -25,6 +26,7 @@ const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   const logout = useCallback(() => {
     dispatch(logoutAsync());
+    dispatch(resetCart());
     navigate('/', { replace: true });
   }, []);
 
