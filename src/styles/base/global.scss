@@ -67,6 +67,11 @@ html {
       border: 0;
       background: transparent;
     }
+
+    ul {
+      padding: 0;
+      margin: 0;
+    }
   }
 
   @include from-breakpoint('medium') {
@@ -126,10 +131,6 @@ html {
       border-radius: 312px 0px 0px 0px;
       margin-bottom: -443px; // footer height
     }
-  }
-
-  @include from-breakpoint('xx-large') {
-    padding: 5% 20%;
   }
 }
 

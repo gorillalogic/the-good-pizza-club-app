@@ -1,0 +1,13 @@
+@import '../../styles/styles.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  gap: 16px;
+
+  h2 {
+    color: colors('yellow');
+  }
+}

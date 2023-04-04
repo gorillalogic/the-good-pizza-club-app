@@ -13,7 +13,6 @@ export const NAVBAR_ITEMS = [
   { label: 'Menu', url: '/menu' },
   { label: 'About Us', url: '/about-us' },
   { label: 'Contact', url: '/contact' },
-  { label: 'Help', url: '/help' },
 ];
 
 export const SOCIAL_MEDIA_ITEMS = [

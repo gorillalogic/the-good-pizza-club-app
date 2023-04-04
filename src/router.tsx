@@ -1,9 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { CustomizeDialogProvider } from './core/context/customizeDialogCtx';
+import AboutUs from './pages/AboutUs/AboutUs';
 import App from './pages/App';
 import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Cart/Checkout/Checkout';
 import OrderPlaced from './pages/Cart/OrderPlaced/OrderPlaced';
+import Contact from './pages/Contact/Contact';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Welcome from './pages/Login/Welcome/Welcome';
@@ -84,6 +86,14 @@ const router = createBrowserRouter([
             ],
           },
         ],
+      },
+      {
+        path: '/about-us',
+        element: <AboutUs />,
+      },
+      {
+        path: '/contact',
+        element: <Contact />,
       },
     ],
   },

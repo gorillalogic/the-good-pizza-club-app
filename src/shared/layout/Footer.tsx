@@ -25,7 +25,6 @@ const Footer: React.FC = () => {
           <Link to="/menu">Menu</Link>
           <Link to="/contact">Contact</Link>
           <Link to="/about-us">About Us</Link>
-          <Link to="/help">Help</Link>
         </div>
         <div className={styles.column}>
           <h3>Important stuff!</h3>
