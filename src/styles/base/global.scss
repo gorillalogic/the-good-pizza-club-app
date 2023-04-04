@@ -120,6 +120,8 @@ html {
   }
 
   @include from-breakpoint('x-large') {
+    padding: 5% 15%;
+
     &:last-of-type:not(:first-of-type) {
       border-radius: 312px 0px 0px 0px;
       margin-bottom: -443px; // footer height

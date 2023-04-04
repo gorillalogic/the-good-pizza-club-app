@@ -25,12 +25,16 @@ const PaymentCard: React.FC<Props> = ({
   onDelete,
   onSelect,
 }) => {
+  const title = payment.company
+    ? `${payment.company} - ${payment.type}`
+    : payment.type;
+
   return (
     <Card className={styles.card}>
-      <CardHeader title={`${payment.company} - ${payment.type}`} />
+      <CardHeader title={title} />
       <CardContent>
         <img
-          src={`icons/${payment.company.toLowerCase()}.svg`}
+          src={`icons/${payment.company?.toLowerCase()}.svg`}
           alt=""
           className={styles.image}
         />

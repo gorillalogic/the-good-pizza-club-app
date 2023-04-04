@@ -6,9 +6,11 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  useMediaQuery,
 } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import theme from '../../../../core/theme/theme';
 import { Address } from '../../../../models/Address';
 import { getGeocode, getGeolocation } from '../../../utils/geolocation';
 import Map from '../../Map/Map';
@@ -31,6 +33,7 @@ interface FormValues {
 }
 
 const CreateAddressDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [loadingCoords, setLoadingCoords] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const form = useForm<FormValues>();
@@ -147,38 +150,41 @@ const CreateAddressDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
   }
 
   return (
-    <Dialog open={open} onClose={onClose} className={styles.dialog}>
-      <form onSubmit={submitHandler}>
-        <DialogTitle className={styles.title}>Where to, tho?</DialogTitle>
-        <DialogContent className={styles.content}>
-          <>
-            {loadingCoords && <CircularProgress color="primary" />}
-            {!loadingCoords && !coords && (
-              <Button
-                variant="outlined"
-                color="error"
-                onClick={currentLocationHandler}
-              >
-                Use my current location
-              </Button>
-            )}
-            {content}
-          </>
-        </DialogContent>
-        <DialogActions className={styles.actions}>
-          <Button variant="outlined" color="error" onClick={closeHandler}>
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            color="error"
-            type="submit"
-            disabled={!coords || !form.formState.isValid}
-          >
-            Save
-          </Button>
-        </DialogActions>
-      </form>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      className={styles.dialog}
+      fullScreen={fullScreen}
+    >
+      <DialogTitle className={styles.title}>Where to, tho?</DialogTitle>
+      <DialogContent className={styles.content}>
+        <>
+          {loadingCoords && <CircularProgress color="primary" />}
+          {!loadingCoords && !coords && (
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={currentLocationHandler}
+            >
+              Use my current location
+            </Button>
+          )}
+          {content}
+        </>
+      </DialogContent>
+      <DialogActions className={styles.actions}>
+        <Button variant="outlined" color="error" onClick={closeHandler}>
+          Cancel
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          disabled={!coords || !form.formState.isValid}
+          onClick={submitHandler}
+        >
+          Save
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 };

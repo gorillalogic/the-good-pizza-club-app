@@ -16,4 +16,21 @@
   .error {
     color: colors('red');
   }
+
+  .actions {
+    gap: 12px;
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+@include from-breakpoint('large') {
+  .dialog {
+    .actions {
+      flex-direction: row;
+    }
+  }
 }

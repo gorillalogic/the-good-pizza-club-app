@@ -10,7 +10,6 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    min-width: 600px;
 
     p {
       @include font(12, 16);
@@ -25,5 +24,26 @@
     @include font(16, 18);
     color: colors('light-gray');
     text-decoration: underline;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 12px;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+@include from-breakpoint('large') {
+  .dialog {
+    .content {
+      min-width: 600px;
+    }
+
+    .actions {
+      flex-direction: row;
+    }
   }
 }

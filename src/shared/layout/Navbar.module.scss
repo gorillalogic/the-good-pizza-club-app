@@ -99,12 +99,20 @@
   }
 
   .list {
+    max-height: 100%;
     flex-direction: row;
     flex-grow: 0;
+    justify-content: end;
     gap: 24px;
+    background-color: transparent;
+    opacity: 1;
 
     &--hidden {
       display: flex;
+    }
+
+    a {
+      color: colors('white');
     }
   }
 }

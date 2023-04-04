@@ -1,10 +1,16 @@
 @import '../../../styles/styles.scss';
 
 .search {
-  min-width: 350px !important;
+  min-width: 300px !important;
   border-radius: 50px !important;
 
   fieldset {
     border: 0;
+  }
+}
+
+@include from-breakpoint('large') {
+  .search {
+    min-width: 350px !important;
   }
 }
