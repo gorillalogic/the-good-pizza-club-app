@@ -109,14 +109,18 @@ html {
   text-align: center;
   min-height: 80vh;
   gap: 80px;
-  padding: 5% 10%;
+  padding: 5% 16px;
 
   &--green {
     background-color: colors('green');
   }
 
+  @include from-breakpoint('large') {
+    padding: 5% 10%;
+  }
+
   @include from-breakpoint('x-large') {
-    &:last-of-type {
+    &:last-of-type:not(:first-of-type) {
       border-radius: 312px 0px 0px 0px;
       margin-bottom: -443px; // footer height
     }

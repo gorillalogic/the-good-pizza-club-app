@@ -9,6 +9,12 @@
 }
 
 .selected {
-  transform: scale(1.5);
+  transform: scale(1.1);
   background: colors('orange');
+}
+
+@include from-breakpoint('large') {
+  .selected {
+    transform: scale(1.5);
+  }
 }

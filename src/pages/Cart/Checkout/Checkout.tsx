@@ -1,5 +1,6 @@
 import { CircularProgress } from '@mui/material';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
+import useScrollToRef from '../../../core/hooks/useScrollToRef';
 import { useThunkDispatch } from '../../../core/hooks/useThunkDispatch';
 import {
   getAddressesAsync,
@@ -10,6 +11,8 @@ import CartTabs from '../../../shared/components/CartTabs/CartTabs';
 import styles from './Checkout.module.scss';
 
 const Checkout: React.FC = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollTo } = useScrollToRef();
   const [selectedTab, setSelectedTab] = useState(0);
   const tabChangeHandler = useCallback((value: number) => {
     setSelectedTab(value);
@@ -17,6 +20,7 @@ const Checkout: React.FC = () => {
 
   const nextClickHandler = useCallback(() => {
     setSelectedTab(selectedTab + 1);
+    scrollTo(ref);
   }, [selectedTab]);
 
   const { data, loading, error } = useThunkDispatch([
@@ -36,7 +40,7 @@ const Checkout: React.FC = () => {
 
   if (data) {
     content = (
-      <div className={styles.content}>
+      <div className={styles.content} ref={ref}>
         <CartTabs selectedTab={selectedTab} onChange={tabChangeHandler} />
         <CartSummary selectedTab={selectedTab} onClick={nextClickHandler} />
       </div>

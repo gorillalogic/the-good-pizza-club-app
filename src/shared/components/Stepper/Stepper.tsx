@@ -7,13 +7,20 @@ import StepperIcon from './StepperIcon';
 interface Props {
   className?: string;
   activeStep: number;
+  orientation?: 'vertical' | 'horizontal';
   steps: { icon: string; label: string }[];
 }
 
-const Stepper: React.FC<Props> = ({ steps, activeStep, className = '' }) => {
+const Stepper: React.FC<Props> = ({
+  steps,
+  activeStep,
+  orientation = 'horizontal',
+  className = '',
+}) => {
   return (
     <MaterialStepper
       alternativeLabel
+      orientation={orientation}
       activeStep={activeStep}
       className={`${styles.stepper} ${className}`}
       connector={<StepperConnector />}

@@ -19,11 +19,11 @@
   }
 
   h1 {
-    @include font(120, 130);
+    @include font(80, 130);
   }
 
   h2 {
-    @include font(80, 100);
+    @include font(60, 100);
     margin-bottom: 70px;
   }
 
@@ -37,6 +37,18 @@
 
     &:hover {
       background-color: colors('yellow');
+    }
+  }
+}
+
+@include from-breakpoint('large') {
+  .hero {
+    h1 {
+      @include font(120, 130);
+    }
+
+    h2 {
+      @include font(80, 100);
     }
   }
 }

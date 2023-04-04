@@ -1,6 +1,9 @@
 @import '../../../styles/styles.scss';
 
 .stepper {
+  overflow-x: auto;
+  width: 100%;
+
   .icon {
     display: flex;
     justify-content: center;

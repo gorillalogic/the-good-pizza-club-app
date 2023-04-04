@@ -4,7 +4,7 @@ import styles from './Login.module.scss';
 
 const Welcome: React.FC = () => {
   return (
-    <section className={styles.login}>
+    <section className={`page ${styles.login}`}>
       <img
         src={BACKGROUND_IMAGES.desktop}
         alt=""
@@ -15,7 +15,7 @@ const Welcome: React.FC = () => {
         alt=""
         className={`${styles.background} ${styles['background--mobile']}`}
       />
-      <div className={styles.content}>
+      <div className={`page-section ${styles.content}`}>
         <Outlet />
       </div>
     </section>

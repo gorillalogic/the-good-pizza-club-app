@@ -40,7 +40,16 @@
 
   .actions {
     display: flex;
+    flex-direction: column;
     gap: 16px;
     justify-content: center;
+  }
+}
+
+@include from-breakpoint('large') {
+  .order-summary {
+    .actions {
+      flex-direction: row;
+    }
   }
 }

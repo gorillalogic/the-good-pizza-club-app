@@ -19,6 +19,11 @@ const Navbar: React.FC = () => {
     setShowMenu((prev) => !prev);
   };
 
+  const handleLogout = () => {
+    authCtx.logout();
+    toggleMenu();
+  };
+
   const listClasses = `${styles.list} ${
     !showMenu ? styles['list--hidden'] : ''
   }`;
@@ -26,7 +31,10 @@ const Navbar: React.FC = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>
-        <NavLink to={isLoggedIn ? '/home' : '/'}>
+        <NavLink
+          to={isLoggedIn ? '/home' : '/'}
+          onClick={() => setShowMenu(false)}
+        >
           <img src="images/logo.svg" alt="The Good Pizza Club Logo" />
         </NavLink>
         <IconButton className={styles.button} size="small" onClick={toggleMenu}>
@@ -41,6 +49,7 @@ const Navbar: React.FC = () => {
               className={({ isActive }) =>
                 isActive ? styles.active : undefined
               }
+              onClick={toggleMenu}
             >
               {item.label}
             </NavLink>
@@ -49,7 +58,7 @@ const Navbar: React.FC = () => {
         {isLoggedIn && (
           <>
             <li>
-              <a onClick={authCtx.logout}>Logout</a>
+              <a onClick={handleLogout}>Logout</a>
             </li>
             <li>
               <NavLink
@@ -57,6 +66,7 @@ const Navbar: React.FC = () => {
                 className={({ isActive }) =>
                   isActive ? styles.active : undefined
                 }
+                onClick={toggleMenu}
               >
                 {cartItems && (
                   <span className={styles.cartItems}>{cartItems}</span>
@@ -73,6 +83,7 @@ const Navbar: React.FC = () => {
               className={({ isActive }) =>
                 isActive ? styles.active : undefined
               }
+              onClick={toggleMenu}
             >
               Log in/Sign up
             </NavLink>
