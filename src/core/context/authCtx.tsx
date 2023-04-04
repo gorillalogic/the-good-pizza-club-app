@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { User } from '../../models/User';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { logoutAsync } from '../store/slices/auth/asyncThunks';
-import { getUser } from '../store/slices/auth/selectors';
+import authSelectors from '../store/slices/auth/selectors';
 import { resetCart } from '../store/slices/cart';
 
 interface AuthContext {
@@ -20,7 +20,7 @@ const authContext = createContext<AuthContext>({
 });
 
 const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const user = useSelector(getUser);
+  const user = useSelector(authSelectors.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

@@ -172,6 +172,38 @@ const theme = createTheme({
         },
       },
     },
+    MuiStepper: {
+      styleOverrides: {
+        root: {
+          color: '#f2f2f2',
+        },
+      },
+    },
+    MuiStepLabel: {
+      styleOverrides: {
+        label: {
+          color: '#f2f2f2',
+          '&.Mui-active, &.Mui-completed': {
+            color: '#f2c94c',
+          },
+        },
+      },
+    },
+    MuiStepConnector: {
+      styleOverrides: {
+        root: {
+          '&.Mui-active': {
+            '.MuiStepConnector-line': {
+              borderColor: '#f2c94c',
+            },
+          },
+        },
+        line: {
+          borderColor: '#4f4f4f',
+          borderWidth: '3px',
+        },
+      },
+    },
   },
 });
 

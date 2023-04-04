@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
-import { getLoggedIn } from '../../../core/store/slices/auth/selectors';
+import authSelectors from '../../../core/store/slices/auth/selectors';
 
 const ProtectedRoute: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const isLoggedIn = useSelector(getLoggedIn);
+  const isLoggedIn = useSelector(authSelectors.loggedIn);
 
   if (!isLoggedIn) {
     return <Navigate to="/" replace />;

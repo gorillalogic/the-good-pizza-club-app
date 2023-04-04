@@ -1,7 +1,10 @@
 import { Button } from '@mui/material';
 import { useContext } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { authContext } from '../../../../core/context/authCtx';
+import { useAppDispatch } from '../../../../core/hooks/useAppDispatch';
+import { placeOrder } from '../../../../core/store/slices/cart';
 import cartSelectors from '../../../../core/store/slices/cart/selectors';
 import { Address } from '../../../../models/Address';
 import { Payment } from '../../../../models/Payment';
@@ -21,6 +24,13 @@ interface Props {
 const OrderSummary: React.FC<Props> = ({ payment, address, onBack }) => {
   const authCtx = useContext(authContext);
   const cartTotals = useSelector(cartSelectors.totals);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const placeOrderHandler = () => {
+    dispatch(placeOrder());
+    navigate('order-placed', { replace: true });
+  };
 
   return (
     <div className={styles['order-summary']}>
@@ -69,7 +79,7 @@ const OrderSummary: React.FC<Props> = ({ payment, address, onBack }) => {
           variant="contained"
           color="error"
           className={styles.button}
-          onClick={onBack}
+          onClick={placeOrderHandler}
         >
           Place order
         </Button>

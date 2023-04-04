@@ -57,3 +57,22 @@ export enum RecordTypes {
   Appetizer = 'appetizer',
   Dessert = 'dessert',
 }
+
+export const CART_STEPS = [
+  {
+    icon: 'shopping_cart',
+    label: 'Order placed',
+  },
+  {
+    icon: 'local_pizza',
+    label: 'Order being prepared',
+  },
+  {
+    icon: 'directions_bike',
+    label: 'Your order is on its way',
+  },
+  {
+    icon: 'home',
+    label: "They're outside! Go!",
+  },
+];

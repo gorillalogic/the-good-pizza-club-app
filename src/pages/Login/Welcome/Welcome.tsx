@@ -2,12 +2,12 @@ import { Button } from '@mui/material';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { getLoggedIn } from '../../../core/store/slices/auth/selectors';
+import authSelectors from '../../../core/store/slices/auth/selectors';
 import styles from './Welcome.module.scss';
 
 const Landing: React.FC = () => {
   const navigate = useNavigate();
-  const isLoggedIn = useSelector(getLoggedIn);
+  const isLoggedIn = useSelector(authSelectors.loggedIn);
 
   useEffect(() => {
     if (isLoggedIn) {

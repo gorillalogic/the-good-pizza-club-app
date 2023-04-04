@@ -11,6 +11,7 @@ const cartSelectors = {
   }),
   selectPayment: (state: RootState) => state.cart.selectedPayment,
   selectAddress: (state: RootState) => state.cart.selectedAddress,
+  placed: (state: RootState) => state.cart.placed,
 };
 
 export default cartSelectors;

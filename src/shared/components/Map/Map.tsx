@@ -4,10 +4,11 @@ import styles from './Map.module.scss';
 
 interface Props {
   options: MapOptions;
+  className?: string;
   markers?: { lat: number; lng: number }[];
 }
 
-const Map: React.FC<Props> = ({ options, markers }) => {
+const Map: React.FC<Props> = ({ options, markers, className = '' }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const Map: React.FC<Props> = ({ options, markers }) => {
     }
   }, [mapRef, options, markers]);
 
-  return <div className={styles.map} ref={mapRef}></div>;
+  return <div className={`${styles.map} ${className}`} ref={mapRef}></div>;
 };
 
 export default Map;

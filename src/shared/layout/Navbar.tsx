@@ -3,15 +3,16 @@ import { useContext, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { authContext } from '../../core/context/authCtx';
-import { getLoggedIn } from '../../core/store/slices/auth/selectors';
+import authSelectors from '../../core/store/slices/auth/selectors';
 import cartSelectors from '../../core/store/slices/cart/selectors';
 import { NAVBAR_ITEMS } from '../constants/global.constants';
 import styles from './Navbar.module.scss';
 
 const Navbar: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
-  const isLoggedIn = useSelector(getLoggedIn);
+  const isLoggedIn = useSelector(authSelectors.loggedIn);
   const cartItems = useSelector(cartSelectors.totalItems);
+  const isOrderPlaced = useSelector(cartSelectors.placed);
   const authCtx = useContext(authContext);
 
   const toggleMenu = () => {
@@ -52,7 +53,7 @@ const Navbar: React.FC = () => {
             </li>
             <li>
               <NavLink
-                to="/cart"
+                to={`${isOrderPlaced ? '/cart/order-placed' : '/cart'}`}
                 className={({ isActive }) =>
                   isActive ? styles.active : undefined
                 }

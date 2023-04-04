@@ -1,5 +1,5 @@
 import { Button, CircularProgress } from '@mui/material';
-import { useCallback, useContext } from 'react';
+import { useCallback, useContext, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import CustomizeDialogCtx from '../../core/context/customizeDialogCtx';
 import { useAppDispatch } from '../../core/hooks/useAppDispatch';
@@ -22,6 +22,7 @@ import { PROMOTION_DISCLAIMER } from '../../shared/constants/global.constants';
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
+  const sectionRef = useRef<HTMLDivElement>(null);
   const products = useSelector(productsSelector);
   const promotions = useSelector(promotionsSelector);
   const customizeDialogCtx = useContext(CustomizeDialogCtx);
@@ -57,7 +58,7 @@ const Home: React.FC = () => {
   return (
     <>
       <section className="page">
-        <Hero image="images/home_background.png">
+        <Hero image="images/home_background.png" refToScroll={sectionRef}>
           <h1>Pizza?</h1>
           <h2>Gotcha!</h2>
           <Button
@@ -81,7 +82,7 @@ const Home: React.FC = () => {
         )}
         {!loading && !error && (
           <>
-            <section className="page-section">
+            <section className="page-section" ref={sectionRef}>
               <h3>Promotions of the day</h3>
               {promotions.length > 0 &&
                 promotions.map((promotion, index) => (

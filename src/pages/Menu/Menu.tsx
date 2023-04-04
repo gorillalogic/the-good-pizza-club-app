@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { useCallback, useContext } from 'react';
+import { useCallback, useContext, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import CustomizeDialogCtx from '../../core/context/customizeDialogCtx';
 import { useAppDispatch } from '../../core/hooks/useAppDispatch';
@@ -19,6 +19,7 @@ import styles from './Menu.module.scss';
 
 const Menu: React.FC = () => {
   const dispatch = useAppDispatch();
+  const sectionRef = useRef<HTMLDivElement>(null);
   const customizeDialogCtx = useContext(CustomizeDialogCtx);
   const products = useSelector(productsSelector);
   const promotions = useSelector(promotionsSelector);
@@ -44,10 +45,10 @@ const Menu: React.FC = () => {
 
   return (
     <section className={`page ${styles.menu}`}>
-      <Hero image="images/menu_background.png">
+      <Hero image="images/menu_background.png" refToScroll={sectionRef}>
         <h1>OUR MOST BELOVED MENU</h1>
       </Hero>
-      <section className="page-section">
+      <section className="page-section" ref={sectionRef}>
         <h3>Our repertoire</h3>
         <div className={styles.products}>
           {products.map((product) => (

@@ -24,4 +24,5 @@ export interface Cart {
   totalTaxes: number;
   selectedPayment: Payment | null;
   selectedAddress: Address | null;
+  placed: boolean;
 }

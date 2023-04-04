@@ -14,6 +14,7 @@ const initialState: Cart = {
   totalTaxes: 0,
   selectedPayment: null,
   selectedAddress: null,
+  placed: false,
 };
 
 function calculateTotals(items: CartItem[], taxes: number, delivery: number) {
@@ -135,6 +136,9 @@ const cartSlice = createSlice({
     selectAddress: (state, action: PayloadAction<Address>) => {
       state.selectedAddress = action.payload;
     },
+    placeOrder: (state) => {
+      state.placed = true;
+    },
     resetCart: () => {
       return initialState;
     },
@@ -148,5 +152,6 @@ export const {
   updateProductQuantity,
   selectAddress,
   selectPayment,
+  placeOrder,
   resetCart,
 } = cartSlice.actions;

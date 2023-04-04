@@ -1,0 +1,32 @@
+@import '../../../styles/styles.scss';
+
+.order-placed {
+  .title {
+    color: colors('yellow');
+    margin-bottom: 30px;
+  }
+
+  .label {
+    @include font(12, 16);
+  }
+
+  .stepper {
+    margin: 36px 0;
+  }
+
+  .map {
+    margin-bottom: 24px;
+  }
+
+  .link {
+    color: colors('yellow');
+    text-decoration: underline;
+    margin: 0 12px;
+  }
+
+  .icon {
+    @include font(20, 22);
+    vertical-align: middle;
+    margin: 0 12px;
+  }
+}
