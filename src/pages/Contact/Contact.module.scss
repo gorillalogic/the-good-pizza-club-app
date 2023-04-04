@@ -1,13 +1,27 @@
 @import '../../styles/styles.scss';
 
-.form {
+.wrapper {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 400px;
-  gap: 16px;
+  align-items: center;
+  gap: 24px;
 
   h2 {
     color: colors('yellow');
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+    max-width: 500px;
+  }
+}
+
+@include from-breakpoint('large') {
+  .wrapper {
+    flex-direction: row;
+    gap: 48px;
   }
 }

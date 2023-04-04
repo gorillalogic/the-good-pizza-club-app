@@ -12,19 +12,23 @@ const Contact: React.FC = () => {
         <h1>Contact</h1>
       </Hero>
       <section className="page-section" ref={ref}>
-        <form className={styles.form}>
-          <h2>Reach out to us!</h2>
-          <p>
-            Got a question about The Good Pizza Club? Please send us a message
-            and we will text you asap.{' '}
-          </p>
-          <TextField placeholder="Name" name="name" type="text" />
-          <TextField placeholder="Your email" name="name" type="email" />
-          <TextField multiline placeholder="Message" type="text" rows={3} />
-          <Button variant="contained" color="error">
-            Send
-          </Button>
-        </form>
+        <div className={styles.wrapper}>
+          <div>
+            <h2>Reach out to us!</h2>
+            <p>
+              Got a question about The Good Pizza Club? Please send us a message
+              and we will text you asap.{' '}
+            </p>
+          </div>
+          <form className={styles.form}>
+            <TextField placeholder="Name" name="name" type="text" />
+            <TextField placeholder="Your email" name="name" type="email" />
+            <TextField multiline placeholder="Message" type="text" rows={3} />
+            <Button variant="contained" color="error">
+              Send
+            </Button>
+          </form>
+        </div>
       </section>
     </section>
   );
