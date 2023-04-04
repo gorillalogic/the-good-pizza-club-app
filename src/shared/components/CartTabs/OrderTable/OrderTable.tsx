@@ -55,60 +55,76 @@ const OrderTable: React.FC<{ hideActions?: boolean }> = ({ hideActions }) => {
 
   return (
     <>
-      <Table className={styles.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell align="center" sx={{ width: 100 }}>
-              Quantity
-            </TableCell>
-            <TableCell align="left">Product</TableCell>
-            <TableCell align="right">Price</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {cartItems.length === 0 && (
+      <div className={styles['table-wrapper']}>
+        <Table className={styles.table}>
+          <TableHead>
             <TableRow>
-              <TableCell colSpan={3}>
-                <p>No products in your cart</p>
+              <TableCell align="center" sx={{ width: 100 }}>
+                Quantity
               </TableCell>
+              <TableCell align="left">Product</TableCell>
+              <TableCell align="right">Price</TableCell>
             </TableRow>
-          )}
-          {cartItems.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>
-                <Counter
-                  initialValue={item.quantity}
-                  minValue={1}
-                  onChange={(value) => counterChangeHander(item, value)}
-                />
-              </TableCell>
-              <TableCell align="left" className={styles.cell}>
-                <div>
-                  <span>
-                    {item.product ? item.product.name : 'Custom'} (
-                    {item.size.name})
-                  </span>
-                  <button className={styles.customize}>Customize</button>
-                </div>
-                {item.promotion && (
-                  <div className={styles.discount}>{item.promotion.name}</div>
-                )}
-              </TableCell>
-              <TableCell align="right">
-                {currencyFormat(item.subtotal || 0)}
-              </TableCell>
-              <TableCell>
-                <button
-                  className={styles.delete}
-                  onClick={() => openModalHandler(item.id)}
-                >
-                  <Icon>delete</Icon>
-                </button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {cartItems.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={3}>
+                  <p>No products in your cart</p>
+                </TableCell>
+              </TableRow>
+            )}
+            {cartItems.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>
+                  <Counter
+                    initialValue={item.quantity}
+                    minValue={1}
+                    onChange={(value) => counterChangeHander(item, value)}
+                  />
+                </TableCell>
+                <TableCell align="left" className={styles.cell}>
+                  <div className={styles['product-name']}>
+                    <span>
+                      {item.product ? item.product.name : 'Custom'} (
+                      {item.size.name})
+                    </span>
+                  </div>
+                  {item.promotion && (
+                    <div className={styles.discount}>{item.promotion.name}</div>
+                  )}
+                  {item.extras && item.extras.length > 0 && (
+                    <div className={styles.extras}>
+                      <label className={styles.customize}>Extras</label>
+                      {item.extras.map((extra) => (
+                        <div key={extra.id} className={styles['extras-item']}>
+                          <span>
+                            {extra.quantity} {extra.name}
+                          </span>
+                          <span>
+                            {currencyFormat(extra.price * extra.quantity)}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </TableCell>
+                <TableCell align="right">
+                  {currencyFormat(item.subtotal || 0)}
+                </TableCell>
+                <TableCell>
+                  <button
+                    className={styles.delete}
+                    onClick={() => openModalHandler(item.id)}
+                  >
+                    <Icon>delete</Icon>
+                  </button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
       {!hideActions && (
         <div className={styles.actions}>
           <Button

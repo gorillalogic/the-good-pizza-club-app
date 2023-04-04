@@ -1,5 +1,9 @@
 @import '../../../../styles/styles.scss';
 
+.table-wrapper {
+  overflow: auto;
+}
+
 .table {
   .cell {
     display: flex;
@@ -36,6 +40,18 @@
 
   p {
     text-align: center;
+  }
+
+  .product-name {
+    display: flex;
+    align-items: center;
+  }
+
+  .extras-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 150px;
   }
 }
 
