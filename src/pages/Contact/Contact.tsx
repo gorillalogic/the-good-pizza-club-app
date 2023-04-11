@@ -20,7 +20,7 @@ const Contact: React.FC = () => {
               and we will text you asap.{' '}
             </p>
           </div>
-          <form className={styles.form}>
+          <form className={styles.form} role="form">
             <TextField placeholder="Name" name="name" type="text" />
             <TextField placeholder="Your email" name="name" type="email" />
             <TextField multiline placeholder="Message" type="text" rows={3} />

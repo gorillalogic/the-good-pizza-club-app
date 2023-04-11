@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import Login from './Login';
 
-describe('LoginComponent', () => {
+describe('LoginPage', () => {
   beforeEach(() => {
     render(<Login />);
   });
@@ -10,5 +10,10 @@ describe('LoginComponent', () => {
     const result = screen.getAllByRole('img');
     expect(result).toBeDefined();
     expect(result.length).toBeGreaterThan(0);
+  });
+
+  it('should render content div', () => {
+    const result = screen.getByTestId('page-content');
+    expect(result).toBeDefined();
   });
 });

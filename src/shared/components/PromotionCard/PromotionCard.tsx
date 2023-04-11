@@ -30,7 +30,7 @@ const PromotionCard: React.FC<Props> = ({
     }`;
 
   return (
-    <div className={classes} style={style}>
+    <div className={classes} style={style} data-testid="promotion-card">
       <div className={styles.content}>
         <span className={styles.title}>{promotion.name}</span>
         <span className={styles.subtitle}>{promotion.product.name}</span>

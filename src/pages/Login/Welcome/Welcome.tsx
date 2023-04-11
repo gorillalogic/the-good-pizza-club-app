@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import authSelectors from '../../../core/store/slices/auth/selectors';
 import styles from './Welcome.module.scss';
 
-const Landing: React.FC = () => {
+const Welcome: React.FC = () => {
   const navigate = useNavigate();
   const isLoggedIn = useSelector(authSelectors.loggedIn);
 
@@ -35,4 +35,4 @@ const Landing: React.FC = () => {
   );
 };
 
-export default Landing;
+export default Welcome;

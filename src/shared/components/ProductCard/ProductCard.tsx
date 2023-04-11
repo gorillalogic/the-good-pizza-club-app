@@ -12,7 +12,7 @@ const ProductCard: React.FC<Props> = ({ product, onClick }) => {
   const classes = [styles.card, styles[`card--${product.color}`]].join(' ');
 
   return (
-    <div className={classes}>
+    <div className={classes} data-testid="product-card">
       <img src={product.image} alt="" className={styles.image} />
       <span className={styles.title}>{product.name}</span>
       <div className={styles.info}>

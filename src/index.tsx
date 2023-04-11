@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 import { initMapLoader } from './core/lib/maps';
-import store from './core/store/store';
+import setupStore from './core/store/store';
 import theme from './core/theme/theme';
 import './index.scss';
 import router from './router';
@@ -14,6 +14,8 @@ import router from './router';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const store = setupStore();
 
 initMapLoader();
 
