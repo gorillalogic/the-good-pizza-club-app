@@ -15,7 +15,7 @@ import LoginForm from './shared/components/LoginForm/LoginForm';
 import ProtectedRoute from './shared/components/ProtectedRoute/ProtectedRoute';
 import RegisterForm from './shared/components/RegisterForm/RegisterForm';
 
-const router = createBrowserRouter([
+const routes = [
   {
     path: '/',
     element: <App />,
@@ -97,6 +97,9 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+];
+
+const router = createBrowserRouter(routes);
 
 export default router;
+export { routes };

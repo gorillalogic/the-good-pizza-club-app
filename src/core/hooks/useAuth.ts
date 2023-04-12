@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { COOKIE_SESSION_NAME, LOCALSTORAGE_KEYS } from '../../shared/constants/global.constants';
+import {
+  COOKIE_SESSION_NAME,
+  LOCALSTORAGE_KEYS,
+} from '../../shared/constants/global.constants';
 import { setUser } from '../store/slices/auth';
 import { useAppDispatch } from './useAppDispatch';
 

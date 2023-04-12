@@ -1,37 +1,30 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { CustomizeDialogProvider } from '../../core/context/customizeDialogCtx';
-import { AppStore } from '../../core/store/store';
 import { PRODUCTS } from '../../mocks/products';
 import { PROMOTIONS } from '../../mocks/promotions';
 import { RECORDS } from '../../mocks/records';
 import { renderWithProviders } from '../../shared/utils/test';
-import Menu from './Menu';
 
 describe('MenuPage', () => {
-  let store: AppStore;
-
   beforeEach(async () => {
-    const { store: appStore } = renderWithProviders(
-      <CustomizeDialogProvider>
-        <Menu />
-      </CustomizeDialogProvider>,
-      {
-        preloadedState: {
-          products: {
-            products: PRODUCTS,
-          },
-          promotions: {
-            promotions: PROMOTIONS,
-          },
-          records: {
-            records: RECORDS,
-          },
+    renderWithProviders({
+      route: '/menu',
+      preloadedState: {
+        auth: {
+          isLoggedIn: true,
+          user: null,
         },
-      }
-    );
-
-    store = appStore;
+        products: {
+          products: PRODUCTS,
+        },
+        promotions: {
+          promotions: PROMOTIONS,
+        },
+        records: {
+          records: RECORDS,
+        },
+      },
+    });
     await act(() => Promise.resolve());
   });
 
@@ -48,9 +41,9 @@ describe('MenuPage', () => {
     const button = promotionEl.querySelector('button') as Element;
 
     userEvent.click(button);
-    const state = store.getState();
 
-    expect(state.cart.items.length).toBeGreaterThan(0);
+    const cartItemsEl = screen.queryByTestId('cart-items');
+    expect(cartItemsEl).toBeInTheDocument();
   });
 
   it('should open customize dialog on product click', () => {
@@ -58,8 +51,8 @@ describe('MenuPage', () => {
     const button = productEl.querySelector('button') as Element;
 
     userEvent.click(button);
-    const dialog = screen.getByRole('dialog');
 
+    const dialog = screen.getByRole('dialog');
     expect(dialog).toBeInTheDocument();
   });
 });

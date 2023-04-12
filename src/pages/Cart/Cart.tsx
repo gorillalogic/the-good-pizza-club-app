@@ -24,7 +24,7 @@ const Cart: React.FC = () => {
         <h1>WE’RE FAST!</h1>
         <h2>Well, sorta.</h2>
       </Hero>
-      <section className="page-section" ref={ref}>
+      <section className="page-section" data-testid="main-section" ref={ref}>
         <Outlet />
       </section>
       <section className={`page-section ${styles.section}`}>

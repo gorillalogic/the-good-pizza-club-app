@@ -1,17 +1,9 @@
 import { screen } from '@testing-library/react';
 import { renderWithProviders } from '../../../shared/utils/test';
-import Welcome from './Welcome';
-
-const mockedUsedNavigate = jest.fn();
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockedUsedNavigate,
-}));
 
 describe('WelcomePage', () => {
   it('should render Welcome page', () => {
-    renderWithProviders(<Welcome />);
+    renderWithProviders();
 
     const title = screen.getByText('WELCOME!');
     const subtitle = screen.getByText('Make yourself at home');
@@ -25,7 +17,7 @@ describe('WelcomePage', () => {
   });
 
   it('should navigate to home page if user is logged in', () => {
-    renderWithProviders(<Welcome />, {
+    renderWithProviders({
       preloadedState: {
         auth: {
           isLoggedIn: true,
@@ -34,6 +26,7 @@ describe('WelcomePage', () => {
       },
     });
 
-    expect(mockedUsedNavigate).toHaveBeenCalledWith('/home', { replace: true });
+    const title = screen.getByText('Pizza?');
+    expect(title).toBeInTheDocument();
   });
 });

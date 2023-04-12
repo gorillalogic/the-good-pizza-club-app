@@ -65,8 +65,8 @@
       "!<rootDir>/node_modules/",
       "!<rootDir>/src/**/*.d.ts",
       "!<rootDir>/src/models/*",
-      "!<rootDir>/src/index.tsx",
-      "!<rootDir>/src/router.tsx"
+      "!<rootDir>/src/mocks/*",
+      "!<rootDir>/src/index.tsx"
     ],
     "coverageThreshold": {
       "global": {

@@ -69,7 +69,9 @@ const Navbar: React.FC = () => {
                 onClick={toggleMenu}
               >
                 {cartItems && (
-                  <span className={styles.cartItems}>{cartItems}</span>
+                  <span className={styles.cartItems} data-testid="cart-items">
+                    {cartItems}
+                  </span>
                 )}
                 <Icon>shopping_cart</Icon>
               </NavLink>
