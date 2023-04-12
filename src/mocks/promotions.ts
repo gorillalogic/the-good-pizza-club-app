@@ -1,4 +1,4 @@
-export const PROMOTIONS = [
+export const MOCK_PROMOTIONS = [
   {
     id: 0,
     name: '2x1 Fridays',

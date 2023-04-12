@@ -79,7 +79,7 @@ export function renderWithProviders({
   };
 }
 
-export function setupHttpMocks(handlers: RequestHandler[]) {
+export function setupHttpMocks(handlers: RequestHandler[] = []) {
   const server = setupServer(...handlers);
 
   // Enable API mocking before tests.
@@ -90,4 +90,6 @@ export function setupHttpMocks(handlers: RequestHandler[]) {
 
   // Disable API mocking after the tests are done.
   afterAll(() => server.close());
+
+  return server;
 }

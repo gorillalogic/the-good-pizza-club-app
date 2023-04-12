@@ -1,4 +1,4 @@
-export const RECORDS = [
+export const MOCK_RECORDS = [
   {
     id: 0,
     name: 'Small 7”',

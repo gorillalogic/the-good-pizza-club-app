@@ -39,13 +39,18 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit(onSubmit)}
+      data-testid="login-form"
+    >
       <h2 className={styles['form-title']}>Welcome back!</h2>
       <div className={styles['form-group']}>
         <label htmlFor="email">Email</label>
         <TextField
           id="email"
           type="text"
+          inputProps={{ role: 'input' }}
           {...register('email', { pattern: EMAIL_PATTERN, required: true })}
         />
         {errors?.email?.type === 'required' && (
@@ -60,6 +65,7 @@ const LoginForm: React.FC = () => {
         <TextField
           id="password"
           type="password"
+          inputProps={{ role: 'input' }}
           {...register('password', { required: true })}
         />
         {errors?.password?.type === 'required' && (

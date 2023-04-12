@@ -35,19 +35,23 @@ const Checkout: React.FC = () => {
   }
 
   if (error) {
-    content = <p>Error loading data...</p>;
+    content = <p data-testid="error">Error loading data...</p>;
   }
 
   if (data) {
     content = (
-      <div className={styles.content} ref={ref}>
+      <div data-testid="content" className={styles.content} ref={ref}>
         <CartTabs selectedTab={selectedTab} onChange={tabChangeHandler} />
         <CartSummary selectedTab={selectedTab} onClick={nextClickHandler} />
       </div>
     );
   }
 
-  return <div className={styles.checkout}>{content}</div>;
+  return (
+    <div data-testid="checkout" className={styles.checkout}>
+      {content}
+    </div>
+  );
 };
 
 export default Checkout;

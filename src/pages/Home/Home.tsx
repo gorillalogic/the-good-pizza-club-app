@@ -57,7 +57,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <section className="page">
+      <section className="page" data-testid="home-page">
         <Hero image="images/home_background.png" refToScroll={sectionRef}>
           <h1>Pizza?</h1>
           <h2>Gotcha!</h2>

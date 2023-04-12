@@ -1,8 +1,8 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { PRODUCTS } from '../../mocks/products';
-import { PROMOTIONS } from '../../mocks/promotions';
-import { RECORDS } from '../../mocks/records';
+import { MOCK_PRODUCTS } from '../../mocks/products';
+import { MOCK_PROMOTIONS } from '../../mocks/promotions';
+import { MOCK_RECORDS } from '../../mocks/records';
 import { renderWithProviders } from '../../shared/utils/test';
 
 describe('MenuPage', () => {
@@ -15,13 +15,13 @@ describe('MenuPage', () => {
           user: null,
         },
         products: {
-          products: PRODUCTS,
+          products: MOCK_PRODUCTS,
         },
         promotions: {
-          promotions: PROMOTIONS,
+          promotions: MOCK_PROMOTIONS,
         },
         records: {
-          records: RECORDS,
+          records: MOCK_RECORDS,
         },
       },
     });

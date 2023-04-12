@@ -26,7 +26,7 @@ describe('WelcomePage', () => {
       },
     });
 
-    const title = screen.getByText('Pizza?');
-    expect(title).toBeInTheDocument();
+    const homePageEl = screen.getByTestId('home-page');
+    expect(homePageEl).toBeInTheDocument();
   });
 });

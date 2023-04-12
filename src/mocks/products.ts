@@ -1,4 +1,4 @@
-export const PRODUCTS = [
+export const MOCK_PRODUCTS = [
   {
     id: 0,
     name: 'Egg & Basil',

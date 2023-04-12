@@ -2,16 +2,16 @@ import { screen } from '@testing-library/dom';
 import { act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
-import { PRODUCTS } from '../../mocks/products';
-import { PROMOTIONS } from '../../mocks/promotions';
-import { RECORDS } from '../../mocks/records';
+import { MOCK_PRODUCTS } from '../../mocks/products';
+import { MOCK_PROMOTIONS } from '../../mocks/promotions';
+import { MOCK_RECORDS } from '../../mocks/records';
 import { renderWithProviders, setupHttpMocks } from '../../shared/utils/test';
 
 describe('HomePage', () => {
   const handlers = [
-    rest.get('/products', (req, res, ctx) => res(ctx.json(PRODUCTS))),
-    rest.get('/promotions', (req, res, ctx) => res(ctx.json(PROMOTIONS))),
-    rest.get('/records', (req, res, ctx) => res(ctx.json(RECORDS))),
+    rest.get('/products', (_, res, ctx) => res(ctx.json(MOCK_PRODUCTS))),
+    rest.get('/promotions', (_, res, ctx) => res(ctx.json(MOCK_PROMOTIONS))),
+    rest.get('/records', (_, res, ctx) => res(ctx.json(MOCK_RECORDS))),
   ];
 
   setupHttpMocks(handlers);
@@ -30,8 +30,8 @@ describe('HomePage', () => {
   });
 
   it('should render Home page', () => {
-    const title = screen.getByText('Pizza?');
-    expect(title).toBeInTheDocument();
+    const homePageEl = screen.getByTestId('home-page');
+    expect(homePageEl).toBeInTheDocument();
   });
 
   it('should add product to cart on promotion click', () => {

@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import { User } from '../../../../models/User';
 import { loginAsync, logoutAsync, registerAsync } from './asyncThunks';
 
-interface InitialState {
+export interface AuthState {
   isLoggedIn: boolean;
   user: Partial<User> | null;
 }
 
-const initialState: InitialState = {
+const initialState: AuthState = {
   isLoggedIn: false,
   user: null,
 };
