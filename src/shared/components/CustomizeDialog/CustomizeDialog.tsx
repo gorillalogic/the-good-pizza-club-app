@@ -10,11 +10,12 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useThunkDispatch } from '../../../core/hooks/useThunkDispatch';
+import { useAppDispatch } from '../../../core/hooks/useAppDispatch';
 import { fetchRecords } from '../../../core/store/slices/records/asyncThunks';
 import { recordsSelector } from '../../../core/store/slices/records/selectors';
+import { HttpError } from '../../../models/Error';
 import { RecordTypes } from '../../constants/global.constants';
 import Additions from './Additions/Additions';
 import styles from './CustomizeDialog.module.scss';
@@ -40,11 +41,25 @@ const CustomizeDialog: React.FC<Props> = ({
   onConfirm,
 }) => {
   const theme = useTheme();
+  const reduxDispatch = useAppDispatch();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [state, dispatch] = useReducer(selectedElementsReducer, initialState);
-
   const records = useSelector(recordsSelector);
-  const { loading, error } = useThunkDispatch(fetchRecords());
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<HttpError>();
+
+  useEffect(() => {
+    if (open && !records.length) {
+      try {
+        setLoading(true);
+        reduxDispatch(fetchRecords());
+      } catch (error) {
+        setError(error as HttpError);
+      } finally {
+        setLoading(false);
+      }
+    }
+  }, [open]);
 
   let content: React.ReactNode;
 
