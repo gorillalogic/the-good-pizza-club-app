@@ -59,7 +59,7 @@ const CustomizeDialog: React.FC<Props> = ({
         setLoading(false);
       }
     }
-  }, [open]);
+  }, [open, records]);
 
   let content: React.ReactNode;
 
@@ -128,7 +128,12 @@ const CustomizeDialog: React.FC<Props> = ({
       <DialogContent>
         <div className={styles.content}>
           {error && <p className={styles.error}>Error loading data...</p>}
-          {loading && <CircularProgress color="primary" />}
+          {loading && (
+            <CircularProgress
+              data-testid="customize-dialog-loader"
+              color="primary"
+            />
+          )}
           {!loading && !error && content}
         </div>
       </DialogContent>

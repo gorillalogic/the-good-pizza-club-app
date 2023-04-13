@@ -1,4 +1,4 @@
-import { act, screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MOCK_PRODUCTS } from '../../mocks/products';
 import { MOCK_PROMOTIONS } from '../../mocks/promotions';
@@ -6,7 +6,7 @@ import { MOCK_RECORDS } from '../../mocks/records';
 import { renderWithProviders } from '../../shared/utils/test';
 
 describe('MenuPage', () => {
-  beforeEach(async () => {
+  beforeEach(() => {
     renderWithProviders({
       route: '/menu',
       preloadedState: {
@@ -25,7 +25,6 @@ describe('MenuPage', () => {
         },
       },
     });
-    await act(() => Promise.resolve());
   });
 
   it('should render Menu page', () => {
@@ -42,8 +41,10 @@ describe('MenuPage', () => {
 
     userEvent.click(button);
 
-    const cartItemsEl = screen.queryByTestId('cart-items');
-    expect(cartItemsEl).toBeInTheDocument();
+    waitFor(() => {
+      const cartItemsEl = screen.queryByTestId('cart-items');
+      expect(cartItemsEl).toBeInTheDocument();
+    });
   });
 
   it('should open customize dialog on product click', () => {
@@ -52,7 +53,9 @@ describe('MenuPage', () => {
 
     userEvent.click(button);
 
-    const dialog = screen.getByRole('dialog');
-    expect(dialog).toBeInTheDocument();
+    waitFor(() => {
+      const dialog = screen.getByRole('dialog');
+      expect(dialog).toBeInTheDocument();
+    });
   });
 });

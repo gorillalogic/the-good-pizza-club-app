@@ -1,4 +1,4 @@
-import { act, screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MOCK_USER } from '../../../mocks/auth';
@@ -18,12 +18,10 @@ describe('RegisterFormComponent', () => {
 
     setupHttpMocks(handlers);
 
-    beforeEach(async () => {
+    beforeEach(() => {
       renderWithProviders({
         route: '/register',
       });
-
-      await act(() => Promise.resolve());
     });
 
     it('should render register form', () => {
@@ -36,20 +34,16 @@ describe('RegisterFormComponent', () => {
         screen.getAllByRole('input');
       const submitButton = screen.getByText('Sign up');
 
-      await act(
-        () =>
-          new Promise<void>((resolve) => {
-            userEvent.type(emailInputEl, 'test@test.com');
-            userEvent.type(passInputEl, '1234');
-            userEvent.type(nameInputEl, 'test');
-            userEvent.type(phoneInputEl, '+1111');
-            userEvent.click(submitButton);
-            resolve();
-          })
-      );
+      userEvent.type(emailInputEl, 'test@test.com');
+      userEvent.type(passInputEl, '1234');
+      userEvent.type(nameInputEl, 'test');
+      userEvent.type(phoneInputEl, '+1111');
+      userEvent.click(submitButton);
 
-      const homePageEl = screen.getByTestId('home-page');
-      expect(homePageEl).toBeInTheDocument();
+      waitFor(() => {
+        const homePageEl = screen.getByTestId('home-page');
+        expect(homePageEl).toBeInTheDocument();
+      });
     });
   });
 
@@ -60,12 +54,10 @@ describe('RegisterFormComponent', () => {
 
     setupHttpMocks(handlers);
 
-    beforeEach(async () => {
+    beforeEach(() => {
       renderWithProviders({
         route: '/register',
       });
-
-      await act(() => Promise.resolve());
     });
 
     it('should display snackbar on register error', async () => {
@@ -73,20 +65,16 @@ describe('RegisterFormComponent', () => {
         screen.getAllByRole('input');
       const submitButton = screen.getByText('Sign up');
 
-      await act(
-        () =>
-          new Promise<void>((resolve) => {
-            userEvent.type(emailInputEl, 'test@test.com');
-            userEvent.type(passInputEl, '1234');
-            userEvent.type(nameInputEl, 'test');
-            userEvent.type(phoneInputEl, '+1111');
-            userEvent.click(submitButton);
-            resolve();
-          })
-      );
+      userEvent.type(emailInputEl, 'test@test.com');
+      userEvent.type(passInputEl, '1234');
+      userEvent.type(nameInputEl, 'test');
+      userEvent.type(phoneInputEl, '+1111');
+      userEvent.click(submitButton);
 
-      const snackbarEl = screen.getByTestId('snackbar');
-      expect(snackbarEl).toBeInTheDocument();
+      waitFor(() => {
+        const snackbarEl = screen.getByTestId('snackbar');
+        expect(snackbarEl).toBeInTheDocument();
+      });
     });
   });
 });

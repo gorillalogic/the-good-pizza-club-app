@@ -1,4 +1,8 @@
-import { act, screen } from '@testing-library/react';
+import {
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MOCK_ADDRESSES } from '../../../mocks/addresses';
@@ -42,7 +46,7 @@ describe('CheckoutPage', () => {
 
     beforeEach(async () => {
       renderWithProviders(renderOptions);
-      await act(() => Promise.resolve());
+      await waitForElementToBeRemoved(screen.getByTestId('loader'));
     });
 
     it('should render Checkout page', () => {
@@ -53,10 +57,10 @@ describe('CheckoutPage', () => {
     it('should move to Address tab on Next Step button click', () => {
       const nextButton = screen.getByText('Next Step');
 
-      act(() => userEvent.click(nextButton));
+      userEvent.click(nextButton);
 
       const addressesTitle = screen.getByText('Your addresses');
-      expect(addressesTitle).toBeInTheDocument();
+      waitFor(() => expect(addressesTitle).toBeInTheDocument());
     });
   });
 
@@ -70,7 +74,7 @@ describe('CheckoutPage', () => {
 
     beforeEach(async () => {
       renderWithProviders(renderOptions);
-      await act(() => Promise.resolve());
+      await waitForElementToBeRemoved(screen.getByTestId('loader'));
     });
 
     it('should render error content', () => {

@@ -1,7 +1,7 @@
-import { HttpError } from '../../models/Error';
-import { useEffect, useState } from 'react';
-import { useAppDispatch } from './useAppDispatch';
 import { AsyncThunkAction, Dispatch } from '@reduxjs/toolkit';
+import { useEffect, useState } from 'react';
+import { HttpError } from '../../models/Error';
+import { useAppDispatch } from './useAppDispatch';
 
 interface AsyncThunkConfig {
   /** return type for `thunkApi.getState` */

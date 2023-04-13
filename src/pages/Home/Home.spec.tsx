@@ -1,5 +1,8 @@
-import { screen } from '@testing-library/dom';
-import { act } from '@testing-library/react';
+import {
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MOCK_PRODUCTS } from '../../mocks/products';
@@ -26,7 +29,8 @@ describe('HomePage', () => {
         },
       },
     });
-    await act(() => Promise.resolve());
+
+    await waitForElementToBeRemoved(screen.getByTestId('loader'));
   });
 
   it('should render Home page', () => {
@@ -50,8 +54,11 @@ describe('HomePage', () => {
 
     userEvent.click(button);
 
-    const dialog = screen.getByRole('dialog');
-    expect(dialog).toBeInTheDocument();
+    waitFor(() => {
+      const dialog = screen.getByRole('dialog');
+      expect(dialog).toBeInTheDocument();
+      waitForElementToBeRemoved(screen.getByTestId('customize-dialog-loader'));
+    });
   });
 
   it('should open customize dialog', () => {
@@ -59,7 +66,10 @@ describe('HomePage', () => {
 
     userEvent.click(openDialogButton);
 
-    const dialog = screen.getByRole('dialog');
-    expect(dialog).toBeInTheDocument();
+    waitFor(() => {
+      const dialog = screen.getByRole('dialog');
+      expect(dialog).toBeInTheDocument();
+      waitForElementToBeRemoved(screen.getByTestId('customize-dialog-loader'));
+    });
   });
 });

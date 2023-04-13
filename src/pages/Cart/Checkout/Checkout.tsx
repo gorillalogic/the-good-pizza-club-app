@@ -31,7 +31,7 @@ const Checkout: React.FC = () => {
   let content: React.ReactNode;
 
   if (loading) {
-    content = <CircularProgress color="primary" />;
+    content = <CircularProgress data-testid="loader" color="primary" />;
   }
 
   if (error) {

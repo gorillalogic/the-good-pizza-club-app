@@ -77,7 +77,7 @@ const Home: React.FC = () => {
         )}
         {loading && (
           <section className="page-section">
-            <CircularProgress color="primary" />
+            <CircularProgress data-testid="loader" color="primary" />
           </section>
         )}
         {!loading && !error && (

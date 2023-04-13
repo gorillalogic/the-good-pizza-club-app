@@ -1,4 +1,4 @@
-import { act, screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MOCK_USER } from '../../../mocks/auth';
@@ -18,12 +18,10 @@ describe('LoginFormComponent', () => {
 
     setupHttpMocks(handlers);
 
-    beforeEach(async () => {
+    beforeEach(() => {
       renderWithProviders({
         route: '/login',
       });
-
-      await act(() => Promise.resolve());
     });
 
     it('should render login form', () => {
@@ -35,18 +33,14 @@ describe('LoginFormComponent', () => {
       const [emailInputEl, passInputEl] = screen.getAllByRole('input');
       const submitButton = screen.getByText('Log in');
 
-      await act(
-        () =>
-          new Promise<void>((resolve) => {
-            userEvent.type(emailInputEl, 'test@test.com');
-            userEvent.type(passInputEl, '1234');
-            userEvent.click(submitButton);
-            resolve();
-          })
-      );
+      userEvent.type(emailInputEl, 'test@test.com');
+      userEvent.type(passInputEl, '1234');
+      userEvent.click(submitButton);
 
-      const homePageEl = screen.getByTestId('home-page');
-      expect(homePageEl).toBeInTheDocument();
+      waitFor(() => {
+        const homePageEl = screen.getByTestId('home-page');
+        expect(homePageEl).toBeInTheDocument();
+      });
     });
   });
 
@@ -57,30 +51,24 @@ describe('LoginFormComponent', () => {
 
     setupHttpMocks(handlers);
 
-    beforeEach(async () => {
+    beforeEach(() => {
       renderWithProviders({
         route: '/login',
       });
-
-      await act(() => Promise.resolve());
     });
 
     it('should display snackbar on login error', async () => {
       const [emailInputEl, passInputEl] = screen.getAllByRole('input');
       const submitButton = screen.getByText('Log in');
 
-      await act(
-        () =>
-          new Promise<void>((resolve) => {
-            userEvent.type(emailInputEl, 'test@test.com');
-            userEvent.type(passInputEl, '1234');
-            userEvent.click(submitButton);
-            resolve();
-          })
-      );
+      userEvent.type(emailInputEl, 'test@test.com');
+      userEvent.type(passInputEl, '1234');
+      userEvent.click(submitButton);
 
-      const snackbarEl = screen.getByTestId('snackbar');
-      expect(snackbarEl).toBeInTheDocument();
+      waitFor(() => {
+        const snackbarEl = screen.getByTestId('snackbar');
+        expect(snackbarEl).toBeInTheDocument();
+      });
     });
   });
 });
