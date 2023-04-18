@@ -46,6 +46,9 @@ const Search = forwardRef<HTMLInputElement, Props>(
             </InputAdornment>
           ),
         }}
+        inputProps={{
+          'data-testid': 'search-input',
+        }}
       />
     );
   }

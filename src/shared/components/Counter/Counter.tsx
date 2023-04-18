@@ -30,7 +30,7 @@ const Counter: React.FC<Props> = ({
   };
 
   return (
-    <div className={styles.counter}>
+    <div data-testid="counter" className={styles.counter}>
       <IconButton
         className={styles.button}
         onClick={handleSubstract}

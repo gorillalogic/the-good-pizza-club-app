@@ -47,7 +47,7 @@ const Carousel: React.FC<Props> = ({ slides, align = 'start' }) => {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className={styles.carousel}>
+    <div data-testid="carousel" className={styles.carousel}>
       <div className={styles.viewport} ref={emblaRef}>
         <div className={styles.container}>
           {slides.map((slide, index) => (
