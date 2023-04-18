@@ -24,7 +24,12 @@ const RemoveDialog: React.FC<Props> = ({
   onConfirm,
 }) => {
   return (
-    <Dialog open={open} onClose={onClose} className={styles.dialog}>
+    <Dialog
+      data-testid="remove-dialog"
+      open={open}
+      onClose={onClose}
+      className={styles.dialog}
+    >
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         <DialogContentText>{content}</DialogContentText>

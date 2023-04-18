@@ -38,7 +38,13 @@ const Map: React.FC<Props> = ({ options, markers, className = '' }) => {
     }
   }, [mapRef, options, markers]);
 
-  return <div className={`${styles.map} ${className}`} ref={mapRef}></div>;
+  return (
+    <div
+      data-testid="map"
+      className={`${styles.map} ${className}`}
+      ref={mapRef}
+    ></div>
+  );
 };
 
 export default Map;

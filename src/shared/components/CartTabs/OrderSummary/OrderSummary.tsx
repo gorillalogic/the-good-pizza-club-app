@@ -33,7 +33,7 @@ const OrderSummary: React.FC<Props> = ({ payment, address, onBack }) => {
   };
 
   return (
-    <div className={styles['order-summary']}>
+    <div data-testid="order-summary" className={styles['order-summary']}>
       <TabHeader
         title="Order summary"
         user={authCtx.user?.name || ''}

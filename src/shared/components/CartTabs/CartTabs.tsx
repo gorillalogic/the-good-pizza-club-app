@@ -42,13 +42,19 @@ const CartTabs: React.FC<Props> = ({ selectedTab, onChange }) => {
         value={selectedTab}
         onChange={(_, value: number) => onChange(value)}
       >
-        <Tab label="Order" />
-        <Tab label="Address" disabled={totalCartItems === 0} />
+        <Tab data-testid="order-tab" label="Order" />
         <Tab
+          data-testid="address-tab"
+          label="Address"
+          disabled={totalCartItems === 0}
+        />
+        <Tab
+          data-testid="payment-tab"
           label="Payment"
           disabled={totalCartItems === 0 || !selectedAddress}
         />
         <Tab
+          data-testid="summary-tab"
           label="Checkout"
           disabled={totalCartItems === 0 || !selectedPayment}
         />

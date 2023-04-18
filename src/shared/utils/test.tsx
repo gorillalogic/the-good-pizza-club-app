@@ -4,9 +4,14 @@ import { RequestHandler } from 'msw';
 import { setupServer } from 'msw/node';
 import { CookiesProvider } from 'react-cookie';
 import { Provider } from 'react-redux';
-import { createMemoryRouter, RouterProvider } from 'react-router-dom';
+import {
+  BrowserRouter,
+  createMemoryRouter,
+  RouterProvider,
+} from 'react-router-dom';
 import setupStore, { AppStore, RootState } from '../../core/store/store';
 import { routes } from '../../router';
+import Layout from '../layout/Layout';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   route?: string;
@@ -23,7 +28,13 @@ export function renderWithStore(
   }: ExtendedRenderOptions = {}
 ) {
   const Wrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
-    return <Provider store={store}>{children}</Provider>;
+    return (
+      <Provider store={store}>
+        <BrowserRouter>
+          <Layout>{children}</Layout>
+        </BrowserRouter>
+      </Provider>
+    );
   };
 
   return {

@@ -129,6 +129,7 @@ const CreateAddressDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
         <TextField
           {...form.register('name', { required: true })}
           className={styles.input}
+          inputProps={{ role: 'input' }}
           placeholder="Add a name for this address"
         />
         <button className={styles.clear} onClick={() => form.reset()}>
@@ -151,6 +152,7 @@ const CreateAddressDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
 
   return (
     <Dialog
+      data-testid="create-address-dialog"
       open={open}
       onClose={onClose}
       className={styles.dialog}

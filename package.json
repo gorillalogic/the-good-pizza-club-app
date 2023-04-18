@@ -36,7 +36,7 @@
     "test": "react-scripts test --watchAll=false",
     "test:watch": "react-scripts test",
     "test:coverage": "react-scripts test --watchAll=false --coverage",
-    "test:coverage:watch": "react-scripts test --coverage",
+    "test:coverage:watch": "react-scripts test --watchAll --coverage",
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "prepare": "husky install"
@@ -64,6 +64,7 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!<rootDir>/node_modules/",
       "!<rootDir>/src/**/*.d.ts",
+      "!<rootDir>/src/core/lib/*",
       "!<rootDir>/src/models/*",
       "!<rootDir>/src/mocks/*",
       "!<rootDir>/src/index.tsx"

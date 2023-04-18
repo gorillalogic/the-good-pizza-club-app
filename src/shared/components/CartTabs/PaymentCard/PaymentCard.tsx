@@ -30,7 +30,7 @@ const PaymentCard: React.FC<Props> = ({
     : payment.type;
 
   return (
-    <Card className={styles.card}>
+    <Card data-testid="payment-card" className={styles.card}>
       <CardHeader title={title} />
       <CardContent>
         <img

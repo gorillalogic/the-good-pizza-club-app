@@ -15,7 +15,7 @@ const OrderPlaced: React.FC = () => {
   };
 
   return (
-    <div className={styles['order-placed']}>
+    <div data-testid="order-placed" className={styles['order-placed']}>
       <h2 className={styles.title}>Your order has been completed!</h2>
       <span>N051661</span>
       <p className={styles.label}>Order number</p>

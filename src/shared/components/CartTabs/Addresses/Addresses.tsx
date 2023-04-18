@@ -62,7 +62,7 @@ const Addresses: React.FC<Props> = ({
   }, []);
 
   const deleteAddress = useCallback(async () => {
-    if (selectedAddressId) {
+    if (selectedAddressId !== undefined) {
       try {
         await dispatch(deleteAddressAsync(selectedAddressId)).unwrap();
         dispatch(
@@ -99,7 +99,7 @@ const Addresses: React.FC<Props> = ({
 
   return (
     <>
-      <div className={styles.addresses}>
+      <div data-testid="addresses" className={styles.addresses}>
         <TabHeader
           title="Your addresses"
           user={authCtx.user?.name || ''}

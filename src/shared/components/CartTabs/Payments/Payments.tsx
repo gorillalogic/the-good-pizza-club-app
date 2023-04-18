@@ -55,7 +55,7 @@ const Payments: React.FC<Props> = ({ payments, selectedPayment, onSelect }) => {
   }, []);
 
   const deletePayment = useCallback(async () => {
-    if (selectedPaymentId) {
+    if (selectedPaymentId !== undefined) {
       try {
         await dispatch(deletePaymentAsync(selectedPaymentId)).unwrap();
         dispatch(
@@ -94,7 +94,7 @@ const Payments: React.FC<Props> = ({ payments, selectedPayment, onSelect }) => {
 
   return (
     <>
-      <div className={styles.payments}>
+      <div data-testid="payments" className={styles.payments}>
         <TabHeader
           title="Your payments"
           user={authCtx.user?.name || ''}

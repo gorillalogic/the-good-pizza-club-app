@@ -65,6 +65,7 @@ const CreatePaymentDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
 
   return (
     <Dialog
+      data-testid="create-payment-dialog"
       open={open}
       onClose={onClose}
       className={styles.dialog}
@@ -81,13 +82,13 @@ const CreatePaymentDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
               <RadioGroup row {...field} value={field.value || ''}>
                 <FormControlLabel
                   value={CardTypes.Credit}
-                  control={<Radio />}
+                  control={<Radio role="radio" />}
                   label="Credit"
                   onChange={field.onChange}
                 />
                 <FormControlLabel
                   value={CardTypes.Debit}
-                  control={<Radio />}
+                  control={<Radio role="radio" />}
                   label="Debit"
                 />
               </RadioGroup>
@@ -107,6 +108,7 @@ const CreatePaymentDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
                 placeholder="Card number"
                 className={styles.input}
                 inputProps={{
+                  role: 'input',
                   ...getCardNumberProps({
                     onChange: field.onChange,
                   }),
@@ -122,6 +124,7 @@ const CreatePaymentDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
           <TextField
             placeholder="Name on card"
             className={styles.input}
+            inputProps={{ role: 'input' }}
             {...form.register('name', { required: true })}
           />
           {form.formState.errors.name && (
@@ -141,6 +144,7 @@ const CreatePaymentDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
                       className={styles.input}
                       placeholder="Expiration date"
                       inputProps={{
+                        role: 'input',
                         ...getExpiryDateProps({
                           onChange: field.onChange,
                         }),
@@ -167,6 +171,7 @@ const CreatePaymentDialog: React.FC<Props> = ({ open, onClose, onConfirm }) => {
                       className={styles.input}
                       placeholder="Securty Code"
                       inputProps={{
+                        role: 'input',
                         ...getCVCProps({ onChange: field.onChange }),
                       }}
                     />

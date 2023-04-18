@@ -26,7 +26,7 @@ const AddressCard: React.FC<Props> = ({
   onSelect,
 }) => {
   return (
-    <Card className={styles.card}>
+    <Card data-testid="address-card" className={styles.card}>
       <CardHeader title={address.name} />
       <CardContent>
         <Icon className={styles.image}>location_on</Icon>
