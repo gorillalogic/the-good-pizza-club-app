@@ -13,7 +13,7 @@ import {
 import { useEffect, useReducer, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../core/hooks/useAppDispatch';
-import { fetchRecords } from '../../../core/store/slices/records/asyncThunks';
+import { fetchRecords as fetchRecordsAction } from '../../../core/store/slices/records/asyncThunks';
 import { recordsSelector } from '../../../core/store/slices/records/selectors';
 import { HttpError } from '../../../models/Error';
 import { RecordTypes } from '../../constants/global.constants';
@@ -49,26 +49,34 @@ const CustomizeDialog: React.FC<Props> = ({
   const [error, setError] = useState<HttpError>();
 
   useEffect(() => {
-    if (open && !records.length) {
+    const fetchRecords = async () => {
       try {
         setLoading(true);
-        reduxDispatch(fetchRecords());
+        await reduxDispatch(fetchRecordsAction()).unwrap();
       } catch (error) {
         setError(error as HttpError);
       } finally {
         setLoading(false);
       }
+    };
+
+    if (open && !records.length) {
+      fetchRecords();
     }
   }, [open, records]);
-
-  let content: React.ReactNode;
 
   const confirmHandler = () => {
     onConfirm(state);
     dispatch({ type: 'restart' });
   };
 
-  if (sizesOnly) {
+  let content: React.ReactNode;
+
+  if (!records.length) {
+    content = null;
+  }
+
+  if (records.length && sizesOnly) {
     content = (
       <Sizes
         sizes={records.filter((r) => r.type === RecordTypes.Size)}
@@ -76,7 +84,9 @@ const CustomizeDialog: React.FC<Props> = ({
         onSelect={(size) => dispatch({ type: size.type, payload: size })}
       />
     );
-  } else {
+  }
+
+  if (records.length && !sizesOnly) {
     content = (
       <>
         <Sizes
