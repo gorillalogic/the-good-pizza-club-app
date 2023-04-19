@@ -9,12 +9,13 @@ interface Props {
 
 const Sizes: React.FC<Props> = ({ sizes, selectedSize, onSelect }) => {
   return (
-    <div className={styles.sizes}>
+    <div data-testid="customize-dialog-sizes" className={styles.sizes}>
       <span className={styles.title}>Choose your size</span>
       <div className={styles.wrapper}>
         {sizes.map((size) => (
           <div key={size.id} className={styles.group}>
             <button
+              data-testid="customize-dialog-size"
               onClick={() => onSelect(size)}
               className={size.id === selectedSize?.id ? styles.active : ''}
             ></button>

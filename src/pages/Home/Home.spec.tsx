@@ -1,8 +1,4 @@
-import {
-  screen,
-  waitFor,
-  waitForElementToBeRemoved,
-} from '@testing-library/dom';
+import { screen, waitForElementToBeRemoved } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MOCK_PRODUCTS } from '../../mocks/products';
@@ -48,28 +44,30 @@ describe('HomePage', () => {
     expect(cartItemsEl).toBeInTheDocument();
   });
 
-  it('should open customize dialog on product click', () => {
+  it('should open customize dialog on product click', async () => {
     const productEl = screen.getAllByTestId('product-card')[0];
     const button = productEl.querySelector('button') as Element;
 
     userEvent.click(button);
 
-    waitFor(() => {
-      const dialog = screen.getByRole('dialog');
-      expect(dialog).toBeInTheDocument();
-      waitForElementToBeRemoved(screen.getByTestId('customize-dialog-loader'));
-    });
+    await waitForElementToBeRemoved(
+      screen.getByTestId('customize-dialog-loader')
+    );
+
+    const dialog = screen.getByRole('dialog');
+    expect(dialog).toBeInTheDocument();
   });
 
-  it('should open customize dialog', () => {
+  it('should open customize dialog', async () => {
     const openDialogButton = screen.getByText('Customize Your Own');
 
     userEvent.click(openDialogButton);
 
-    waitFor(() => {
-      const dialog = screen.getByRole('dialog');
-      expect(dialog).toBeInTheDocument();
-      waitForElementToBeRemoved(screen.getByTestId('customize-dialog-loader'));
-    });
+    await waitForElementToBeRemoved(
+      screen.getByTestId('customize-dialog-loader')
+    );
+
+    const dialog = screen.getByRole('dialog');
+    expect(dialog).toBeInTheDocument();
   });
 });

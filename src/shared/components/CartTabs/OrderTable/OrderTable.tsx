@@ -45,7 +45,7 @@ const OrderTable: React.FC<{ hideActions?: boolean }> = ({ hideActions }) => {
   };
 
   const confirmModalHandler = () => {
-    if (itemId) {
+    if (itemId !== null) {
       dispatch(removeProduct(itemId));
       itemId = null;
     }
@@ -55,7 +55,7 @@ const OrderTable: React.FC<{ hideActions?: boolean }> = ({ hideActions }) => {
 
   return (
     <>
-      <div className={styles['table-wrapper']}>
+      <div data-testid="order-table" className={styles['table-wrapper']}>
         <Table className={styles.table}>
           <TableHead>
             <TableRow>
@@ -84,7 +84,10 @@ const OrderTable: React.FC<{ hideActions?: boolean }> = ({ hideActions }) => {
                   />
                 </TableCell>
                 <TableCell align="left" className={styles.cell}>
-                  <div className={styles['product-name']}>
+                  <div
+                    data-testid="product-item"
+                    className={styles['product-name']}
+                  >
                     <span>
                       {item.product ? item.product.name : 'Custom'} (
                       {item.size.name})
@@ -114,6 +117,7 @@ const OrderTable: React.FC<{ hideActions?: boolean }> = ({ hideActions }) => {
                 </TableCell>
                 <TableCell>
                   <button
+                    data-testid="product-item-delete"
                     className={styles.delete}
                     onClick={() => openModalHandler(item.id)}
                   >

@@ -22,7 +22,7 @@ const Toppings: React.FC<Props> = ({
   onChange,
 }) => {
   return (
-    <div className={styles.toppings}>
+    <div data-testid="customize-dialog-toppings" className={styles.toppings}>
       <span className={styles.title}>Choose your toppings</span>
       <ToppingGroup
         title="Sauce"

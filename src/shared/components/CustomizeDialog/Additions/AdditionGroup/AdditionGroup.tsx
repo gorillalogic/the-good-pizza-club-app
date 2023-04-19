@@ -36,9 +36,10 @@ const AdditionGroup: React.FC<Props> = ({ title, items, onClick }) => {
   };
 
   return (
-    <div className={styles.group}>
+    <div data-testid="customize-dialog-addition-group" className={styles.group}>
       <span>{title}</span>
       <Select
+        role="select"
         value={selectedItem}
         className={styles.select}
         onChange={selectItemChangeHandler}
@@ -54,6 +55,7 @@ const AdditionGroup: React.FC<Props> = ({ title, items, onClick }) => {
       </Select>
       <div className={styles.group__actions}>
         <Select
+          role="select"
           value={quantity}
           className={styles.select}
           onChange={selectQuantityChangeHadler}

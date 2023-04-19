@@ -20,7 +20,7 @@ const Additions: React.FC<Props> = ({
   onChange,
 }) => {
   return (
-    <div className={styles.additions}>
+    <div data-testid="customize-dialog-additions" className={styles.additions}>
       <span className={styles.title}>Need anything else?</span>
       <div className={styles.groups}>
         <AdditionGroup title="Drinks" items={drinks} onClick={onChange} />

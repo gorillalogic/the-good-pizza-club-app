@@ -156,6 +156,7 @@ const CustomizeDialog: React.FC<Props> = ({
           Restart
         </Button>
         <Button
+          data-testid="customize-dialog-add-button"
           variant="contained"
           color="error"
           onClick={confirmHandler}

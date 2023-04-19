@@ -20,7 +20,7 @@ const ToppingGroup: React.FC<Props> = ({
   const isArray = selectedItem instanceof Array;
 
   return (
-    <div className={styles.group}>
+    <div data-testid="customize-dialog-topping-group" className={styles.group}>
       <span className={styles.group__title}>{title}</span>
       <div className={styles.group__buttons}>
         {items.map((item) => (
