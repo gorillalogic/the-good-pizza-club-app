@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { AlertColor } from '@mui/material';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface InitialState {
   isDisplay: boolean;
-  color: 'success' | 'error' | 'warning' | 'info' | undefined;
+  color?: AlertColor;
   message: string;
 }
 
@@ -16,7 +17,10 @@ const snackbarSlice = createSlice({
   name: 'snackbar',
   initialState,
   reducers: {
-    showSnackbar: (state, action) => {
+    showSnackbar: (
+      state,
+      action: PayloadAction<{ color: AlertColor; message: string }>
+    ) => {
       state.isDisplay = true;
       state.color = action.payload.color;
       state.message = action.payload.message;
