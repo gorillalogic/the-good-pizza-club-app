@@ -23,7 +23,12 @@ const initialState: UserState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    resetUser: (state) => {
+      state.addresses = [];
+      state.payments = [];
+    },
+  },
   extraReducers(builder) {
     builder.addCase(getAddressesAsync.fulfilled, (state, action) => {
       state.addresses = action.payload;
@@ -48,4 +53,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { resetUser } = userSlice.actions;
 export default userSlice.reducer;
